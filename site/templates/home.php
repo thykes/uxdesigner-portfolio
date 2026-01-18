@@ -1,11 +1,11 @@
 <?php snippet('header') ?>
 
 <section class="py-24 md:py-32">
-    <h1 class="serif-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[1.1] tracking-tight max-w-5xl">
+    <h1 class="serif-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[1.1] tracking-tight max-w-5xl [&_em]:text-[var(--accent)]">
         <?= $page->headline()->or('Designing with <span class="italic text-[var(--accent)]">purpose</span>. Building for people.') ?>
     </h1>
     <div class="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
-        <div class="text-xl md:text-2xl text-[var(--text-muted)] max-w-xl font-light leading-relaxed">
+        <div class="text-xl md:text-2xl text-[var(--text-muted)] max-w-xl font-light leading-relaxed [&_strong]:text-white [&_strong]:font-normal">
             <?= $page->intro()->or('I’m Tim Hykes, a DC UX Designer turning <span class="text-white font-normal">complex challenges</span> into seamless, <span class="text-white font-normal">human-centered</span><br> digital experiences.') ?>
         </div>
         <div class="flex items-center gap-4 group cursor-pointer">
