@@ -22,5 +22,4 @@ tabs:
                 label: Copyright Text
                 type: text
 
-  seo:
   seo: seo/site
