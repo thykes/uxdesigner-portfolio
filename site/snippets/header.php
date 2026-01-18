@@ -99,11 +99,45 @@
                     </svg>
                 </a>
             </div>
-            <nav class="flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
-                <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('works') ? 'bg-[var(--accent)] text-black' : '' ?>" href="<?= url('works') ?>">Work</a>
-                <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('about') ? 'bg-[var(--accent)] text-black' : '' ?>" href="<?= url('about') ?>">About</a>
-                <!-- Mobile Menu Button -->
-                <button class="material-symbols-outlined text-3xl md:hidden">menu</button>
+            <nav class="flex items-center">
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+                    <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('works') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('works') ?>">Work</a>
+                    <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('about') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('about') ?>">About</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="menu-toggle" class="material-symbols-outlined text-3xl md:hidden z-50 relative hover:text-[var(--accent)] transition-colors">menu</button>
             </nav>
+        </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-[var(--bg-deep)]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
+            <a class="hover:text-[var(--accent)] transition-colors" href="<?= $site->url() ?>">Home</a>
+            <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('works') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('works') ?>">Work</a>
+            <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('about') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('about') ?>">About</a>
+        </div>
+
+        <script>
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('translate-x-0');
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('translate-x-full');
+                    menuToggle.innerText = 'menu';
+                    body.style.overflow = '';
+                } else {
+                    mobileMenu.classList.remove('translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    menuToggle.innerText = 'close';
+                    body.style.overflow = 'hidden';
+                }
+            });
+        </script>
         </header>
         <main>
