@@ -1,0 +1,15 @@
+name: Pull Quote
+icon: quote
+fields:
+  quote:
+    label: Quote Text
+    type: textarea
+  citation:
+    label: Citation / Author
+    type: text
+  style:
+    type: select
+    options:
+      border: Left Border
+      centered: Centered Big
+    default: border

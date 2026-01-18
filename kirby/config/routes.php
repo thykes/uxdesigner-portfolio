@@ -1,14 +1,17 @@
 <?php
 
+use Kirby\Cms\App;
+use Kirby\Cms\Cors;
 use Kirby\Cms\LanguageRoutes;
 use Kirby\Cms\Media;
-use Kirby\Cms\PluginAssets;
+use Kirby\Http\Response;
 use Kirby\Panel\Panel;
 use Kirby\Panel\Plugins;
+use Kirby\Plugin\Assets;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuid;
 
-return function ($kirby) {
+return function (App $kirby) {
 	$api   = $kirby->option('api.slug', 'api');
 	$panel = $kirby->option('panel.slug', 'panel');
 	$index = $kirby->url('index');
@@ -28,11 +31,40 @@ return function ($kirby) {
 	 * plugins.
 	 */
 	$before = [
+		// handle CORS preflight requests
+		[
+			'pattern' => '(:all)',
+			'method'  => 'OPTIONS',
+			'action'  => function () use ($kirby) {
+				$request = $kirby->request();
+
+				// skip if no CORS request
+				if ($request->header('Access-Control-Request-Method') === null) {
+					/** @var \Kirby\Http\Route $this */
+					$this->next();
+				}
+
+				// skip if CORS is disabled
+				if ($kirby->isCorsEnabled() === false) {
+					/** @var \Kirby\Http\Route $this */
+					$this->next();
+				}
+
+				$headers = Cors::headers(preflight: true);
+
+				// block if origin doesn't match
+				if ($headers === []) {
+					return null;
+				}
+
+				return new Response('', null, 204, $headers);
+			}
+		],
 		[
 			'pattern' => $api . '/(:all)',
 			'method'  => 'ALL',
 			'env'     => 'api',
-			'action'  => function ($path = null) use ($kirby) {
+			'action'  => function (string|null $path = null) use ($kirby) {
 				if ($kirby->option('api') === false) {
 					return null;
 				}
@@ -60,37 +92,63 @@ return function ($kirby) {
 			}
 		],
 		[
-			'pattern' => $media . '/plugins/(:any)/(:any)/(:all).(css|map|gif|js|mjs|jpg|png|svg|webp|avif|woff2|woff|json)',
+			// TODO: change to '/plugins/(:any)/(:any)/(:any)/(:all)' once
+			// the hash is made mandatory
+			'pattern' => $media . '/plugins/(:any)/(:any)/(?:(:any)/)?(:all)',
 			'env'     => 'media',
-			'action'  => function (string $provider, string $pluginName, string $filename, string $extension) {
-				return PluginAssets::resolve($provider . '/' . $pluginName, $filename . '.' . $extension);
+			'action'  => function (
+				string $provider,
+				string $pluginName,
+				string $hash,
+				string $path
+			) {
+				return Assets::resolve(
+					$provider . '/' . $pluginName,
+					$hash,
+					$path
+				);
 			}
 		],
 		[
 			'pattern' => $media . '/pages/(:all)/(:any)/(:any)',
 			'env'     => 'media',
-			'action'  => function ($path, $hash, $filename) use ($kirby) {
+			'action'  => function (
+				string $path,
+				string $hash,
+				string $filename
+			) use ($kirby) {
 				return Media::link($kirby->page($path), $hash, $filename);
 			}
 		],
 		[
 			'pattern' => $media . '/site/(:any)/(:any)',
 			'env'     => 'media',
-			'action'  => function ($hash, $filename) use ($kirby) {
+			'action'  => function (
+				string $hash,
+				string $filename
+			) use ($kirby) {
 				return Media::link($kirby->site(), $hash, $filename);
 			}
 		],
 		[
 			'pattern' => $media . '/users/(:any)/(:any)/(:any)',
 			'env'     => 'media',
-			'action'  => function ($id, $hash, $filename) use ($kirby) {
+			'action'  => function (
+				string $id,
+				string $hash,
+				string $filename
+			) use ($kirby) {
 				return Media::link($kirby->user($id), $hash, $filename);
 			}
 		],
 		[
 			'pattern' => $media . '/assets/(:all)/(:any)/(:any)',
 			'env'     => 'media',
-			'action'  => function ($path, $hash, $filename) {
+			'action'  => function (
+				string $path,
+				string $hash,
+				string $filename
+			) {
 				return Media::thumb($path, $hash, $filename);
 			}
 		],
@@ -98,7 +156,7 @@ return function ($kirby) {
 			'pattern' => $panel . '/(:all?)',
 			'method'  => 'ALL',
 			'env'     => 'panel',
-			'action'  => function ($path = null) {
+			'action'  => function (string|null $path = null) {
 				return Panel::router($path);
 			}
 		],

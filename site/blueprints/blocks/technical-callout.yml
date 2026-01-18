@@ -1,0 +1,15 @@
+name: Technical Callout
+icon: alert
+fields:
+  icon:
+    label: Icon (Material Symbols)
+    type: text
+    width: 1/4
+    default: construction
+  title:
+    label: Title
+    type: text
+    width: 3/4
+  text:
+    label: Description
+    type: textarea

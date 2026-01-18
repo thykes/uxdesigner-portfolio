@@ -1,20 +1,26 @@
 title: Site
 
-columns:
-  main:
-    width: 1/3
-    sections:
-      fields:
-        type: fields
-        fields:
-          Description:
-            type: textarea
-            size: small
-          Logo:
-            type: files
+tabs:
+  pages:
+    label: Content
+    icon: page
+    columns:
+      - width: 1/2
+        sections:
+          pages:
+            type: pages
+            templates:
+              - project
+              - about
+              - works
+              - default
+      - width: 1/2
+        sections:
+          fields:
+            fields:
+              copyright:
+                label: Copyright Text
+                type: text
 
-  sidebar:
-    width: 2/3
-    sections:
-      pages:
-        type: pages
+  seo:
+  seo: seo/site

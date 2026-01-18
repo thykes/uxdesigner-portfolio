@@ -2,6 +2,9 @@
 
 namespace Kirby\Http\Request;
 
+use SensitiveParameter;
+use Stringable;
+
 /**
  * Base class for auth types
  *
@@ -11,20 +14,15 @@ namespace Kirby\Http\Request;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-abstract class Auth
+abstract class Auth implements Stringable
 {
 	/**
-	 * Raw authentication data after the first space
-	 * in the `Authorization` header
+	 * @param string $data Raw authentication data after the first space in the `Authorization` header
 	 */
-	protected string $data;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct(string $data)
-	{
-		$this->data = $data;
+	public function __construct(
+		#[SensitiveParameter]
+		protected string $data
+	) {
 	}
 
 	/**

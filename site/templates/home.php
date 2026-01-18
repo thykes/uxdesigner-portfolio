@@ -1,45 +1,58 @@
 <?php snippet('header') ?>
 
-<main>
-  <div class="container">
-    <div class="hero">
-      <h1><?= $page->text()->kirbytext() ?></h1> 
-      <ul class="social-links">
-        <?php if ($page->youtube()->isNotEmpty()): ?>
-          <li><a href="<?= $page->youtube() ?>">youtube</a></li>
-        <?php endif ?>
-        <?php if ($page->instagram()->isNotEmpty()): ?>
-          <li><a href="<?= $page->instagram() ?>">linkedin</a></li> 
-        <?php endif ?>
-        <?php if ($page->twitter()->isNotEmpty()): ?>
-          <li><a href="<?= $page->twitter() ?>">twitter</a></li>
-        <?php endif ?>
-      </ul>
-    </div> <div class="featured-works">
-      <?php
-      $projects = page('projects')->children()->listed()->limit(3);
-      foreach ($projects as $project):
-      ?>
-        <a href="<?= $project->url() ?>">
-          <div class="item">
-            <div class="item-img">
-              <?php if ($image = $project->images()->findBy("template", "cover")): ?> 
-                <?= $image->html(["class" => "img-cover"]) ?>
-              <?php endif ?> 
-            </div>
-            <?php
-            $title = $project->title()->html();
-            $title = preg_replace('/\s+/', '<br>', $title); 
-            ?>
-            <h2 class="item-title"><?= $title ?></h2>
-            <h3 class="item-category"><?= $project->category()->split(",")[0]; ?></h3> 
-          </div>
-        </a>
-        <div class="clearfix"></div>
-      <?php endforeach ?>
-    </div> <div class="cta">
-      <h1>Ready to start a project?</h1>
-      <a href="/contact" class="btn">Let's talk</a>
+<section class="py-24 md:py-32">
+    <h1 class="serif-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-[1.1] tracking-tight max-w-5xl">
+        Designing with <span class="italic text-[var(--accent)]">purpose</span>. Building for people.
+    </h1>
+    <div class="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <p class="text-xl md:text-2xl text-[var(--text-muted)] max-w-xl font-light leading-relaxed">
+            I’m Tim Hykes, a DC UX Designer turning <span class="text-white font-normal">complex challenges</span> into seamless, <span class="text-white font-normal">human-centered</span><br> digital experiences.
+        </p>
+        <div class="flex items-center gap-4 group cursor-pointer">
+            <span class="text-sm uppercase tracking-[0.2em]">Scroll to explore</span>
+            <span class="material-symbols-outlined animate-bounce">arrow_downward</span>
+        </div>
     </div>
-  </div> </main> <?= snippet('footer') ?>
-<?= snippet('navigation') ?> 
+</section>
+
+<section class="mb-16">
+    <div class="flex flex-wrap gap-x-8 gap-y-4 text-xs uppercase tracking-widest text-[var(--text-muted)] border-b border-white/10 pb-6">
+        <a class="filter-link active" href="#">All Projects</a>
+        <!-- Dynamic filters could go here -->
+    </div>
+</section>
+
+<section class="pb-32">
+    <div class="masonry-grid flex flex-col gap-24">
+        <?php 
+        $projects = $page->featured_projects()->toPages();
+        if ($projects->isEmpty()) {
+            $projects = site()->find('works')->children()->listed();
+        }
+        ?>
+
+        <?php foreach ($projects as $project): ?>
+        <div class="item-large group w-full">
+            <a href="<?= $project->url() ?>" class="block">
+                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/5] md:aspect-[16/10]">
+                    <?php if ($image = $project->cover()->toFile()): ?>
+                    <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0" src="<?= $image->url() ?>"/>
+                    <?php endif ?>
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                <div class="mt-6 flex justify-between items-start">
+                    <div>
+                        <h3 class="serif-display text-4xl md:text-5xl group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
+                        <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-2">
+                            <?= $project->subtitle()->or('Case Study') ?> / <?= $project->timeline()->or('2023') ?>
+                        </p>
+                    </div>
+                    <span class="material-symbols-outlined text-3xl opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[var(--accent)]">north_east</span>
+                </div>
+            </a>
+        </div>
+        <?php endforeach ?>
+    </div>
+</section>
+
+<?php snippet('footer') ?>

@@ -1,48 +1,26 @@
-title: Home
+title: Home Page
+options:
+  delete: false
+  status: false
+  url: false
 
-tabs: 
-  main:
-    label: Main Content
+tabs:
+  content:
+    label: Content
     columns:
       - width: 2/3
-        sections:
-          hero:
-            type: fields
-            fields:
-              text: 
-                label: Hero Text
-                type: textarea
-                size: large
-          social:
-            type: fields
-            fields:
-              youtube:
-                label: YouTube
-                type: url
-              instagram:
-                label: LinkedIn
-                type: url
-              twitter:
-                label: Twitter
-                type: url
-
-  featured:
-    label: Featured Projects
-    sections:
-      projects:
-        type: files
-        template: project
-
-  seo:
-    label: SEO
-    sections:
-      seo:
-        type: fields
         fields:
-          meta_title:
-            label: Meta Title
-            type: text
-          meta_description:
-            label: Meta Description
+          intro:
             type: textarea
-            size: small
+      - width: 1/3
+        sections:
+          meta:
+            type: fields
+            fields:
+              featured_projects:
+                label: Featured Projects (Home Grid)
+                type: pages
+                query: site.find("works").children
+                min: 1
+
+  seo: seo/page

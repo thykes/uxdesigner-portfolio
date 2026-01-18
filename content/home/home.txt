@@ -1,0 +1,2 @@
+title: Home
+intro: I'm John Doe, a New York based (link: # text: Digital Designer) & (link: # text: Photographer) focused on creating high-impact brand experiences.

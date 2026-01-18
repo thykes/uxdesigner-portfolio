@@ -1,0 +1,125 @@
+Title: About
+
+----
+
+Role-title: UX DESIGNER & STRATEGIST
+
+----
+
+Header-title: Designing the future of <em>Agentic experiences.</em>
+
+----
+
+Intro: I’m Tim Hykes, a DC-based (highlight: UX Designer at Google).I lead the design for Fantasy Sports in Google's AI Mode, turning (highlight: complex) data into play.
+
+----
+
+Detailed-bio: Currently, I’m reimagining the search experience by building AIM (AI Mode)—a conversational assistant that acts as an agent for fantasy sports fans. Beyond the screen, my work is rooted in over a decade of advocacy for Diversity, Equity, and Inclusion, having co-founded the Design + Diversity Conference to bridge the gap between design and human representation. I believe the most powerful digital products are the ones that make everyone feel seen and empowered.
+
+----
+
+Capabilities-headline: Capabilities
+
+----
+
+Capabilities-intro: I help global brands and products evolve by creating deeply human, accessible connections through strategic UX and AI-powered innovation.
+
+----
+
+Capabilities:
+
+- 
+  title: 'Interaction Design & AI'
+  description: >
+    Reimagining search through AI Mode (AIM)
+    to create conversational, agentic
+    experiences that solve complex user
+    tasks and simplify data.
+- 
+  title: Inclusive Design Strategy
+  description: >
+    Leveraging over a decade of DEI
+    leadership to build equitable product
+    frameworks that ensure digital
+    experiences resonate with diverse global
+    audiences.
+- 
+  title: Strategic UX Leadership
+  description: >
+    Leading cross-functional teams across
+    engineering, legal, and product to
+    navigate ambiguity and deliver
+    high-impact, user-centered solutions at
+    scale.
+- 
+  title: 'Mentorship & Community'
+  description: >
+    Fostering the next generation of design
+    leaders through advocacy, workshops, and
+    platforms like the Design + Diversity
+    conference.
+
+----
+
+Experience-headline: Experience
+
+----
+
+Experience:
+
+- 
+  role: Interaction Designer
+  company: Google
+  timeline: 2022 — Present
+- 
+  role: Operations Team Lead / UX Consultant
+  company: World Wide Technology
+  timeline: 2019 — 2022
+- 
+  role: Senior Ecommerce Designer
+  company: Caleres, Inc. (Allen Edmonds)
+  timeline: 2018 — 2019
+- 
+  role: User Experience Designer
+  company: Wells Fargo Advisors
+  timeline: 2017 — 2018
+- 
+  role: Lead UX Designer
+  company: LaunchCode
+  timeline: 2016 — 2017
+- 
+  role: User Experience Designer
+  company: RoverTown
+  timeline: 2015 — 2016
+- 
+  role: Art Director
+  company: Spoke Marketing
+  timeline: 2013 — 2015
+- 
+  role: Web Design Associate
+  company: Answers.com
+  timeline: 2012 — 2013
+
+----
+
+Cover: - file://1z4ouhegzeegwhgp
+
+----
+
+Location: WASHINGTON DC
+
+----
+
+Email: tim@timhykes.com
+
+----
+
+Meta-title: 
+
+----
+
+Meta-description: 
+
+----
+
+Uuid: xiamf5cibbxtmno1

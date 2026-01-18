@@ -3,6 +3,7 @@
 namespace Kirby\Toolkit;
 
 use ArrayIterator;
+use Countable;
 use IteratorAggregate;
 
 /**
@@ -16,24 +17,17 @@ use IteratorAggregate;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
- * @psalm-suppress MissingTemplateParam Implementing template params in this class would
- *                                      require implementing them throughout the code base
- *                                      https://github.com/getkirby/kirby/pull/4886#pullrequestreview-1203577545
+ * @template TKey of array-key
+ * @template TValue
+ * @implements \IteratorAggregate<TKey, TValue>
  */
-class Iterator implements IteratorAggregate
+class Iterator implements Countable, IteratorAggregate
 {
 	/**
-	 * The data array
-	 *
-	 * @var array
+	 * @var array<TKey, TValue>
 	 */
-	public $data = [];
+	public array $data = [];
 
-	/**
-	 * Constructor
-	 *
-	 * @param array $data
-	 */
 	public function __construct(array $data = [])
 	{
 		$this->data = $data;
@@ -41,8 +35,7 @@ class Iterator implements IteratorAggregate
 
 	/**
 	 * Get an iterator for the items.
-	 *
-	 * @return \ArrayIterator
+	 * @return \ArrayIterator<TKey, TValue>
 	 */
 	public function getIterator(): ArrayIterator
 	{
@@ -51,18 +44,14 @@ class Iterator implements IteratorAggregate
 
 	/**
 	 * Returns the current key
-	 *
-	 * @return string
 	 */
-	public function key()
+	public function key(): int|string|null
 	{
 		return key($this->data);
 	}
 
 	/**
 	 * Returns an array of all keys
-	 *
-	 * @return array
 	 */
 	public function keys(): array
 	{
@@ -71,10 +60,9 @@ class Iterator implements IteratorAggregate
 
 	/**
 	 * Returns the current element
-	 *
-	 * @return mixed
+	 * @return TValue
 	 */
-	public function current()
+	public function current(): mixed
 	{
 		return current($this->data);
 	}
@@ -82,10 +70,9 @@ class Iterator implements IteratorAggregate
 	/**
 	 * Moves the cursor to the previous element
 	 * and returns it
-	 *
-	 * @return mixed
+	 * @return TValue
 	 */
-	public function prev()
+	public function prev(): mixed
 	{
 		return prev($this->data);
 	}
@@ -93,10 +80,9 @@ class Iterator implements IteratorAggregate
 	/**
 	 * Moves the cursor to the next element
 	 * and returns it
-	 *
-	 * @return mixed
+	 * @return TValue
 	 */
-	public function next()
+	public function next(): mixed
 	{
 		return next($this->data);
 	}
@@ -104,15 +90,13 @@ class Iterator implements IteratorAggregate
 	/**
 	 * Moves the cursor to the first element
 	 */
-	public function rewind()
+	public function rewind(): void
 	{
 		reset($this->data);
 	}
 
 	/**
 	 * Checks if the current element is valid
-	 *
-	 * @return bool
 	 */
 	public function valid(): bool
 	{
@@ -121,8 +105,6 @@ class Iterator implements IteratorAggregate
 
 	/**
 	 * Counts all elements
-	 *
-	 * @return int
 	 */
 	public function count(): int
 	{
@@ -132,10 +114,10 @@ class Iterator implements IteratorAggregate
 	/**
 	 * Tries to find the index number for the given element
 	 *
-	 * @param mixed $needle the element to search for
+	 * @param TValue $needle the element to search for
 	 * @return int|false the index (int) of the element or false
 	 */
-	public function indexOf($needle)
+	public function indexOf(mixed $needle): int|false
 	{
 		return array_search($needle, array_values($this->data));
 	}
@@ -143,40 +125,35 @@ class Iterator implements IteratorAggregate
 	/**
 	 * Tries to find the key for the given element
 	 *
-	 * @param mixed $needle the element to search for
-	 * @return string|false the name of the key or false
+	 * @param TValue $needle the element to search for
+	 * @return int|string|false the name of the key or false
 	 */
-	public function keyOf($needle)
+	public function keyOf(mixed $needle): int|string|false
 	{
 		return array_search($needle, $this->data);
 	}
 
 	/**
 	 * Checks by key if an element is included
-	 *
-	 * @param mixed $key
-	 * @return bool
+	 * @param TKey $key
 	 */
-	public function has($key): bool
+	public function has(mixed $key): bool
 	{
-		return isset($this->data[$key]);
+		return isset($this->data[$key]) === true;
 	}
 
 	/**
 	 * Checks if the current key is set
-	 *
-	 * @param mixed $key the key to check
-	 * @return bool
+	 * @param TKey $key
 	 */
-	public function __isset($key): bool
+	public function __isset(mixed $key): bool
 	{
 		return $this->has($key);
 	}
 
 	/**
 	 * Simplified var_dump output
-	 *
-	 * @return array
+	 * @codeCoverageIgnore
 	 */
 	public function __debugInfo(): array
 	{

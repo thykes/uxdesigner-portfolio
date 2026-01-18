@@ -15,34 +15,22 @@ namespace Kirby\Toolkit;
  */
 class Silo
 {
-	/**
-	 * @var array
-	 */
-	public static $data = [];
+	public static array $data = [];
 
 	/**
-	 * Setter for new data.
-	 *
-	 * @param string|array $key
-	 * @param mixed $value
-	 * @return array
+	 * Setter for new data
 	 */
-	public static function set($key, $value = null): array
+	public static function set(string|array $key, $value = null): array
 	{
 		if (is_array($key) === true) {
-			return static::$data = array_merge(static::$data, $key);
+			return static::$data = [...static::$data, ...$key];
 		}
 
 		static::$data[$key] = $value;
 		return static::$data;
 	}
 
-	/**
-	 * @param string|array $key
-	 * @param mixed $default
-	 * @return mixed
-	 */
-	public static function get($key = null, $default = null)
+	public static function get(string|array|null $key = null, $default = null)
 	{
 		if ($key === null) {
 			return static::$data;
@@ -53,11 +41,8 @@ class Silo
 
 	/**
 	 * Removes an item from the data array
-	 *
-	 * @param string|null $key
-	 * @return array
 	 */
-	public static function remove(string $key = null): array
+	public static function remove(string|null $key = null): array
 	{
 		// reset the entire array
 		if ($key === null) {

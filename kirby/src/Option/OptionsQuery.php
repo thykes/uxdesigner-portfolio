@@ -3,12 +3,12 @@
 namespace Kirby\Option;
 
 use Kirby\Cms\Block;
-use Kirby\Cms\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Cms\Page;
 use Kirby\Cms\StructureObject;
 use Kirby\Cms\User;
+use Kirby\Content\Field;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
@@ -30,7 +30,9 @@ class OptionsQuery extends OptionsProvider
 	public function __construct(
 		public string $query,
 		public string|null $text = null,
-		public string|null $value = null
+		public string|null $value = null,
+		public string|null $icon = null,
+		public string|null $info = null
 	) {
 	}
 
@@ -56,8 +58,10 @@ class OptionsQuery extends OptionsProvider
 
 		return new static(
 			query: $props['query'] ?? $props['fetch'],
-			text: $props['text'] ?? null,
-			value: $props['value'] ?? null
+			text : $props['text'] ?? null,
+			value: $props['value'] ?? null,
+			icon : $props['icon'] ?? null,
+			info : $props['info'] ?? null
 		);
 	}
 
@@ -131,8 +135,12 @@ class OptionsQuery extends OptionsProvider
 	 * Creates the actual options by running
 	 * the query on the model and resolving it to
 	 * the correct text-value entries
+	 *
+	 * @param bool $safeMode Whether to escape special HTML characters in
+	 *                       the option text for safe output in the Panel;
+	 *                       only set to `false` if the text is later escaped!
 	 */
-	public function resolve(ModelWithContent $model): Options
+	public function resolve(ModelWithContent $model, bool $safeMode = true): Options
 	{
 		// use cached options if present
 		// @codeCoverageIgnoreStart
@@ -155,11 +163,15 @@ class OptionsQuery extends OptionsProvider
 		}
 
 		if ($result instanceof Collection === false) {
-			throw new InvalidArgumentException('Invalid query result data: ' . get_class($result));
+			$type = is_object($result) === true ? $result::class : gettype($result);
+
+			throw new InvalidArgumentException(
+				message: 'Invalid query result data: ' . $type
+			);
 		}
 
 		// create options array
-		$options = $result->toArray(function ($item) use ($model) {
+		$options = $result->toArray(function ($item) use ($model, $safeMode) {
 			// get defaults based on item type
 			[$alias, $text, $value] = $this->itemToDefaults($item);
 			$data = ['item' => $item, $alias => $item];
@@ -167,11 +179,16 @@ class OptionsQuery extends OptionsProvider
 			// value is always a raw string
 			$value = $model->toString($this->value ?? $value, $data);
 
-			// text is only a raw string when HTML prop
-			// is explicitly set to true
-			$text = $model->toSafeString($this->text ?? $text, $data);
+			// text is only a raw string when using {< >}
+			// or when the safe mode is explicitly disabled (select field)
+			$safeMethod = $safeMode === true ? 'toSafeString' : 'toString';
+			$text = $model->$safeMethod($this->text ?? $text, $data);
 
-			return compact('text', 'value');
+			// additional data
+			$icon = $this->icon !== null ? $model->toString($this->icon, $data) : null;
+			$info = $this->info !== null ? $model->$safeMethod($this->info, $data) : null;
+
+			return compact('text', 'value', 'icon', 'info');
 		});
 
 		return $this->options = Options::factory($options);

@@ -3,7 +3,10 @@
 namespace Kirby\Panel;
 
 use Kirby\Cms\File as CmsFile;
+use Kirby\Cms\ModelWithContent;
 use Kirby\Filesystem\Asset;
+use Kirby\Panel\Ui\Buttons\ViewButtons;
+use Kirby\Panel\Ui\Item\PageItem;
 use Kirby\Toolkit\I18n;
 
 /**
@@ -19,15 +22,38 @@ use Kirby\Toolkit\I18n;
 class Page extends Model
 {
 	/**
+	 * @var \Kirby\Cms\Page
+	 */
+	protected ModelWithContent $model;
+
+	/**
 	 * Breadcrumb array
 	 */
 	public function breadcrumb(): array
 	{
 		$parents = $this->model->parents()->flip()->merge($this->model);
-		return $parents->values(fn ($parent) => [
-			'label' => $parent->title()->toString(),
-			'link'  => $parent->panel()->url(true),
-		]);
+
+		return $parents->values(
+			fn ($parent) => [
+				'label' => $parent->title()->toString(),
+				'link'  => $parent->panel()->url(true),
+			]
+		);
+	}
+
+	/**
+	 * Returns header buttons which should be displayed
+	 * on the page view
+	 */
+	public function buttons(): array
+	{
+		return ViewButtons::view($this)->defaults(
+			'open',
+			'preview',
+			'settings',
+			'languages',
+			'status'
+		)->render();
 	}
 
 	/**
@@ -36,7 +62,6 @@ class Page extends Model
 	 * used in the panel, when the page
 	 * gets dragged onto a textarea
 	 *
-	 * @internal
 	 * @param string|null $type (`auto`|`kirbytext`|`markdown`)
 	 */
 	public function dragText(string|null $type = null): string
@@ -65,24 +90,31 @@ class Page extends Model
 	 */
 	public function dropdown(array $options = []): array
 	{
-		$page = $this->model;
-
-		$defaults = $page->kirby()->request()->get(['view', 'sort', 'delete']);
-		$options  = array_merge($defaults, $options);
-
+		$page        = $this->model;
+		$request     = $page->kirby()->request();
+		$defaults    = $request->get(['view', 'sort', 'delete']);
+		$options     = [...$defaults, ...$options];
 		$permissions = $this->options(['preview']);
 		$view        = $options['view'] ?? 'view';
 		$url         = $this->url(true);
 		$result      = [];
 
 		if ($view === 'list') {
-			$result['preview'] = [
+			$result['open'] = [
 				'link'     => $page->previewUrl(),
 				'target'   => '_blank',
 				'icon'     => 'open',
 				'text'     => I18n::translate('open'),
-				'disabled' => $this->isDisabledDropdownOption('preview', $options, $permissions)
+				'disabled' => $isPreviewDisabled = $this->isDisabledDropdownOption('preview', $options, $permissions)
 			];
+
+			$result['preview'] = [
+				'icon'     => 'window',
+				'link'     => $page->panel()->url(true) . '/preview/changes',
+				'text'     => I18n::translate('preview'),
+				'disabled' => $isPreviewDisabled
+			];
+
 			$result[] = '-';
 		}
 
@@ -97,15 +129,6 @@ class Page extends Model
 			'text'     => I18n::translate('rename'),
 			'disabled' => $this->isDisabledDropdownOption('changeTitle', $options, $permissions)
 		];
-
-		$result['duplicate'] = [
-			'dialog'   => $url . '/duplicate',
-			'icon'     => 'copy',
-			'text'     => I18n::translate('duplicate'),
-			'disabled' => $this->isDisabledDropdownOption('duplicate', $options, $permissions)
-		];
-
-		$result[] = '-';
 
 		$result['changeSlug'] = [
 			'dialog' => [
@@ -143,6 +166,23 @@ class Page extends Model
 		];
 
 		$result[] = '-';
+
+		$result['move'] = [
+			'dialog'   => $url . '/move',
+			'icon'     => 'parent',
+			'text'     => I18n::translate('page.move'),
+			'disabled' => $this->isDisabledDropdownOption('move', $options, $permissions)
+		];
+
+		$result['duplicate'] = [
+			'dialog'   => $url . '/duplicate',
+			'icon'     => 'copy',
+			'text'     => I18n::translate('duplicate'),
+			'disabled' => $this->isDisabledDropdownOption('duplicate', $options, $permissions)
+		];
+
+		$result[] = '-';
+
 		$result['delete'] = [
 			'dialog'   => $url . '/delete',
 			'icon'     => 'trash',
@@ -157,12 +197,14 @@ class Page extends Model
 	 * Returns the setup for a dropdown option
 	 * which is used in the changes dropdown
 	 * for example.
+	 *
+	 * @deprecated 5.1.4 Use the Kirby\Panel\Ui\Item\PageItem class instead
 	 */
 	public function dropdownOption(): array
 	{
-		return [
-			'text' => $this->model->title()->value(),
-		] + parent::dropdownOption();
+		return (new PageItem(page: $this->model))->props() + [
+			'icon' => 'page'
+		];
 	}
 
 	/**
@@ -185,28 +227,24 @@ class Page extends Model
 			$defaults['icon'] = $icon;
 		}
 
-		return array_merge(parent::imageDefaults(), $defaults);
+		return [
+			...parent::imageDefaults(),
+			...$defaults
+		];
 	}
 
 	/**
 	 * Returns the image file object based on provided query
-	 *
-	 * @internal
 	 */
 	protected function imageSource(
 		string|null $query = null
 	): CmsFile|Asset|null {
-		if ($query === null) {
-			$query = 'page.image';
-		}
-
+		$query ??= 'page.image';
 		return parent::imageSource($query);
 	}
 
 	/**
 	 * Returns the full path without leading slash
-	 *
-	 * @internal
 	 */
 	public function path(): string
 	{
@@ -219,13 +257,19 @@ class Page extends Model
 	 */
 	public function pickerData(array $params = []): array
 	{
-		$params['text'] ??= '{{ page.title }}';
+		$item = new PageItem(
+			page: $this->model,
+			image: $params['image'] ?? null,
+			info: $params['info'] ?? null,
+			layout: $params['layout'] ?? null,
+			text: $params['text'] ?? null,
+		);
 
-		return array_merge(parent::pickerData($params), [
-			'dragText'    => $this->dragText(),
+		return [
+			...$item->props(),
 			'hasChildren' => $this->model->hasChildren(),
-			'url'         => $this->model->url()
-		]);
+			'sortable'    => true
+		];
 	}
 
 	/**
@@ -234,16 +278,15 @@ class Page extends Model
 	 */
 	public function position(): int
 	{
-		return $this->model->num() ??
-			   $this->model->parentModel()->children()->listed()->not($this->model)->count() + 1;
+		return
+			$this->model->num() ??
+			$this->model->parentModel()->children()->listed()->not($this->model)->count() + 1;
 	}
 
 	/**
 	 * Returns navigation array with
 	 * previous and next page
 	 * based on blueprint definition
-	 *
-	 * @internal
 	 */
 	public function prevNext(): array
 	{
@@ -251,7 +294,7 @@ class Page extends Model
 
 		// create siblings collection based on
 		// blueprint navigation
-		$siblings = function (string $direction) use ($page) {
+		$siblings = static function (string $direction) use ($page) {
 			$navigation = $page->blueprint()->navigation();
 			$sortBy     = $navigation['sortBy'] ?? null;
 			$status     = $navigation['status'] ?? null;
@@ -278,12 +321,12 @@ class Page extends Model
 				$templates = (array)($template ?? $page->intendedTemplate());
 
 				// do not filter if template navigation is all
-				if (in_array('all', $templates) === false) {
+				if (in_array('all', $templates, true) === false) {
 					$siblings = $siblings->filter('intendedTemplate', 'in', $templates);
 				}
 
 				// do not filter if status navigation is all
-				if (in_array('all', $statuses) === false) {
+				if (in_array('all', $statuses, true) === false) {
 					$siblings = $siblings->filter('status', 'in', $statuses);
 				}
 			} else {
@@ -292,7 +335,7 @@ class Page extends Model
 					->filter('status', $page->status());
 			}
 
-			return $siblings->filter('isReadable', true);
+			return $siblings->filter('isListable', true);
 		};
 
 		return [
@@ -302,53 +345,43 @@ class Page extends Model
 	}
 
 	/**
-	 * Returns the data array for the
-	 * view's component props
-	 *
-	 * @internal
+	 * Returns the data array for the view's component props
 	 */
 	public function props(): array
 	{
-		$page = $this->model;
+		$props = parent::props();
 
-		return array_merge(
-			parent::props(),
-			$this->prevNext(),
-			[
-				'blueprint' => $page->intendedTemplate()->name(),
-				'model' => [
-					'content'    => $this->content(),
-					'id'         => $page->id(),
-					'link'       => $this->url(true),
-					'parent'     => $page->parentModel()->panel()->url(true),
-					'previewUrl' => $page->previewUrl(),
-					'status'     => $page->status(),
-					'title'      => $page->title()->toString(),
-				],
-				'status' => function () use ($page) {
-					if ($status = $page->status()) {
-						return $page->blueprint()->status()[$status] ?? null;
-					}
-				},
-			]
-		);
+		// Additional model information
+		// @deprecated Use the top-level props instead
+		$model = [
+			'id'         => $props['id'],
+			'link'       => $props['link'],
+			'parent'     => $this->model->parentModel()->panel()->url(true),
+			'previewUrl' => $this->model->previewUrl(),
+			'status'     => $this->model->status(),
+			'title'      => $this->model->title()->toString(),
+			'uuid'       => $props['uuid'],
+		];
+
+		return [
+			...$props,
+			...$this->prevNext(),
+			'blueprint'  => $this->model->intendedTemplate()->name(),
+			'model'      => $model,
+			'title'      => $model['title'],
+		];
 	}
 
 	/**
-	 * Returns the data array for
-	 * this model's Panel view
-	 *
-	 * @internal
+	 * Returns the data array for this model's Panel view
 	 */
 	public function view(): array
 	{
-		$page = $this->model;
-
 		return [
-			'breadcrumb' => $page->panel()->breadcrumb(),
+			'breadcrumb' => $this->model->panel()->breadcrumb(),
 			'component'  => 'k-page-view',
-			'props'      => $this->props(),
-			'title'      => $page->title()->toString(),
+			'props'      => $props = $this->props(),
+			'title'      => $props['title'],
 		];
 	}
 }

@@ -1,0 +1,35 @@
+Title: Luxe Cosmetics
+Hero_title: Luxe (br:) (italic: (accent: Cosmetics))
+Subtitle: Elite UX Case Study
+Role: Lead UX/UI Designer
+Timeline: 6 Months (2023)
+Intro: Redefining the digital flagship. We transformed a fragmented mobile experience into a high-conversion engine, blending luxury aesthetics with performance-driven engineering.
+Stats:
+  - 
+    label: Conversion
+    value: +45%
+    description: Mobile Checkout Completions
+  - 
+    label: Retention
+    value: 20%
+    description: Lift in AOV Strategy
+  - 
+    label: Efficiency
+    value: -32%
+    description: Bounce Rate Reduction
+Challenge_section_header: The Challenge
+Challenge_text: Luxe Cosmetics faced a critical bottleneck: despite high brand awareness, their digital flagship store suffered from a fragmented mobile experience that failed to translate prestige into purchases.
+Challenge_points:
+  - 
+    icon: trending_down
+    title: Fragmented User Flows
+    description: Mobile traffic (85%) was being lost to complex, multi-step navigation menus that obscured the path to purchase.
+  - 
+    icon: speed
+    title: Performance Lag
+    description: Heavy image assets compromised speed, leading to a 40% bounce rate for first-time visitors expecting high-end fluidity.
+Strategy_section_header: Strategic Intervention
+Strategy_intro: We moved beyond aesthetics to engineer a commerce engine that prioritizes technical speed and user psychology.
+Outcome_section_header: Final Impact
+Outcome_text: The Luxe Cosmetics redesign proved that sophisticated design and aggressive business metrics are not mutually exclusive. By aligning user empathy with technical constraints, we delivered a 300% projected increase in digital revenue over the next 24 months.
+uuid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx

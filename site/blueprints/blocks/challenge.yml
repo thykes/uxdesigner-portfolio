@@ -1,0 +1,29 @@
+name: Challenge Section
+icon: image
+fields:
+  image:
+    label: Challenge Image (Left)
+    type: files
+    max: 1
+  caption:
+    type: text
+  title:
+    label: Section Title
+    type: text
+    default: The <span class="italic">Challenge</span>
+  text:
+    label: Main Text
+    type: textarea
+  points:
+    label: Key Pain Points
+    type: structure
+    fields:
+      icon:
+        type: text
+        width: 1/4
+      title:
+        type: text
+        width: 1/4
+      description:
+        type: textarea
+        width: 1/2

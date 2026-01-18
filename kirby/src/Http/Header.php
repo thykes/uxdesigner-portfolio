@@ -18,7 +18,6 @@ class Header
 {
 	// configuration
 	public static array $codes = [
-
 		// successful
 		'_200' => 'OK',
 		'_201' => 'Created',
@@ -58,15 +57,18 @@ class Header
 	 *
 	 * @return string|void
 	 */
-	public static function contentType(string $mime, string $charset = 'UTF-8', bool $send = true)
-	{
+	public static function contentType(
+		string $mime,
+		string $charset = 'UTF-8',
+		bool $send = true
+	) {
 		if ($found = F::extensionToMime($mime)) {
 			$mime = $found;
 		}
 
 		$header = 'Content-type: ' . $mime;
 
-		if (empty($charset) === false) {
+		if ($charset !== '') {
 			$header .= '; charset=' . $charset;
 		}
 
@@ -80,8 +82,10 @@ class Header
 	/**
 	 * Creates headers by key and value
 	 */
-	public static function create(string|array $key, string|null $value = null): string
-	{
+	public static function create(
+		string|array $key,
+		string|null $value = null
+	): string {
 		if (is_array($key) === true) {
 			$headers = [];
 
@@ -92,7 +96,8 @@ class Header
 			return implode("\r\n", $headers);
 		}
 
-		// prevent header injection by stripping any newline characters from single headers
+		// prevent header injection by stripping
+		// any newline characters from single headers
 		return str_replace(["\r", "\n"], '', $key . ': ' . $value);
 	}
 
@@ -101,8 +106,11 @@ class Header
 	 *
 	 * @return string|void
 	 */
-	public static function type(string $mime, string $charset = 'UTF-8', bool $send = true)
-	{
+	public static function type(
+		string $mime,
+		string $charset = 'UTF-8',
+		bool $send = true
+	) {
 		return static::contentType($mime, $charset, $send);
 	}
 
@@ -118,17 +126,25 @@ class Header
 	 * @return string|void
 	 * @psalm-return ($send is false ? string : void)
 	 */
-	public static function status(int|string|null $code = null, bool $send = true)
-	{
+	public static function status(
+		int|string|null $code = null,
+		bool $send = true
+	) {
 		$codes    = static::$codes;
 		$protocol = Environment::getGlobally('SERVER_PROTOCOL', 'HTTP/1.1');
 
 		// allow full control over code and message
-		if (is_string($code) === true && preg_match('/^\d{3} \w.+$/', $code) === 1) {
+		if (
+			is_string($code) === true &&
+			preg_match('/^\d{3} \w.+$/', $code) === 1
+		) {
 			$message = substr(rtrim($code), 4);
 			$code    = substr($code, 0, 3);
 		} else {
-			$code    = array_key_exists('_' . $code, $codes) === false ? 500 : $code;
+			if (array_key_exists('_' . $code, $codes) === false) {
+				$code = 500;
+			}
+
 			$message = $codes['_' . $code] ?? 'Something went wrong';
 		}
 
@@ -247,8 +263,11 @@ class Header
 	 *
 	 * @return string|void
 	 */
-	public static function redirect(string $url, int $code = 302, bool $send = true)
-	{
+	public static function redirect(
+		string $url,
+		int $code = 302,
+		bool $send = true
+	) {
 		$status   = static::status($code, false);
 		$location = 'Location:' . Url::unIdn($url);
 
@@ -268,14 +287,13 @@ class Header
 	 */
 	public static function download(array $params = []): void
 	{
-		$defaults = [
+		$options = [
 			'name'     => 'download',
 			'size'     => false,
 			'mime'     => 'application/force-download',
-			'modified' => time()
+			'modified' => time(),
+			...$params
 		];
-
-		$options = array_merge($defaults, $params);
 
 		header('Pragma: public');
 		header('Cache-Control: no-cache, no-store, must-revalidate');

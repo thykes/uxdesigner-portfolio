@@ -4,6 +4,9 @@ namespace Kirby\Http;
 
 use Kirby\Cms\App;
 use Kirby\Http\Request\Auth;
+use Kirby\Http\Request\Auth\BasicAuth;
+use Kirby\Http\Request\Auth\BearerAuth;
+use Kirby\Http\Request\Auth\SessionAuth;
 use Kirby\Http\Request\Body;
 use Kirby\Http\Request\Files;
 use Kirby\Http\Request\Query;
@@ -24,9 +27,9 @@ use Kirby\Toolkit\Str;
 class Request
 {
 	public static array $authTypes = [
-		'basic'   => 'Kirby\Http\Request\Auth\BasicAuth',
-		'bearer'  => 'Kirby\Http\Request\Auth\BearerAuth',
-		'session' => 'Kirby\Http\Request\Auth\SessionAuth',
+		'basic'   => BasicAuth::class,
+		'bearer'  => BearerAuth::class,
+		'session' => SessionAuth::class,
 	];
 
 	/**
@@ -65,12 +68,6 @@ class Request
 	protected string $method;
 
 	/**
-	 * All options that have been passed to
-	 * the request in the constructor
-	 */
-	protected array $options;
-
-	/**
 	 * The Query object is a wrapper around
 	 * the URL query string, which parses the
 	 * string and provides a clean API to fetch
@@ -93,30 +90,43 @@ class Request
 	 * data via the $options array or use
 	 * the data from the incoming request.
 	 */
-	public function __construct(array $options = [])
-	{
-		$this->options = $options;
+	public function __construct(
+		protected array $options = []
+	) {
 		$this->method  = $this->detectRequestMethod($options['method'] ?? null);
 
 		if (isset($options['body']) === true) {
-			$this->body = $options['body'] instanceof Body ? $options['body'] : new Body($options['body']);
+			$this->body =
+				$options['body'] instanceof Body
+				? $options['body']
+				: new Body($options['body']);
 		}
 
 		if (isset($options['files']) === true) {
-			$this->files = $options['files'] instanceof Files ? $options['files'] : new Files($options['files']);
+			$this->files =
+				$options['files'] instanceof Files
+				? $options['files']
+				: new Files($options['files']);
 		}
 
 		if (isset($options['query']) === true) {
-			$this->query = $options['query'] instanceof Query ? $options['query'] : new Query($options['query']);
+			$this->query =
+				$options['query'] instanceof Query
+				? $options['query']
+				: new Query($options['query']);
 		}
 
 		if (isset($options['url']) === true) {
-			$this->url = $options['url'] instanceof Uri ? $options['url'] : new Uri($options['url']);
+			$this->url =
+				$options['url'] instanceof Uri
+				? $options['url']
+				: new Uri($options['url']);
 		}
 	}
 
 	/**
 	 * Improved `var_dump` output
+	 * @codeCoverageIgnore
 	 */
 	public function __debugInfo(): array
 	{
@@ -139,7 +149,7 @@ class Request
 		}
 
 		// lazily request the instance for non-CMS use cases
-		$kirby = App::instance(null, true);
+		$kirby = App::instance(lazy: true);
 
 		// tell the CMS responder that the response relies on
 		// the `Authorization` header and its value (even if
@@ -147,9 +157,7 @@ class Request
 		// this ensures that the response is only cached for
 		// unauthenticated visitors;
 		// https://github.com/getkirby/kirby/issues/4423#issuecomment-1166300526
-		if ($kirby) {
-			$kirby->response()->usesAuth(true);
-		}
+		$kirby?->response()->usesAuth(true);
 
 		if ($auth = $this->authString()) {
 			$type = Str::lower(Str::before($auth, ' '));
@@ -197,7 +205,10 @@ class Request
 	 */
 	public function data(): array
 	{
-		return array_merge($this->body()->toArray(), $this->query()->toArray());
+		return array_replace(
+			$this->body()->toArray(),
+			$this->query()->toArray()
+		);
 	}
 
 	/**
@@ -207,23 +218,36 @@ class Request
 	public function detectRequestMethod(string|null $method = null): string
 	{
 		// all possible methods
-		$methods = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'];
+		$methods = [
+			'CONNECT',
+			'DELETE',
+			'GET',
+			'HEAD',
+			'OPTIONS',
+			'PATCH',
+			'POST',
+			'PUT',
+			'TRACE',
+		];
 
 		// the request method can be overwritten with a header
-		$methodOverride = strtoupper(Environment::getGlobally('HTTP_X_HTTP_METHOD_OVERRIDE', ''));
+		if ($method === null) {
+			$override = Environment::getGlobally('HTTP_X_HTTP_METHOD_OVERRIDE', '');
+			$override = strtoupper($override);
 
-		if ($method === null && in_array($methodOverride, $methods) === true) {
-			$method = $methodOverride;
+			if (in_array($override, $methods, true) === true) {
+				$method = $override;
+			}
 		}
 
 		// final chain of options to detect the method
-		$method = $method ?? Environment::getGlobally('REQUEST_METHOD', 'GET');
+		$method ??= Environment::getGlobally('REQUEST_METHOD', 'GET');
 
 		// uppercase the shit out of it
 		$method = strtoupper($method);
 
 		// sanitize the method
-		if (in_array($method, $methods) === false) {
+		if (in_array($method, $methods, true) === false) {
 			$method = 'GET';
 		}
 
@@ -292,7 +316,10 @@ class Request
 		$headers = [];
 
 		foreach (Environment::getGlobally() as $key => $value) {
-			if (substr($key, 0, 5) !== 'HTTP_' && substr($key, 0, 14) !== 'REDIRECT_HTTP_') {
+			if (
+				str_starts_with($key, 'HTTP_') === false &&
+				str_starts_with($key, 'REDIRECT_HTTP_') === false
+			) {
 				continue;
 			}
 
@@ -390,14 +417,15 @@ class Request
 		// both variants need to be checked separately
 		// because empty strings are treated as invalid
 		// but the `??` operator wouldn't do the fallback
-
 		$option = $this->options['auth'] ?? null;
-		if (empty($option) === false) {
+
+		if (is_string($option) === true && $option !== '') {
 			return $option;
 		}
 
 		$header = $this->header('authorization');
-		if (empty($header) === false) {
+
+		if (is_string($header) === true && $header !== '') {
 			return $header;
 		}
 

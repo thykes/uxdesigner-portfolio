@@ -1,0 +1,17 @@
+name: Strategy Section
+icon: settings
+fields:
+  title:
+    label: Section Title
+    type: text
+    default: Engineering <span class="italic text-[var(--accent)]">Elegance</span>
+  label:
+    label: Top Label
+    type: text
+    default: Strategic Intervention
+  intro:
+    label: Intro Text
+    type: textarea
+  content:
+    label: Content (Blocks)
+    type: blocks

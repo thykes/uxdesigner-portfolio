@@ -30,16 +30,21 @@ class Url
 	 */
 	public static function __callStatic(string $method, array $arguments)
 	{
-		return (new Uri($arguments[0] ?? static::current()))->$method(...array_slice($arguments, 1));
+		$uri = new Uri($arguments[0] ?? static::current());
+		return $uri->$method(...array_slice($arguments, 1));
 	}
 
 	/**
 	 * Url Builder
 	 * Actually just a factory for `new Uri($parts)`
 	 */
-	public static function build(array $parts = [], string|null $url = null): string
-	{
-		return (string)(new Uri($url ?? static::current()))->clone($parts);
+	public static function build(
+		array $parts = [],
+		string|null $url = null
+	): string {
+		$url ??= static::current();
+		$uri   = new Uri($url);
+		return $uri->clone($parts)->toString();
 	}
 
 	/**
@@ -65,7 +70,11 @@ class Url
 	public static function fix(string|null $url = null): string|null
 	{
 		// make sure to not touch absolute urls
-		return (!preg_match('!^(https|http|ftp)\:\/\/!i', $url ?? '')) ? 'http://' . $url : $url;
+		if (!preg_match('!^(https|http|ftp)\:\/\/!i', $url ?? '')) {
+			return 'http://' . $url;
+		}
+
+		return $url;
 	}
 
 	/**
@@ -93,23 +102,27 @@ class Url
 		//  //example.com/uri
 		//  http://example.com/uri, https://example.com/uri, ftp://example.com/uri
 		//  mailto:example@example.com, geo:49.0158,8.3239?z=11
-		return $url !== null && preg_match('!^(//|[a-z0-9+-.]+://|mailto:|tel:|geo:)!i', $url) === 1;
+		return
+			$url !== null &&
+			preg_match('!^(//|[a-z0-9+-.]+://|mailto:|tel:|geo:)!i', $url) === 1;
 	}
 
 	/**
 	 * Convert a relative path into an absolute URL
 	 */
-	public static function makeAbsolute(string|null $path = null, string|null $home = null): string
-	{
+	public static function makeAbsolute(
+		string|null $path = null,
+		string|null $home = null
+	): string {
 		if ($path === '' || $path === '/' || $path === null) {
 			return $home ?? static::home();
 		}
 
-		if (substr($path, 0, 1) === '#') {
+		if (str_starts_with($path, '#') === true) {
 			return $path;
 		}
 
-		if (static::isAbsolute($path)) {
+		if (static::isAbsolute($path) === true) {
 			return $path;
 		}
 
@@ -117,19 +130,28 @@ class Url
 		$path   = ltrim($path, '/');
 		$home ??= static::home();
 
-		if (empty($path) === true) {
+		if ($path === '') {
 			return $home;
 		}
 
-		return $home === '/' ? '/' . $path : $home . '/' . $path;
+		if ($home === '/') {
+			return '/' . $path;
+		}
+
+		return $home . '/' . $path;
 	}
 
 	/**
 	 * Returns the path for the given url
 	 */
-	public static function path(string|array|null $url = null, bool $leadingSlash = false, bool $trailingSlash = false): string
-	{
-		return Url::toObject($url)->path()->toString($leadingSlash, $trailingSlash);
+	public static function path(
+		string|array|null $url = null,
+		bool $leadingSlash = false,
+		bool $trailingSlash = false
+	): string {
+		return Url::toObject($url)
+			->path()
+			->toString($leadingSlash, $trailingSlash);
 	}
 
 	/**
@@ -151,22 +173,26 @@ class Url
 	/**
 	 * Shortens the Url by removing all unnecessary parts
 	 */
-	public static function short(string|null $url = null, int $length = 0, bool $base = false, string $rep = '…'): string
-	{
+	public static function short(
+		string|null $url = null,
+		int $length = 0,
+		bool $base = false,
+		string $rep = '…'
+	): string {
 		$uri = static::toObject($url);
 
-		$uri->fragment = null;
-		$uri->query    = null;
-		$uri->password = null;
-		$uri->port     = null;
-		$uri->scheme   = null;
-		$uri->username = null;
+		$uri->setFragment(null);
+		$uri->setQuery(null);
+		$uri->setPassword(null);
+		$uri->setPort(null);
+		$uri->setScheme(null);
+		$uri->setUsername(null);
 
 		// remove the trailing slash from the path
-		$uri->slash = false;
+		$uri->setSlash(false);
 
 		$url = $base ? $uri->base() : $uri->toString();
-		$url = str_replace('www.', '', $url);
+		$url = str_replace('www.', '', $url ?? '');
 
 		return Str::short($url, $length, $rep);
 	}
@@ -198,13 +224,18 @@ class Url
 	/**
 	 * Smart resolver for internal and external urls
 	 */
-	public static function to(string|null $path = null, array $options = null): string
-	{
+	public static function to(
+		string|null $path = null,
+		array|null $options = null
+	): string {
 		// make sure $path is string
 		$path ??= '';
 
 		// keep relative urls
-		if (substr($path, 0, 2) === './' || substr($path, 0, 3) === '../') {
+		if (
+			str_starts_with($path, './') === true ||
+			str_starts_with($path, '../') === true
+		) {
 			return $path;
 		}
 

@@ -47,7 +47,37 @@ class Remote
 	public string $errorMessage;
 	public array $headers = [];
 	public array $info = [];
-	public array $options = [];
+
+	/**
+	 * @throws \Exception when the curl request failed
+	 */
+	public function __construct(
+		string $url,
+		public array $options = []
+	) {
+		$defaults = static::$defaults;
+
+		// use the system CA store by default if
+		// one has been configured in php.ini
+		$cainfo = ini_get('curl.cainfo');
+
+		// Suppress warnings e.g. if system CA is outside of open_basedir (See: issue #6236)
+		if (empty($cainfo) === false && @is_file($cainfo) === true) {
+			$defaults['ca'] = self::CA_SYSTEM;
+		}
+
+		// update the defaults with App config if set;
+		// request the App instance lazily
+		if ($app = App::instance(null, true)) {
+			$defaults = [...$defaults, ...$app->option('remote', [])];
+		}
+
+		// set all options, incl. url
+		$this->options = [...$defaults, ...$options, 'url' => $url];
+
+		// send the request
+		$this->fetch();
+	}
 
 	/**
 	 * Magic getter for request info data
@@ -58,40 +88,17 @@ class Remote
 		return $this->info[$method] ?? null;
 	}
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(string $url, array $options = [])
-	{
-		$defaults = static::$defaults;
-
-		// use the system CA store by default if
-		// one has been configured in php.ini
-		$cainfo = ini_get('curl.cainfo');
-		if (empty($cainfo) === false && is_file($cainfo) === true) {
-			$defaults['ca'] = self::CA_SYSTEM;
-		}
-
-		// update the defaults with App config if set;
-		// request the App instance lazily
-		$app = App::instance(null, true);
-		if ($app !== null) {
-			$defaults = array_merge($defaults, $app->option('remote', []));
-		}
-
-		// set all options
-		$this->options = array_merge($defaults, $options);
-
-		// add the url
-		$this->options['url'] = $url;
-
-		// send the request
-		$this->fetch();
-	}
-
-	public static function __callStatic(string $method, array $arguments = []): static
-	{
-		return new static($arguments[0], array_merge(['method' => strtoupper($method)], $arguments[1] ?? []));
+	public static function __callStatic(
+		string $method,
+		array $arguments = []
+	): static {
+		return new static(
+			url:     $arguments[0],
+			options: [
+				'method' => strtoupper($method),
+				...$arguments[1] ?? []
+			]
+		);
 	}
 
 	/**
@@ -114,6 +121,7 @@ class Remote
 	 * Sets up all curl options and sends the request
 	 *
 	 * @return $this
+	 * @throws \Exception when the curl request failed
 	 */
 	public function fetch(): static
 	{
@@ -161,7 +169,9 @@ class Remote
 			$this->curlopt[CURLOPT_SSL_VERIFYPEER] = true;
 			$this->curlopt[CURLOPT_CAPATH] = $this->options['ca'];
 		} else {
-			throw new InvalidArgumentException('Invalid "ca" option for the Remote class');
+			throw new InvalidArgumentException(
+				message: 'Invalid "ca" option for the Remote class'
+			);
 		}
 
 		// add the progress
@@ -176,10 +186,10 @@ class Remote
 			$headers = [];
 			foreach ($this->options['headers'] as $key => $value) {
 				if (is_string($key) === true) {
-					$headers[] = $key . ': ' . $value;
-				} else {
-					$headers[] = $value;
+					$value = $key . ': ' . $value;
 				}
+
+				$headers[] = $value;
 			}
 
 			$this->curlopt[CURLOPT_HTTPHEADER] = $headers;
@@ -245,26 +255,29 @@ class Remote
 			throw new Exception($this->errorMessage, $this->errorCode);
 		}
 
-		curl_close($this->curl);
-
 		return $this;
 	}
 
 	/**
 	 * Static method to send a GET request
+	 *
+	 * @throws \Exception when the curl request failed
 	 */
 	public static function get(string $url, array $params = []): static
 	{
-		$defaults = [
+		$options = [
 			'method' => 'GET',
 			'data'   => [],
+			...$params
 		];
 
-		$options = array_merge($defaults, $params);
-		$query   = http_build_query($options['data']);
+		$query = http_build_query($options['data']);
 
-		if (empty($query) === false) {
-			$url = Url::hasQuery($url) === true ? $url . '&' . $query : $url . '?' . $query;
+		if ($query !== '') {
+			$url = match (Url::hasQuery($url)) {
+				true    => $url . '&' . $query,
+				default => $url . '?' . $query
+			};
 		}
 
 		// remove the data array from the options
@@ -293,10 +306,22 @@ class Remote
 	 * Decode the response content
 	 *
 	 * @param bool $array decode as array or object
+	 * @psalm-return ($array is true ? array|null : stdClass|null)
 	 */
 	public function json(bool $array = true): array|stdClass|null
 	{
-		return json_decode($this->content(), $array);
+		if ($content = $this->content()) {
+			$json = json_decode($content, $array);
+
+			if (
+				is_array($json) === true ||
+				$json instanceof stdClass === true
+			) {
+				return $json;
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -321,7 +346,7 @@ class Remote
 	 */
 	protected function postfields($data)
 	{
-		if (is_object($data) || is_array($data)) {
+		if (is_object($data) === true || is_array($data) === true) {
 			return http_build_query($data);
 		}
 
@@ -330,6 +355,8 @@ class Remote
 
 	/**
 	 * Static method to init this class and send a request
+	 *
+	 * @throws \Exception when the curl request failed
 	 */
 	public static function request(string $url, array $params = []): static
 	{

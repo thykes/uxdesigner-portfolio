@@ -4,7 +4,8 @@ namespace Kirby\Http;
 
 use Kirby\Cms\App;
 use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Properties;
+use SensitiveParameter;
+use Stringable;
 use Throwable;
 
 /**
@@ -16,10 +17,8 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Uri
+class Uri implements Stringable
 {
-	use Properties;
-
 	/**
 	 * Cache for the current Uri object
 	 */
@@ -28,32 +27,32 @@ class Uri
 	/**
 	 * The fragment after the hash
 	 */
-	protected string|false|null $fragment = null;
+	protected string|false|null $fragment;
 
 	/**
 	 * The host address
 	 */
-	protected string|null $host = null;
+	protected string|null $host;
 
 	/**
 	 * The optional password for basic authentication
 	 */
-	protected string|false|null $password = null;
+	protected string|false|null $password;
 
 	/**
 	 * The optional list of params
 	 */
-	protected Params|null $params = null;
+	protected Params $params;
 
 	/**
 	 * The optional path
 	 */
-	protected Path|null $path = null;
+	protected Path $path;
 
 	/**
 	 * The optional port number
 	 */
-	protected int|false|null $port = null;
+	protected int|false|null $port;
 
 	/**
 	 * All original properties
@@ -63,24 +62,65 @@ class Uri
 	/**
 	 * The optional query string without leading ?
 	 */
-	protected Query|null $query = null;
+	protected Query $query;
 
 	/**
 	 * https or http
 	 */
-	protected string|null $scheme = 'http';
+	protected string|null $scheme;
 
 	/**
 	 * Supported schemes
 	 */
 	protected static array $schemes = ['http', 'https', 'ftp'];
 
-	protected bool $slash = false;
+	protected bool $slash;
 
 	/**
 	 * The optional username for basic authentication
 	 */
 	protected string|false|null $username = null;
+
+	/**
+	 * Creates a new URI object
+	 *
+	 * @param array $inject Additional props to inject if a URL string is passed
+	 */
+	public function __construct(array|string $props = [], array $inject = [])
+	{
+		if (is_string($props) === true) {
+			// make sure the URL parser works properly when there's a
+			// colon in the string but the string is a relative URL
+			if (Url::isAbsolute($props) === false) {
+				$props = 'https://getkirby.com/' . $props;
+				$props = parse_url($props);
+				unset($props['scheme'], $props['host']);
+			} else {
+				$props = parse_url($props);
+			}
+
+			$props['username'] = $props['user'] ?? null;
+			$props['password'] = $props['pass'] ?? null;
+			$props             = [...$props, ...$inject];
+		}
+
+		// parse the path and extract params
+		if (empty($props['path']) === false) {
+			$props = static::parsePath($props);
+		}
+
+		$this->props = $props;
+		$this->setFragment($props['fragment'] ?? null);
+		$this->setHost($props['host'] ?? null);
+		$this->setParams($props['params'] ?? null);
+		$this->setPassword($props['password'] ?? null);
+		$this->setPath($props['path'] ?? null);
+		$this->setPort($props['port'] ?? null);
+		$this->setQuery($props['query'] ?? null);
+		$this->setScheme($props['scheme'] ?? 'http');
+		$this->setSlash($props['slash'] ?? false);
+		$this->setUsername($props['username'] ?? null);
+	}
 
 	/**
 	 * Magic caller to access all properties
@@ -99,29 +139,6 @@ class Uri
 		$this->path   = clone $this->path;
 		$this->query  = clone $this->query;
 		$this->params = clone $this->params;
-	}
-
-	/**
-	 * Creates a new URI object
-	 *
-	 * @param array $inject Additional props to inject if a URL string is passed
-	 */
-	public function __construct(array|string $props = [], array $inject = [])
-	{
-		if (is_string($props) === true) {
-			$props = parse_url($props);
-			$props['username'] = $props['user'] ?? null;
-			$props['password'] = $props['pass'] ?? null;
-
-			$props = array_merge($props, $inject);
-		}
-
-		// parse the path and extract params
-		if (empty($props['path']) === false) {
-			$props = static::parsePath($props);
-		}
-
-		$this->setProperties($this->props = $props);
 	}
 
 	/**
@@ -199,9 +216,9 @@ class Uri
 
 		if ($app = App::instance(null, true)) {
 			$environment = $app->environment();
-		} else {
-			$environment = new Environment();
 		}
+
+		$environment ??= new Environment();
 
 		return new static($environment->requestUrl(), $props);
 	}
@@ -213,7 +230,7 @@ class Uri
 	 */
 	public function domain(): string|null
 	{
-		if (empty($this->host) === true || $this->host === '/') {
+		if ($this->host === null || $this->host === '' || $this->host === '/') {
 			return null;
 		}
 
@@ -226,7 +243,10 @@ class Uri
 
 		$domain .= $this->host;
 
-		if ($this->port !== null && in_array($this->port, [80, 443]) === false) {
+		if (
+			$this->port !== null &&
+			in_array($this->port, [80, 443], true) === false
+		) {
 			$domain .= ':' . $this->port;
 		}
 
@@ -235,7 +255,7 @@ class Uri
 
 	public function hasFragment(): bool
 	{
-		return empty($this->fragment) === false;
+		return $this->fragment !== null && $this->fragment !== '';
 	}
 
 	public function hasPath(): bool
@@ -261,8 +281,9 @@ class Uri
 	 */
 	public function idn(): static
 	{
-		if (empty($this->host) === false) {
-			$this->setHost(Idn::decode($this->host));
+		if ($this->isAbsolute() === true) {
+			$host = Idn::decode($this->host);
+			$this->setHost($host);
 		}
 		return $this;
 	}
@@ -275,11 +296,32 @@ class Uri
 	{
 		if ($app = App::instance(null, true)) {
 			$url = $app->url('index');
-		} else {
-			$url = (new Environment())->baseUrl();
 		}
 
+		$url ??= (new Environment())->baseUrl();
+
 		return new static($url, $props);
+	}
+
+	/**
+	 * Inherit query, params and fragment from a parent Uri
+	 * @since 5.2.0
+	 * @return $this
+	 */
+	public function inherit(Uri|string $parent): static
+	{
+		if (is_string($parent) === true) {
+			$parent = new static($parent);
+		}
+
+		$this->query->merge($parent->query());
+		$this->params->merge($parent->params());
+
+		if ($fragment = $parent->fragment()) {
+			$this->setFragment($fragment);
+		}
+
+		return $this;
 	}
 
 	/**
@@ -287,7 +329,16 @@ class Uri
 	 */
 	public function isAbsolute(): bool
 	{
-		return empty($this->host) === false;
+		return $this->host !== null && $this->host !== '';
+	}
+
+	/**
+	 * Returns the fragment after the hash
+	 * @since 5.1.0
+	 */
+	public function fragment(): string|null
+	{
+		return $this->fragment;
 	}
 
 	/**
@@ -326,8 +377,10 @@ class Uri
 	/**
 	 * @return $this
 	 */
-	public function setPassword(string|null $password = null): static
-	{
+	public function setPassword(
+		#[SensitiveParameter]
+		string|null $password = null
+	): static {
 		$this->password = $password;
 		return $this;
 	}
@@ -352,7 +405,9 @@ class Uri
 
 		if ($port !== null) {
 			if ($port < 1 || $port > 65535) {
-				throw new InvalidArgumentException('Invalid port format: ' . $port);
+				throw new InvalidArgumentException(
+					message: 'Invalid port format: ' . $port
+				);
 			}
 		}
 
@@ -374,8 +429,13 @@ class Uri
 	 */
 	public function setScheme(string|null $scheme = null): static
 	{
-		if ($scheme !== null && in_array($scheme, static::$schemes) === false) {
-			throw new InvalidArgumentException('Invalid URL scheme: ' . $scheme);
+		if (
+			$scheme !== null &&
+			in_array($scheme, static::$schemes, true) === false
+		) {
+			throw new InvalidArgumentException(
+				message: 'Invalid URL scheme: ' . $scheme
+			);
 		}
 
 		$this->scheme = $scheme;
@@ -410,7 +470,7 @@ class Uri
 	{
 		$array = [];
 
-		foreach ($this->propertyData as $key => $value) {
+		foreach ($this->props as $key => $value) {
 			$value = $this->$key;
 
 			if (is_object($value) === true) {
@@ -436,22 +496,22 @@ class Uri
 		$url   = $this->base();
 		$slash = true;
 
-		if (empty($url) === true) {
+		if ($url === null || $url === '') {
 			$url   = '/';
 			$slash = false;
 		}
 
 		$path = $this->path->toString($slash) . $this->params->toString(true);
 
-		if ($this->slash && $slash === true) {
+		if ($this->slash && ($path !== '' || $slash === true)) {
 			$path .= '/';
 		}
 
 		$url .= $path;
 		$url .= $this->query->toString(true);
 
-		if (empty($this->fragment) === false) {
-			$url .= '#' . $this->fragment;
+		if ($this->hasFragment() === true) {
+			$url .= '#' . $this->fragment();
 		}
 
 		return $url;
@@ -465,8 +525,9 @@ class Uri
 	 */
 	public function unIdn(): static
 	{
-		if (empty($this->host) === false) {
-			$this->setHost(Idn::encode($this->host));
+		if ($this->isAbsolute() === true) {
+			$host = Idn::encode($this->host);
+			$this->setHost($host);
 		}
 		return $this;
 	}
@@ -493,7 +554,7 @@ class Uri
 		// use the full path;
 		// automatically detect the trailing slash from it if possible
 		if (is_string($props['path']) === true) {
-			$props['slash'] = substr($props['path'], -1, 1) === '/';
+			$props['slash'] = str_ends_with($props['path'], '/') === true;
 		}
 
 		return $props;

@@ -20,6 +20,7 @@ trait Data
 {
 	/**
 	 * Improved `var_dump` output
+	 * @codeCoverageIgnore
 	 */
 	public function __debugInfo(): array
 	{
@@ -44,9 +45,11 @@ trait Data
 	{
 		if (is_array($key) === true) {
 			$result = [];
+
 			foreach ($key as $k) {
 				$result[$k] = $this->get($k);
 			}
+
 			return $result;
 		}
 

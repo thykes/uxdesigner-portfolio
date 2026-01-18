@@ -1,0 +1,102 @@
+Title: Luxe Cosmetics
+
+----
+
+Subtitle: Elite UX Case Study
+
+----
+
+Hero-title: Luxe (br:) (italic: (accent: Cosmetics))
+
+----
+
+Role: Lead UX/UI Designer
+
+----
+
+Timeline: 6 Months (2023)
+
+----
+
+Intro: Redefining the digital flagship. We transformed a fragmented mobile experience into a high-conversion engine, blending luxury aesthetics with performance-driven engineering.
+
+----
+
+Modules: [{"attrs":[],"columns":[{"blocks":[],"id":"b2d62d37-d212-4131-85d0-317cf9123e18","width":"1/1"}],"id":"399b7d5e-1a80-49bf-bd41-e3b524de80cd"}]
+
+----
+
+Challenge-text: Luxe Cosmetics faced a critical bottleneck: despite high brand awareness, their digital flagship store suffered from a fragmented mobile experience that failed to translate prestige into purchases.
+
+----
+
+Challenge-points: 
+
+----
+
+Strategy-intro: 
+
+----
+
+Text: 
+
+----
+
+Alternative-paths: 
+
+----
+
+Inclusion-intro: 
+
+----
+
+Inclusion-points: 
+
+----
+
+Outcome-text: 
+
+----
+
+Case-study-pdf: 
+
+----
+
+Cover: 
+
+----
+
+Challenge-image: 
+
+----
+
+Stats:
+
+- 
+  label: Conversion
+  value: '+45%'
+  description: Mobile Checkout Completions
+- 
+  label: Retention
+  value: '20%'
+  description: Lift in AOV Strategy
+- 
+  label: Efficiency
+  value: '-32%'
+  description: Bounce Rate Reduction
+
+----
+
+Meta-title: 
+
+----
+
+Meta-description: 
+
+----
+
+Og-image: 
+
+----
+
+Uuid: suha3q1kcudov4zz

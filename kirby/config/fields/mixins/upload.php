@@ -3,6 +3,7 @@
 use Kirby\Cms\Api;
 use Kirby\Cms\File;
 use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
 
 return [
 	'props' => [
@@ -22,18 +23,29 @@ return [
 				$uploads = [];
 			}
 
-			$template = $uploads['template'] ?? null;
+			$uploads['accept']  = '*';
 
-			if ($template) {
+			if ($preview = $this->image) {
+				$uploads['preview'] = $preview;
+			}
+
+			if ($template = $uploads['template'] ?? null) {
+				// get parent object for upload target
+				$parent = $this->uploadParent($uploads['parent'] ?? null);
+
+				if ($parent === null) {
+					throw new InvalidArgumentException(
+						message: '"' . $uploads['parent'] . '" could not be resolved as a valid parent for the upload'
+					);
+				}
+
 				$file = new File([
 					'filename' => 'tmp',
-					'parent'   => $this->model(),
+					'parent'   => $parent,
 					'template' => $template
 				]);
 
-				$uploads['accept'] = $file->blueprint()->acceptMime();
-			} else {
-				$uploads['accept'] = '*';
+				$uploads['accept'] = $file->blueprint()->acceptAttribute();
 			}
 
 			return $uploads;
@@ -42,32 +54,44 @@ return [
 	'methods' => [
 		'upload' => function (Api $api, $params, Closure $map) {
 			if ($params === false) {
-				throw new Exception('Uploads are disabled for this field');
+				throw new Exception(
+					message: 'Uploads are disabled for this field'
+				);
 			}
 
-			if ($parentQuery = ($params['parent'] ?? null)) {
-				$parent = $this->model()->query($parentQuery);
-			} else {
-				$parent = $this->model();
+			$parent = $this->uploadParent($params['parent'] ?? null);
+
+			return $api->upload(function ($source, $filename) use ($parent, $params, $map) {
+				$props = [
+					'source'   => $source,
+					'template' => $params['template'] ?? null,
+					'filename' => $filename,
+				];
+
+				// move the source file from the temp dir
+				$file = $parent->createFile($props, true);
+
+				if ($file instanceof File === false) {
+					throw new Exception(
+						message: 'The file could not be uploaded'
+					);
+				}
+
+				return $map($file, $parent);
+			});
+		},
+		'uploadParent' => function (string|null $parentQuery = null) {
+			$parent = $this->model();
+
+			if ($parentQuery) {
+				$parent = $parent->query($parentQuery);
 			}
 
 			if ($parent instanceof File) {
 				$parent = $parent->parent();
 			}
 
-			return $api->upload(function ($source, $filename) use ($parent, $params, $map) {
-				$file = $parent->createFile([
-					'source'   => $source,
-					'template' => $params['template'] ?? null,
-					'filename' => $filename,
-				]);
-
-				if ($file instanceof File === false) {
-					throw new Exception('The file could not be uploaded');
-				}
-
-				return $map($file, $parent);
-			});
+			return $parent;
 		}
 	]
 ];

@@ -14,6 +14,8 @@ use Kirby\Toolkit\Str;
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ *
+ * @extends \Kirby\Toolkit\Collection<string>
  */
 class Path extends Collection
 {
@@ -31,9 +33,11 @@ class Path extends Collection
 		return $this->toString();
 	}
 
-	public function toString(bool $leadingSlash = false, bool $trailingSlash = false): string
-	{
-		if (empty($this->data) === true) {
+	public function toString(
+		bool $leadingSlash = false,
+		bool $trailingSlash = false
+	): string {
+		if ($this->data === []) {
 			return '';
 		}
 

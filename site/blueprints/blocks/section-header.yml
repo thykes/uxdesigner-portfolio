@@ -1,0 +1,14 @@
+name: Section Header
+icon: text
+fields:
+  label:
+    label: Top Label (e.g. The Strategic Intervention)
+    type: text
+  title:
+    label: Main Title
+    type: textarea
+    buttons: false
+    help: Supports (brace) tags
+  description:
+    label: Description
+    type: textarea

@@ -1,0 +1,16 @@
+name: Labeled Image
+icon: image
+fields:
+  image:
+    label: Image
+    type: files
+    max: 1
+  label:
+    label: Badge Label (Overlay)
+    type: text
+    width: 1/2
+    help: e.g. Legacy Experience
+  caption:
+    label: Bottom Caption
+    type: text
+    width: 1/2

@@ -3,6 +3,9 @@
 namespace Kirby\Image;
 
 use Exception;
+use Kirby\Image\Darkroom\GdLib;
+use Kirby\Image\Darkroom\ImageMagick;
+use Kirby\Image\Darkroom\Imagick;
 
 /**
  * A wrapper around resizing and cropping
@@ -17,34 +20,30 @@ use Exception;
 class Darkroom
 {
 	public static array $types = [
-		'gd' => 'Kirby\Image\Darkroom\GdLib',
-		'im' => 'Kirby\Image\Darkroom\ImageMagick'
+		'gd'      => GdLib::class,
+		'imagick' => Imagick::class,
+		'im'      => ImageMagick::class
 	];
 
-	protected array $settings = [];
-
-	/**
-	 * Darkroom constructor
-	 */
-	public function __construct(array $settings = [])
-	{
-		$this->settings = array_merge($this->defaults(), $settings);
+	public function __construct(
+		protected array $settings = []
+	) {
+		$this->settings = [...$this->defaults(), ...$settings];
 	}
 
 	/**
-	 * Creates a new Darkroom instance for the given
-	 * type/driver
+	 * Creates a new Darkroom instance
+	 * for the given type/driver
 	 *
 	 * @throws \Exception
 	 */
-	public static function factory(string $type, array $settings = []): object
+	public static function factory(string $type, array $settings = []): static
 	{
 		if (isset(static::$types[$type]) === false) {
-			throw new Exception('Invalid Darkroom type');
+			throw new Exception(message: 'Invalid Darkroom type');
 		}
 
-		$class = static::$types[$type];
-		return new $class($settings);
+		return new static::$types[$type]($settings);
 	}
 
 	/**
@@ -53,7 +52,6 @@ class Darkroom
 	protected function defaults(): array
 	{
 		return [
-			'autoOrient'  => true,
 			'blur'        => false,
 			'crop'        => false,
 			'format'      => null,
@@ -62,6 +60,7 @@ class Darkroom
 			'quality'     => 90,
 			'scaleHeight' => null,
 			'scaleWidth'  => null,
+			'sharpen'     => null,
 			'width'       => null,
 		];
 	}
@@ -71,7 +70,12 @@ class Darkroom
 	 */
 	protected function options(array $options = []): array
 	{
-		$options = array_merge($this->settings, $options);
+		$options = [
+			...$this->settings,
+			...$options,
+			// ensure quality isn't unset by provided options
+			'quality' => $options['quality'] ?? $this->settings['quality']
+		];
 
 		// normalize the crop option
 		if ($options['crop'] === true) {
@@ -83,7 +87,7 @@ class Darkroom
 			$options['blur'] = 10;
 		}
 
-		// normalize the greyscale option
+		// normalize the grayscale option
 		if (isset($options['greyscale']) === true) {
 			$options['grayscale'] = $options['greyscale'];
 			unset($options['greyscale']);
@@ -95,7 +99,10 @@ class Darkroom
 			unset($options['bw']);
 		}
 
-		$options['quality'] ??= $this->settings['quality'];
+		// normalize the sharpen option
+		if ($options['sharpen'] === true) {
+			$options['sharpen'] = 50;
+		}
 
 		return $options;
 	}
@@ -110,18 +117,24 @@ class Darkroom
 		$options = $this->options($options);
 		$image   = new Image($file);
 
-		$dimensions      = $image->dimensions();
-		$thumbDimensions = $dimensions->thumb($options);
+		$options['sourceWidth']  = $image->width();
+		$options['sourceHeight'] = $image->height();
 
-		$sourceWidth  = $image->width();
-		$sourceHeight = $image->height();
+		$dimensions        = $image->dimensions();
+		$thumbDimensions   = $dimensions->thumb($options);
 
 		$options['width']  = $thumbDimensions->width();
 		$options['height'] = $thumbDimensions->height();
 
 		// scale ratio compared to the source dimensions
-		$options['scaleWidth']  = $sourceWidth ? $options['width'] / $sourceWidth : null;
-		$options['scaleHeight'] = $sourceHeight ? $options['height'] / $sourceHeight : null;
+		$options['scaleWidth'] = Focus::ratio(
+			$options['width'],
+			$options['sourceWidth']
+		);
+		$options['scaleHeight'] = Focus::ratio(
+			$options['height'],
+			$options['sourceHeight']
+		);
 
 		return $options;
 	}

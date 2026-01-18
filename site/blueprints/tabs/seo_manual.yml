@@ -1,0 +1,39 @@
+label: SEO
+icon: search
+columns:
+  main:
+    width: 2/3
+    fields:
+      seo_title:
+        label: Meta Title
+        type: text
+        help: Recommended length 50-60 characters
+      seo_description:
+        label: Meta Description
+        type: textarea
+        help: Recommended length 150-160 characters
+
+      seo_divider:
+        type: line
+
+      og_image:
+        label: Social Share Image (OG:Image)
+        type: files
+        max: 1
+        help: 1200x630px recommended
+
+  sidebar:
+    width: 1/3
+    fields:
+      robots:
+        label: Search Engine Indexing
+        type: select
+        default: index, follow
+        options:
+          index, follow: "Index, Follow (Standard)"
+          noindex, nofollow: "Hide from Search (Private)"
+
+      canonical_url:
+        label: Canonical URL
+        type: url
+        help: Leave empty to use default page URL

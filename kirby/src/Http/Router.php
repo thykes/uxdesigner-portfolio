@@ -63,7 +63,9 @@ class Router
 
 		foreach ($routes as $props) {
 			if (isset($props['pattern'], $props['action']) === false) {
-				throw new InvalidArgumentException('Invalid route parameters');
+				throw new InvalidArgumentException(
+					message: 'Invalid route parameters'
+				);
 			}
 
 			$patterns = A::wrap($props['pattern']);
@@ -117,7 +119,10 @@ class Router
 				if ($callback) {
 					$result = $callback($route);
 				} else {
-					$result = $route?->action()->call($route, ...$route->arguments());
+					$result = $route->action()->call(
+						$route,
+						...$route->arguments()
+					);
 				}
 
 				$loop = false;
@@ -139,8 +144,12 @@ class Router
 	 * the routing action immediately
 	 * @since 3.7.0
 	 */
-	public static function execute(string|null $path = null, string $method = 'GET', array $routes = [], Closure|null $callback = null)
-	{
+	public static function execute(
+		string|null $path = null,
+		string $method = 'GET',
+		array $routes = [],
+		Closure|null $callback = null
+	) {
 		return (new static($routes))->call($path, $method, $callback);
 	}
 
@@ -149,27 +158,40 @@ class Router
 	 * The Route's arguments method is used to
 	 * find matches and return all the found
 	 * arguments in the path.
+	 *
+	 * @param array|null $ignore (Passing null has been deprecated)
+	 * @todo Remove support for `$ignore = null` in v6
 	 */
-	public function find(string $path, string $method, array|null $ignore = null): Route|null
-	{
+	public function find(
+		string $path,
+		string $method,
+		array|null $ignore = null
+	): Route {
 		if (isset($this->routes[$method]) === false) {
-			throw new InvalidArgumentException('Invalid routing method: ' . $method, 400);
+			throw new InvalidArgumentException(
+				message: 'Invalid routing method: ' . $method,
+				code: 400
+			);
 		}
 
 		// remove leading and trailing slashes
-		$path = trim($path, '/');
+		$path     = trim($path, '/');
+		$ignore ??= [];
 
 		foreach ($this->routes[$method] as $route) {
 			$arguments = $route->parse($route->pattern(), $path);
 
 			if ($arguments !== false) {
-				if (empty($ignore) === true || in_array($route, $ignore) === false) {
+				if (in_array($route, $ignore, true) === false) {
 					return $this->route = $route;
 				}
 			}
 		}
 
-		throw new Exception('No route found for path: "' . $path . '" and request method: "' . $method . '"', 404);
+		throw new Exception(
+			code: 404,
+			message: 'No route found for path: "' . $path . '" and request method: "' . $method . '"',
+		);
 	}
 
 	/**

@@ -4,7 +4,10 @@ namespace Kirby\Cms;
 
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Filesystem\Mime;
+use Kirby\Http\Response as HttpResponse;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
+use Stringable;
 
 /**
  * Global response configuration
@@ -15,73 +18,61 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-class Responder
+class Responder implements Stringable
 {
 	/**
 	 * Timestamp when the response expires
 	 * in Kirby's cache
-	 *
-	 * @var int|null
 	 */
-	protected $expires = null;
+	protected int|null $expires = null;
 
 	/**
 	 * HTTP status code
-	 *
-	 * @var int
 	 */
-	protected $code = null;
+	protected int|null $code = null;
 
 	/**
 	 * Response body
-	 *
-	 * @var string
 	 */
-	protected $body = null;
+	protected string|null $body = null;
 
 	/**
 	 * Flag that defines whether the current
 	 * response can be cached by Kirby's cache
-	 *
-	 * @var bool
 	 */
-	protected $cache = true;
+	protected bool $cache = true;
 
 	/**
 	 * HTTP headers
-	 *
-	 * @var array
 	 */
-	protected $headers = [];
+	protected array $headers = [];
 
 	/**
 	 * Content type
-	 *
-	 * @var string
 	 */
-	protected $type = null;
+	protected string|null $type = null;
 
 	/**
 	 * Flag that defines whether the current
 	 * response uses the HTTP `Authorization`
 	 * request header
-	 *
-	 * @var bool
 	 */
-	protected $usesAuth = false;
+	protected bool $usesAuth = false;
 
 	/**
 	 * List of cookie names the response
 	 * relies on
-	 *
-	 * @var array
 	 */
-	protected $usesCookies = [];
+	protected array $usesCookies = [];
+
+	/**
+	 * Tracks headers that depend on the request
+	 * and must not be persisted in the cache
+	 */
+	protected array $volatileHeaders = [];
 
 	/**
 	 * Creates and sends the response
-	 *
-	 * @return string
 	 */
 	public function __toString(): string
 	{
@@ -91,10 +82,9 @@ class Responder
 	/**
 	 * Setter and getter for the response body
 	 *
-	 * @param string|null $body
-	 * @return string|$this
+	 * @return $this|string|null
 	 */
-	public function body(string $body = null)
+	public function body(string|null $body = null): static|string|null
 	{
 		if ($body === null) {
 			return $this->body;
@@ -110,10 +100,9 @@ class Responder
 	 * by Kirby's cache
 	 * @since 3.5.5
 	 *
-	 * @param bool|null $cache
 	 * @return bool|$this
 	 */
-	public function cache(bool|null $cache = null)
+	public function cache(bool|null $cache = null): bool|static
 	{
 		if ($cache === null) {
 			// never ever cache private responses
@@ -134,10 +123,9 @@ class Responder
 	 * `Authorization` request header
 	 * @since 3.7.0
 	 *
-	 * @param bool|null $usesAuth
 	 * @return bool|$this
 	 */
-	public function usesAuth(bool|null $usesAuth = null)
+	public function usesAuth(bool|null $usesAuth = null): bool|static
 	{
 		if ($usesAuth === null) {
 			return $this->usesAuth;
@@ -151,14 +139,11 @@ class Responder
 	 * Setter for a cookie name that is
 	 * used by the response
 	 * @since 3.7.0
-	 *
-	 * @param string $name
-	 * @return void
 	 */
 	public function usesCookie(string $name): void
 	{
 		// only add unique names
-		if (in_array($name, $this->usesCookies) === false) {
+		if (in_array($name, $this->usesCookies, true) === false) {
 			$this->usesCookies[] = $name;
 		}
 	}
@@ -168,7 +153,6 @@ class Responder
 	 * names the response relies on
 	 * @since 3.7.0
 	 *
-	 * @param array|null $usesCookies
 	 * @return array|$this
 	 */
 	public function usesCookies(array|null $usesCookies = null)
@@ -212,7 +196,9 @@ class Responder
 			$parsedExpires = strtotime($expires);
 
 			if (is_int($parsedExpires) !== true) {
-				throw new InvalidArgumentException('Invalid time string "' . $expires . '"');
+				throw new InvalidArgumentException(
+					message: 'Invalid time string "' . $expires . '"'
+				);
 			}
 
 			$expires = $parsedExpires;
@@ -233,10 +219,9 @@ class Responder
 	/**
 	 * Setter and getter for the status code
 	 *
-	 * @param int|null $code
 	 * @return int|$this
 	 */
-	public function code(int $code = null)
+	public function code(int|null $code = null)
 	{
 		if ($code === null) {
 			return $this->code;
@@ -248,8 +233,6 @@ class Responder
 
 	/**
 	 * Construct response from an array
-	 *
-	 * @param array $response
 	 */
 	public function fromArray(array $response): void
 	{
@@ -261,12 +244,12 @@ class Responder
 		$this->type($response['type'] ?? null);
 		$this->usesAuth($response['usesAuth'] ?? null);
 		$this->usesCookies($response['usesCookies'] ?? null);
+		$this->volatileHeaders = $response['volatileHeaders'] ?? [];
 	}
 
 	/**
 	 * Setter and getter for a single header
 	 *
-	 * @param string $key
 	 * @param string|false|null $value
 	 * @param bool $lazy If `true`, an existing header value is not overridden
 	 * @return string|$this
@@ -293,18 +276,26 @@ class Responder
 	/**
 	 * Setter and getter for all headers
 	 *
-	 * @param array|null $headers
 	 * @return array|$this
 	 */
-	public function headers(array $headers = null)
+	public function headers(array|null $headers = null)
 	{
 		if ($headers === null) {
 			$injectedHeaders = [];
+			$isPrivate = static::isPrivate($this->usesAuth(), $this->usesCookies());
 
-			if (static::isPrivate($this->usesAuth(), $this->usesCookies()) === true) {
+			if ($isPrivate === true) {
 				// never ever cache private responses
 				$injectedHeaders['Cache-Control'] = 'no-store, private';
-			} else {
+			}
+
+			// inject CORS headers if enabled
+			$corsHeaders = Cors::headers();
+			if ($corsHeaders !== []) {
+				$injectedHeaders = [...$injectedHeaders, ...$corsHeaders];
+			}
+
+			if ($isPrivate === false) {
 				// the response is public, but it may
 				// vary based on request headers
 				$vary = [];
@@ -317,26 +308,33 @@ class Responder
 					$vary[] = 'Cookie';
 				}
 
+				// merge Vary from CORS if present
+				if (isset($injectedHeaders['Vary']) === true) {
+					// split CORS Vary into individual values to avoid duplication
+					$corsVaryValues = array_map('trim', explode(',', $injectedHeaders['Vary']));
+					$vary = [...$vary, ...$corsVaryValues];
+				}
+
 				if ($vary !== []) {
 					$injectedHeaders['Vary'] = implode(', ', $vary);
 				}
 			}
 
 			// lazily inject (never override custom headers)
-			return array_merge($injectedHeaders, $this->headers);
+			return [...$injectedHeaders, ...$this->headers];
 		}
 
 		$this->headers = $headers;
+		$this->volatileHeaders = [];
 		return $this;
 	}
 
 	/**
 	 * Shortcut to configure a json response
 	 *
-	 * @param array|null $json
 	 * @return string|$this
 	 */
-	public function json(array $json = null)
+	public function json(array|null $json = null)
 	{
 		if ($json !== null) {
 			$this->body(json_encode($json));
@@ -348,12 +346,12 @@ class Responder
 	/**
 	 * Shortcut to create a redirect response
 	 *
-	 * @param string|null $location
-	 * @param int|null $code
 	 * @return $this
 	 */
-	public function redirect(string|null $location = null, int|null $code = null)
-	{
+	public function redirect(
+		string|null $location = null,
+		int|null $code = null
+	) {
 		$location = Url::to($location ?? '/');
 		$location = Url::unIdn($location);
 
@@ -364,12 +362,16 @@ class Responder
 
 	/**
 	 * Creates and returns the response object from the config
-	 *
-	 * @param string|null $body
-	 * @return \Kirby\Cms\Response
 	 */
-	public function send(string $body = null)
+	public function send(HttpResponse|string|null $body = null): HttpResponse
 	{
+		if ($body instanceof HttpResponse) {
+			// inject headers from the responder into the response
+			// (only if they are not already set);
+			$body->setHeaderFallbacks($this->headers());
+			return $body;
+		}
+
 		if ($body !== null) {
 			$this->body($body);
 		}
@@ -380,14 +382,12 @@ class Responder
 	/**
 	 * Converts the response configuration
 	 * to an array
-	 *
-	 * @return array
 	 */
 	public function toArray(): array
 	{
-		// the `cache`, `expires`, `usesAuth` and `usesCookies`
-		// values are explicitly *not* serialized as they are
-		// volatile and not to be exported
+		// the `cache`, `expires`, `usesAuth`, `usesCookies` and
+		// `volatileHeaders` values are explicitly *not* serialized
+		// as they are volatile and not to be exported
 		return [
 			'body'    => $this->body(),
 			'code'    => $this->code(),
@@ -397,12 +397,30 @@ class Responder
 	}
 
 	/**
+	 * Converts the response configuration to an array
+	 * that can safely be cached
+	 *
+	 * @since 5.2.0
+	 */
+	public function toCacheArray(): array
+	{
+		$response = $this->toArray();
+		$volatile = $this->collectVolatileHeaders();
+
+		if ($volatile === []) {
+			return $response;
+		}
+
+		$response['headers'] = $this->stripVolatileHeaders($response['headers'], $volatile);
+		return $response;
+	}
+
+	/**
 	 * Setter and getter for the content type
 	 *
-	 * @param string|null $type
 	 * @return string|$this
 	 */
-	public function type(string $type = null)
+	public function type(string|null $type = null)
 	{
 		if ($type === null) {
 			return $this->type;
@@ -421,12 +439,9 @@ class Responder
 	 * all caches due to using dynamic data based on auth
 	 * and/or cookies; the request data only matters if it
 	 * is actually used/relied on by the response
-	 * @since 3.7.0
-	 * @internal
 	 *
-	 * @param bool $usesAuth
-	 * @param array $usesCookies
-	 * @return bool
+	 * @since 3.7.0
+	 * @unstable
 	 */
 	public static function isPrivate(bool $usesAuth, array $usesCookies): bool
 	{
@@ -443,5 +458,121 @@ class Responder
 		}
 
 		return false;
+	}
+
+	/**
+	 * Marks headers (or header parts) as request-dependent, so they
+	 * can be subtracted before caching a response snapshot
+	 *
+	 * @since 5.2.0
+	 */
+	public function markVolatileHeader(string $name, array|null $values = null): void
+	{
+		$this->appendVolatileHeader($this->volatileHeaders, $name, $values);
+	}
+
+	/**
+	 * Collects volatile headers from both manual configuration
+	 * and automatically injected CORS headers
+	 */
+	protected function collectVolatileHeaders(): array
+	{
+		$volatile    = $this->volatileHeaders;
+		$corsHeaders = Cors::headers();
+
+		if ($corsHeaders === []) {
+			return $volatile;
+		}
+
+		foreach ($corsHeaders as $name => $value) {
+			if ($name === 'Vary') {
+				$corsVaryValues = array_map('trim', explode(',', $value));
+				$this->appendVolatileHeader($volatile, 'Vary', $corsVaryValues);
+				continue;
+			}
+
+			$this->appendVolatileHeader($volatile, $name);
+		}
+
+		return $volatile;
+	}
+
+	/**
+	 * Strips request-dependent headers for safe caching
+	 */
+	protected function stripVolatileHeaders(array $headers, array $volatile): array
+	{
+		foreach ($volatile as $name => $values) {
+			if ($name === 'Vary' && is_array($values) === true) {
+				if (isset($headers['Vary']) === false) {
+					continue;
+				}
+
+				$current   = $this->normalizeVaryValues($headers['Vary']);
+				$remaining = $this->removeVaryValues($current, $values);
+
+				if ($remaining === []) {
+					unset($headers['Vary']);
+				} else {
+					$headers['Vary'] = implode(', ', $remaining);
+				}
+
+				continue;
+			}
+
+			unset($headers[$name]);
+		}
+
+		return $headers;
+	}
+
+	/**
+	 * Adds (parts of) a header to the provided volatile header list
+	 */
+	protected function appendVolatileHeader(array &$target, string $name, array|null $values = null): void
+	{
+		if ($values === null) {
+			$target[$name] = null;
+			return;
+		}
+
+		if (array_key_exists($name, $target) === true && $target[$name] === null) {
+			return;
+		}
+
+		$values = A::map($values, static fn ($value) => strtolower(trim($value)));
+		$values = A::filter($values, static fn ($value) => $value !== '');
+
+		if ($values === []) {
+			return;
+		}
+
+		$existingValues = $target[$name] ?? [];
+		$target[$name] = array_values(array_unique([...$existingValues, ...$values]));
+	}
+
+	/**
+	 * Normalizes a comma-separated list of Vary values
+	 * into a unique array without empty entries
+	 */
+	protected function normalizeVaryValues(string $value): array
+	{
+		$values = A::map(explode(',', $value), 'trim');
+		$values = A::filter($values, static fn ($entry) => $entry !== '');
+
+		return array_values(array_unique($values));
+	}
+
+	/**
+	 * Returns the Vary values with the provided entries removed
+	 */
+	protected function removeVaryValues(array $values, array $remove): array
+	{
+		$removeLower = A::map($remove, 'strtolower');
+
+		return array_values(A::filter(
+			$values,
+			static fn ($value) => in_array(strtolower($value), $removeLower, true) === false
+		));
 	}
 }

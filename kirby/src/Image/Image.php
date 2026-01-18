@@ -2,6 +2,8 @@
 
 namespace Kirby\Image;
 
+use Kirby\Cms\FileVersion;
+use Kirby\Content\Content;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\File;
 use Kirby\Toolkit\Html;
@@ -27,6 +29,7 @@ class Image extends File
 	protected Dimensions|null $dimensions = null;
 
 	public static array $resizableTypes = [
+		'avif',
 		'jpg',
 		'jpeg',
 		'gif',
@@ -75,13 +78,14 @@ class Image extends File
 		}
 
 		if (in_array($this->mime(), [
+			'image/avif',
+			'image/gif',
 			'image/jpeg',
 			'image/jp2',
 			'image/png',
-			'image/gif',
 			'image/webp'
-		])) {
-			return $this->dimensions = Dimensions::forImage($this->root);
+		], true)) {
+			return $this->dimensions = Dimensions::forImage($this);
 		}
 
 		if ($this->extension() === 'svg') {
@@ -112,19 +116,37 @@ class Image extends File
 	 */
 	public function html(array $attr = []): string
 	{
+		$model = match (true) {
+			$this->model instanceof FileVersion => $this->model->original(),
+			default                             => $this->model
+		};
+
+		// if no alt text explicitly provided,
+		// try to infer from model content file
+		if (
+			$model !== null &&
+			method_exists($model, 'content') === true &&
+			$model->content() instanceof Content &&
+			$model->content()->get('alt')->isNotEmpty() === true
+		) {
+			$attr['alt'] ??= $model->content()->get('alt')->value();
+		}
+
 		if ($url = $this->url()) {
 			return Html::img($url, $attr);
 		}
 
-		throw new LogicException('Calling Image::html() requires that the URL property is not null');
+		throw new LogicException(
+			message: 'Calling Image::html() requires that the URL property is not null'
+		);
 	}
 
 	/**
 	 * Returns the PHP imagesize array
 	 */
-	public function imagesize(): array
+	public function imagesize(): array|false
 	{
-		return getimagesize($this->root);
+		return @getimagesize($this->root);
 	}
 
 	/**
@@ -156,7 +178,19 @@ class Image extends File
 	 */
 	public function isResizable(): bool
 	{
-		return in_array($this->extension(), static::$resizableTypes) === true;
+		// check extension first to avoid expensive dimension calculation
+		if (in_array($this->extension(), static::$resizableTypes, true) === false) {
+			return false;
+		}
+
+		$dimensions = $this->dimensions();
+
+		// invalid or corrupted images return 0x0 dimensions
+		if ($dimensions->width() === 0 || $dimensions->height() === 0) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -165,7 +199,7 @@ class Image extends File
 	 */
 	public function isViewable(): bool
 	{
-		return in_array($this->extension(), static::$viewableTypes) === true;
+		return in_array($this->extension(), static::$viewableTypes, true) === true;
 	}
 
 	/**
@@ -190,10 +224,11 @@ class Image extends File
 	 */
 	public function toArray(): array
 	{
-		$array = array_merge(parent::toArray(), [
+		$array = [
+			...parent::toArray(),
 			'dimensions' => $this->dimensions()->toArray(),
 			'exif'       => $this->exif()->toArray(),
-		]);
+		];
 
 		ksort($array);
 

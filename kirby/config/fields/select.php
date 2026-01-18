@@ -1,5 +1,8 @@
 <?php
 
+use Kirby\Field\FieldOptions;
+use Kirby\Toolkit\I18n;
+
 return [
 	'extends' => 'radio',
 	'props' => [
@@ -11,14 +14,25 @@ return [
 		/**
 		 * Custom icon to replace the arrow down.
 		 */
-		'icon' => function (string $icon = null) {
+		'icon' => function (string|null $icon = null) {
 			return $icon;
 		},
 		/**
-		 * Custom placeholder string for empty option.
+		 * Text shown when no option is selected yet
 		 */
-		'placeholder' => function (string $placeholder = '—') {
-			return $placeholder;
+		'placeholder' => function (string|array $placeholder = '—') {
+			return I18n::translate($placeholder, $placeholder);
 		},
+	],
+	'methods' => [
+		'getOptions' => function () {
+			$props = FieldOptions::polyfill($this->props);
+
+			// disable safe mode as the select field does not
+			// render HTML for the option text
+			$options = FieldOptions::factory($props['options'], false);
+
+			return $options->render($this->model());
+		}
 	]
 ];
