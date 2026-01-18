@@ -16,19 +16,26 @@
 
 <section class="pb-32">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-12 gap-y-24">
-        <!-- Loop through projects would go here, static for now -->
+        <?php foreach ($page->children()->listed() as $project): ?>
         <div class="project-card group cursor-pointer">
-            <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
-                <img alt="Visual Identity Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCETAcWHfXGbbaeRCREkfD3i-8wC7gaTKBArwG-7lWJXhXqFzB2FxakwfXZchHEIKqY7TflTDESJGxjwPgp4dnnpWNw2CH89xdtvYCOyhibuXlB0EA05YroV2y3Ko7FU4ROZqIWXV0TVaBLIpFopxLNy11ThnVKCp9y2T6OmTzk1yq0WRlXuGiTqsRy96Lo3Kcivs2AXIwIffiYEm8wJ3W-ChsVjBhXSK-860DbD2KTnJtThd3XUQXaSaGTCX6WHVTy-QboVchGnLw"/>
-                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+            <a href="<?= $project->url() ?>" class="block">
+                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+                    <?php if ($image = $project->cover()->toFile()): ?>
+                    <img alt="<?= $image->alt() ?>" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="<?= $image->url() ?>"/>
+                    <?php endif ?>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-8">
-                <h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Visual Identity</h3>
-                <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Branding • 2024</p>
-            </div>
+                <div class="mt-8">
+                    <h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
+                    <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">
+                        <?= $project->subtitle()->or('Project') ?> • <?= $project->timeline()->or(date('Y')) ?>
+                    </p>
+                </div>
+            </a>
         </div>
+        <?php endforeach ?>
     </div>
 </section>
 

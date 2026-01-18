@@ -3,7 +3,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-12">
                 <div class="text-center md:text-left">
                     <h2 class="serif-display text-4xl mb-4">Let's create together.</h2>
-                    <a class="text-[var(--accent)] text-lg hover:underline underline-offset-8" href="mailto:hello@johndoe.design">hello@johndoe.design</a>
+                    <a class="text-[var(--accent)] text-lg hover:underline underline-offset-8" href="mailto:tim@timhykes.com">tim@timhykes.com</a>
                 </div>
                 <div class="flex flex-col items-center md:items-end gap-6">
                     <div class="flex space-x-6">

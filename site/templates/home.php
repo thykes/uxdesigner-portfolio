@@ -44,7 +44,7 @@
                     <div>
                         <h3 class="serif-display text-4xl md:text-5xl group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
                         <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-2">
-                            <?= $project->subtitle()->or('Case Study') ?> / <?= $project->timeline()->or('2023') ?>
+                            <?= $project->subtitle()->or('Case Study') ?> / <?= $project->timeline()->or(date('Y')) ?>
                         </p>
                     </div>
                     <span class="material-symbols-outlined text-3xl opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[var(--accent)]">north_east</span>
