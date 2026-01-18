@@ -1,2 +1,81 @@
-title: Home
-intro: I'm John Doe, a New York based (link: # text: Digital Designer) & (link: # text: Photographer) focused on creating high-impact brand experiences.
+Title: Home
+
+----
+
+Headline: <p>Designing with <em>purpose</em>. Building for people.</p>
+
+----
+
+Intro: <p>I’m Tim Hykes, a DC UX Designer turning <strong>complex challenges</strong> into seamless, <strong>human-centered</strong><br>digital experiences.</p>
+
+----
+
+Scroll-label: Scroll to explore
+
+----
+
+Featured-projects: - page://neagfhulvrbaolg3
+
+----
+
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: 
+
+----
+
+Cropogimage: 
+
+----
+
+Robotsindex: default
+
+----
+
+Robotsfollow: default
+
+----
+
+Robotsarchive: default
+
+----
+
+Robotsimageindex: default
+
+----
+
+Robotssnippet: default
+
+----
+
+Metainherit: 
+
+----
+
+Uuid: uiucweuxwkts1e6a
