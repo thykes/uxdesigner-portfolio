@@ -5,7 +5,7 @@
         <?= $page->headline()->or('Designing with <span class="italic text-[var(--accent)]">purpose</span>. Building for people.') ?>
     </h1>
     <div class="mt-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
-        <div class="text-xl md:text-2xl text-[var(--text-muted)] max-w-xl font-light leading-relaxed [&_strong]:text-white [&_strong]:font-normal">
+        <div class="text-xl md:text-2xl text-[var(--text-muted)] max-w-xl font-light leading-relaxed [&_strong]:!text-white [&_strong]:!font-normal [&_b]:!text-white [&_b]:!font-normal">
             <?= $page->intro()->or('I’m Tim Hykes, a DC UX Designer turning <span class="text-white font-normal">complex challenges</span> into seamless, <span class="text-white font-normal">human-centered</span><br> digital experiences.') ?>
         </div>
         <div class="flex items-center gap-4 group cursor-pointer">
