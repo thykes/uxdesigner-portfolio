@@ -10,6 +10,7 @@ tabs:
           pages:
             type: pages
             templates:
+              - home
               - project
               - about
               - works
