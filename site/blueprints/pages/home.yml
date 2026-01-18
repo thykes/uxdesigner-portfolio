@@ -10,8 +10,27 @@ tabs:
     columns:
       - width: 2/3
         fields:
+          headline:
+            label: Hero Headline
+            type: writer
+            nodes: false
+            marks:
+              - italic
           intro:
-            type: textarea
+            label: Hero Intro Text
+            type: writer
+            marks:
+              - bold
+              - italic
+              - link
+            nodes:
+              - paragraph
+          scroll_label:
+            label: Scroll Down Label
+            type: text
+            default: Scroll to explore
+            width: 1/2
+
       - width: 1/3
         sections:
           meta:
@@ -22,5 +41,4 @@ tabs:
                 type: pages
                 query: site.find("works").children
                 min: 1
-
   seo: seo/page
