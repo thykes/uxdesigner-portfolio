@@ -47,6 +47,7 @@ tabs:
               - technical-callout
               - pull-quote
               - labeled-image
+              - gallery
               - challenge # Legacy Custom Block
               - strategy # Legacy Custom Block
 

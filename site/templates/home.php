@@ -34,7 +34,7 @@
         <?php foreach ($projects as $project): ?>
         <div class="item-large group w-full">
             <a href="<?= $project->url() ?>" class="block">
-                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/5] md:aspect-[16/10]">
+                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/5] md:aspect-[16/10] rounded-3xl">
                     <?php if ($image = $project->cover()->toFile()): ?>
                     <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0" src="<?= $image->url() ?>"/>
                     <?php endif ?>

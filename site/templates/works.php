@@ -19,7 +19,7 @@
         <?php foreach ($page->children()->listed() as $project): ?>
         <div class="project-card group cursor-pointer">
             <a href="<?= $project->url() ?>" class="block">
-                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+                <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3] rounded-3xl">
                     <?php if ($image = $project->cover()->toFile()): ?>
                     <img alt="<?= $image->alt() ?>" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="<?= $image->url() ?>"/>
                     <?php endif ?>

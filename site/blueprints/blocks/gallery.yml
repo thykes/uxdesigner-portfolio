@@ -1,0 +1,27 @@
+name: Photo Gallery
+icon: images
+fields:
+  headline:
+    label: Gallery Headline
+    type: text
+    width: 1/2
+  intro:
+    label: Gallery Intro
+    type: textarea
+    size: small
+  items:
+    label: Gallery Images
+    type: structure
+    fields:
+      image:
+        label: Image
+        type: files
+        max: 1
+      caption_title:
+        label: Caption Title
+        type: text
+        width: 1/2
+      caption_text:
+        label: Caption Description
+        type: textarea
+        size: small
