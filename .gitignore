@@ -4,4 +4,5 @@
 /media/
 /site/sessions/
 .DS_Store
-thumbs.db
+thumbs.db.env
+site/config/config.php
