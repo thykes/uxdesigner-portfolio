@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if($icon = $site->favicon()->toFile()): ?>
+    <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
+    <?php endif ?>
     <?php snippet('seo/head') ?>
     
     <!-- Tailwind CSS -->
@@ -33,8 +36,14 @@
         }
         .masonry-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 2rem;
+            row-gap: 6rem;
+        }
+        @media (min-width: 768px) {
+            .masonry-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         @media (min-width: 1024px) {
             .masonry-grid {

@@ -23,4 +23,21 @@ tabs:
                 label: Copyright Text
                 type: text
 
+  global:
+    label: Global Settings
+    icon: settings
+    columns:
+      - width: 1/2
+        sections:
+          branding:
+            type: fields
+            fields:
+              favicon:
+                label: Site Favicon
+                type: files
+                multiple: false
+                layout: cards
+                size: small
+                help: "Upload a PNG or ICO file. If empty, no favicon is set."
+
   seo: seo/site

@@ -23,16 +23,32 @@
 </section>
 
 <section class="pb-32">
-    <div class="masonry-grid flex flex-col gap-24">
+<div class="masonry-grid w-full">
         <?php 
         $projects = $page->featured_projects()->toPages();
         if ($projects->isEmpty()) {
             $projects = site()->find('works')->children()->listed();
         }
+        $i = 0;
         ?>
 
         <?php foreach ($projects as $project): ?>
-        <div class="item-large group w-full">
+        <?php
+            // Masonry Logic
+            // Row Pattern: Large + Small (offset), then Small + Large (offset)
+            $row = floor($i / 2);
+            $isFirstInRow = ($i % 2 == 0);
+            
+            if ($row % 2 == 0) {
+                // Even Rows (0, 2, 4...)
+                $itemClass = $isFirstInRow ? 'item-large' : 'item-small md:mt-32';
+            } else {
+                // Odd Rows (1, 3, 5...)
+                $itemClass = $isFirstInRow ? 'item-small' : 'item-large md:mt-32';
+            }
+            $i++;
+        ?>
+        <div class="<?= $itemClass ?> group w-full">
             <a href="<?= $project->url() ?>" class="block">
                 <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/5] md:aspect-[16/10] rounded-3xl">
                     <?php if ($image = $project->cover()->toFile()): ?>
@@ -42,9 +58,9 @@
                 </div>
                 <div class="mt-6 flex justify-between items-start">
                     <div>
-                        <h3 class="serif-display text-4xl md:text-5xl group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
+                        <h3 class="serif-display text-3xl md:text-4xl group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
                         <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-2">
-                            <?= $project->subtitle()->or('Case Study') ?> / <?= $project->timeline()->or(date('Y')) ?>
+                            <?= $project->subtitle()->or('Case Study') ?><?= $project->timeline()->isNotEmpty() ? ' / ' . $project->timeline() : '' ?>
                         </p>
                     </div>
                     <span class="material-symbols-outlined text-3xl opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[var(--accent)]">north_east</span>

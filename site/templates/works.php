@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <div class="mt-8">
-                    <h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
+                    <h3 class="serif-display text-3xl md:text-4xl group-hover:text-[var(--accent)] transition-colors"><?= $project->title() ?></h3>
                     <p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">
-                        <?= $project->subtitle()->or('Project') ?> • <?= $project->timeline()->or(date('Y')) ?>
+                        <?= $project->subtitle()->or('Project') ?><?= $project->timeline()->isNotEmpty() ? ' / ' . $project->timeline() : '' ?>
                     </p>
                 </div>
             </a>

@@ -14,7 +14,12 @@ Scroll-label: Scroll to explore
 
 ----
 
-Featured-projects: - page://neagfhulvrbaolg3
+Featured-projects:
+
+- page://odkd6chcqetdqswv
+- page://aqdvgxtvxwmpjypp
+- page://zknivktzwlqk1eji
+- page://neagfhulvrbaolg3
 
 ----
 
