@@ -112,8 +112,17 @@
             <nav class="flex items-center">
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
-                    <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('works') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('works') ?>">Work</a>
-                    <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('about') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('about') ?>">About</a>
+                    <?php foreach($site->navigation()->toStructure() as $navItem): ?>
+                        <?php 
+                            $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url(); 
+                            if (!$linkUrl) continue;
+                        ?>
+                        <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>" 
+                           href="<?= $linkUrl ?>" 
+                           <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
+                            <?= $navItem->label() ?>
+                        </a>
+                    <?php endforeach ?>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
@@ -124,8 +133,17 @@
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="fixed inset-0 bg-[var(--bg-deep)]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
             <a class="hover:text-[var(--accent)] transition-colors" href="<?= $site->url() ?>">Home</a>
-            <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('works') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('works') ?>">Work</a>
-            <a class="hover:text-[var(--accent)] transition-colors <?= $page->is('about') ? 'text-[var(--accent)]' : '' ?>" href="<?= url('about') ?>">About</a>
+            <?php foreach($site->navigation()->toStructure() as $navItem): ?>
+                <?php 
+                    $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url(); 
+                    if (!$linkUrl) continue;
+                ?>
+                <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>" 
+                   href="<?= $linkUrl ?>"
+                   <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
+                    <?= $navItem->label() ?>
+                </a>
+            <?php endforeach ?>
         </div>
 
         <script>

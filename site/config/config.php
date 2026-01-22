@@ -5,6 +5,9 @@ return [
   'panel' => [
     'install' => true
   ],
+  'postmark' => [
+    'token' => '6c39a52b-4a50-4368-9d51-8a68389f69e7'
+  ],
   'routes' => [
     [
       'pattern' => 'sitemap.xml',

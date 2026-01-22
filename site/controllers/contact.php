@@ -12,9 +12,10 @@ return function($kirby, $pages, $page) {
         }
 
         $data = [
-            'name'  => get('name'),
-            'email' => get('email'),
-            'text'  => get('text')
+            'name'         => get('name'),
+            'email'        => get('email'),
+            'project_type' => get('project_type'),
+            'text'         => get('text')
         ];
 
         $rules = [
@@ -36,17 +37,33 @@ return function($kirby, $pages, $page) {
             // the data is fine, let's send the email
         } else {
             try {
-                $kirby->email([
-                    'template' => 'email',
-                    'from'     => 'yourcontactform@yourcompany.com',
-                    'replyTo'  => $data['email'],
-                    'to'       => 'you@yourcompany.com',
-                    'subject'  => esc($data['name']) . ' sent you a message from your contact form',
-                    'data'     => [
-                        'text'   => esc($data['text']),
-                        'sender' => esc($data['name'])
-                    ]
-                ]);
+                // Initialize Postmark Client
+                $client = new \Postmark\PostmarkClient(option('postmark.token'));
+                
+                // Prepare Data
+                $emailData = [
+                    'name'         => esc($data['name']),
+                    'senderEmail'  => esc($data['email']),
+                    'projectType'  => esc($data['project_type'] ?? ''),
+                    'text'         => esc($data['text'])
+                ];
+
+                // Render Templates
+                // Note: tpl::load returns the rendered content
+                $htmlBody = \Kirby\Toolkit\Tpl::load($kirby->root('templates') . '/emails/inquiry.html.php', $emailData);
+                $textBody = \Kirby\Toolkit\Tpl::load($kirby->root('templates') . '/emails/inquiry.php', $emailData);
+
+                // Send Email via Postmark
+                $client->sendEmail(
+                    'notifications@timhykes.com',
+                    'tim@timhykes.com',
+                    'New Project Inquiry: ' . esc($data['name']),
+                    $htmlBody,
+                    $textBody,
+                    null, // Tag
+                    true, // TrackOpens
+                    $data['email'] // Reply To
+                );
 
             } catch (Exception $error) {
                 if(option('debug')):
@@ -58,7 +75,7 @@ return function($kirby, $pages, $page) {
 
             // no exception occurred, let's send a success message
             if (empty($alert) === true) {
-                $success = 'Your message has been sent, thank you. We will get back to you soon!';
+                $success = $page->success_message()->or('Your message has been sent, thank you. We will get back to you soon!');
                 $data = [];
             }
         }

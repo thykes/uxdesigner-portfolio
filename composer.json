@@ -23,7 +23,8 @@
   },
   "require": {
     "php": ">=8.1",
-    "getkirby/cms": "^5.0.0-beta.1"
+    "getkirby/cms": "^5.0.0-beta.1",
+    "wildbit/postmark-php": "^7.0"
   },
   "config": {
     "allow-plugins": {

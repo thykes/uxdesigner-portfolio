@@ -6,6 +6,33 @@ Copyright: © 2026 by Tim Hykes. All rights reserved.
 
 ----
 
+Favicon: - file://qiazlsdyu4qeo1ca
+
+----
+
+Navigation:
+
+- 
+  label: Work
+  link_type: internal
+  page:
+    - page://bmIt72EGdHoffyJt
+  url: ""
+- 
+  label: About
+  link_type: internal
+  page:
+    - page://xiamf5cibbxtmno1
+  url: ""
+- 
+  label: Contact
+  link_type: internal
+  page:
+    - page://funfq3jfxh5zg5os
+  url: ""
+
+----
+
 Metatemplate: 
 
 ----

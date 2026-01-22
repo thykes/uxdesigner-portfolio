@@ -14,6 +14,7 @@ tabs:
               - project
               - about
               - works
+              - contact
               - default
       - width: 1/2
         sections:
@@ -39,5 +40,34 @@ tabs:
                 layout: cards
                 size: small
                 help: "Upload a PNG or ICO file. If empty, no favicon is set."
+
+              navigation:
+                label: Site Navigation
+                type: structure
+                fields:
+                  label:
+                    label: Menu Label
+                    type: text
+                    width: 1/2
+                  link_type:
+                    label: Link Type
+                    type: toggles
+                    width: 1/2
+                    active: false
+                    options:
+                      internal: Internal Page
+                      external: External URL
+                    default: internal
+                  page:
+                    label: Internal Page
+                    type: pages
+                    max: 1
+                    when:
+                      link_type: internal
+                  url:
+                    label: External URL
+                    type: url
+                    when:
+                      link_type: external
 
   seo: seo/site

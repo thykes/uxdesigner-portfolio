@@ -1,0 +1,85 @@
+Title: Contact
+
+----
+
+Headline: <p>Let’s build<br>(accent: <em>something)</em><br>remarkable.</p>
+
+----
+
+Direct-contact-title: Direct Contact
+
+----
+
+Email: tim@timhykes.com
+
+----
+
+Social-title: 
+
+----
+
+Success-message: Your message has been sent, thank you. I will get back to you soon!
+
+----
+
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: 
+
+----
+
+Cropogimage: 
+
+----
+
+Robotsindex: default
+
+----
+
+Robotsfollow: default
+
+----
+
+Robotsarchive: default
+
+----
+
+Robotsimageindex: default
+
+----
+
+Robotssnippet: default
+
+----
+
+Metainherit: 
+
+----
+
+Uuid: funfq3jfxh5zg5os
