@@ -45,6 +45,15 @@ Social-links:
   platform: bluesky
   url: >
     https://bsky.app/profile/thykes.bsky.social
+- 
+  platform: github
+  url: https://github.com/thykes
+- 
+  platform: threads
+  url: https://www.threads.com/@maxdelaro
+- 
+  platform: instagram
+  url: https://www.instagram.com/maxdelaro/
 
 ----
 
@@ -64,7 +73,7 @@ Ogdescription: Black UI/UX Designer specializing in Figma, usability testing, an
 
 ----
 
-Ogsitename: 
+Ogsitename: Tim Hykes
 
 ----
 
@@ -105,4 +114,4 @@ youtube: https://www.youtube.com/@TimHykes
 linkedin: https://www.linkedin.com/in/timhykes/
 bluesky: >
   https://bsky.app/profile/thykes.bsky.social
-mastodon: ""
+mastodon: https://mastodon.social/@timhykes
