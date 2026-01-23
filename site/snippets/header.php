@@ -28,9 +28,9 @@
         "url" => $site->url(),
         "jobTitle" => "UI/UX Designer",
         "description" => $site->seo()->metaDescription()->exists() ? $site->seo()->metaDescription()->value() : $site->description()->value(),
-        "sameAs" => array_map(function($item) {
-            return $item->url()->value();
-        }, $site->social_links()->toStructure()->toArray())
+        "sameAs" => $site->social_links()->toStructure()->map(function($social) {
+            return $social->url()->value();
+        })->values()
     ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
     </script>    
     <!-- Tailwind CSS -->
