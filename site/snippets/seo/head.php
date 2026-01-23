@@ -109,3 +109,76 @@ $seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site-
 ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 <?php endif ?>
+
+<!-- Image Object Schema for Google Images (Licensable Badge) -->
+<?php
+$imagesToSchema = new Kirby\Cms\Collection();
+
+// Add Page Cover
+if ($cover = $page->cover()->toFile()) {
+    $imagesToSchema->add($cover);
+}
+
+// Add Schema Image (Profile)
+if ($page->template() == 'about' && $page->schema_image()->toFile()) {
+    $imagesToSchema->add($page->schema_image()->toFile());
+}
+
+// Add Project Thumbs for Home/Works
+if ($page->isHomePage() || $page->template() == 'works') {
+    $projects = $page->isHomePage() 
+        ? ($page->featured_projects()->toPages()->isNotEmpty() ? $page->featured_projects()->toPages() : site()->find('works')->children()->listed())
+        : $page->children()->listed();
+        
+    foreach ($projects as $project) {
+        if ($img = $project->cover()->toFile()) {
+            $imagesToSchema->add($img);
+        }
+    }
+}
+
+// Add Article Thumbs for Blog Index
+if ($page->template() == 'thoughts') {
+    foreach ($page->children()->listed() as $article) {
+        if ($img = $article->cover()->toFile()) {
+            $imagesToSchema->add($img);
+        }
+    }
+}
+
+// Filter duplicates
+$uniqueImages = $imagesToSchema->unique();
+
+if ($uniqueImages->count() > 0): 
+?>
+<script type="application/ld+json">
+<?= json_encode($uniqueImages->map(function($image) use ($site) {
+    // License Mapping
+    $licenseUrl = $site->url(); // Default to home/copyright
+    $l = $image->license()->value();
+    
+    if ($l == 'Unsplash') $licenseUrl = 'https://unsplash.com/license';
+    if ($l == 'CC BY 4.0') $licenseUrl = 'https://creativecommons.org/licenses/by/4.0/';
+    if ($l == 'CC BY-SA 4.0') $licenseUrl = 'https://creativecommons.org/licenses/by-sa/4.0/';
+    if ($l == 'CC BY-NC 4.0') $licenseUrl = 'https://creativecommons.org/licenses/by-nc/4.0/';
+    if ($l == 'CC BY-ND 4.0') $licenseUrl = 'https://creativecommons.org/licenses/by-nd/4.0/';
+    
+    // Creator Logic
+    $creator = $image->photographer()->isNotEmpty() ? $image->photographer()->value() : 'Tim Hykes';
+
+    return [
+        '@context' => 'https://schema.org/',
+        '@type' => 'ImageObject',
+        'contentUrl' => $image->url(),
+        'license' => $licenseUrl,
+        'acquireLicensePage' => $site->url() . '/contact', // Best place to ask for usage rights
+        'creditText' => $creator,
+        'creator' => [
+            '@type' => 'Person',
+            'name' => $creator
+        ],
+        'copyrightNotice' => $creator
+    ];
+})->values()->toArray(), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
+</script>
+<?php endif ?>
