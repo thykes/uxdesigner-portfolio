@@ -29,7 +29,13 @@
         <a href="<?= $featured->url() ?>" class="group block relative">
             <div class="relative w-full aspect-[21/9] rounded-3xl overflow-hidden bg-[var(--charcoal)] mb-10">
                 <?php if ($image = $featured->cover()->toFile()): ?>
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-80" style="background-image: url('<?= $image->url() ?>');"></div>
+                <img 
+                    src="<?= $image->resize(1200)->url() ?>" 
+                    srcset="<?= $image->srcset([800, 1200, 1600, 2000]) ?>" 
+                    sizes="(min-width: 1440px) 1440px, 100vw"
+                    alt="<?= $image->alt()->or($featured->title()) ?>" 
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80"
+                />
                 <?php endif ?>
                 <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-deep)]/80 via-transparent to-transparent"></div>
                 <div class="absolute bottom-8 left-8">
@@ -61,7 +67,13 @@
             <a href="<?= $article->url() ?>" class="block">
                 <div class="aspect-video rounded-3xl overflow-hidden bg-[var(--charcoal)] mb-8">
                     <?php if ($image = $article->cover()->toFile()): ?>
-                    <div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" style="background-image: url('<?= $image->url() ?>');"></div>
+                    <img 
+                        src="<?= $image->resize(800)->url() ?>" 
+                        srcset="<?= $image->srcset([600, 800, 1200]) ?>" 
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        alt="<?= $image->alt()->or($article->title()) ?>" 
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-70" 
+                    />
                     <?php endif ?>
                 </div>
                 <div class="flex justify-between items-start mb-4">

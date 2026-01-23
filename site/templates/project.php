@@ -67,7 +67,13 @@
 <?php if ($image = $page->cover()->toFile()): ?>
 <section class="mb-32">
     <div class="aspect-[21/7] w-full bg-[var(--charcoal)] relative overflow-hidden group rounded-3xl">
-        <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" src="<?= $image->url() ?>"/>
+        <img 
+            alt="<?= $image->alt() ?>" 
+            class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" 
+            src="<?= $image->resize(1200)->url() ?>"
+            srcset="<?= $image->srcset([800, 1200, 1600, 2048]) ?>"
+            sizes="100vw"
+        />
         <div class="absolute inset-0 flex items-center justify-center bg-black/40">
             <div class="text-center px-6">
                 <h3 class="serif-display text-5xl md:text-7xl text-white">Visualizing <span class="italic">ROI</span></h3>
@@ -86,7 +92,13 @@
         <div class="relative">
             <?php if ($image = $page->challenge_image()->toFile()): ?>
             <div class="aspect-[4/5] overflow-hidden bg-[var(--charcoal)] rounded-3xl">
-                <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover grayscale" src="<?= $image->url() ?>"/>
+                <img 
+                    alt="<?= $image->alt() ?>" 
+                    class="w-full h-full object-cover grayscale" 
+                    src="<?= $image->resize(800)->url() ?>"
+                    srcset="<?= $image->srcset([600, 800, 1200]) ?>"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                />
             </div>
             <p class="mt-6 text-[10px] uppercase tracking-widest text-[var(--text-muted)]"><?= $image->caption() ?></p>
             <?php endif ?>

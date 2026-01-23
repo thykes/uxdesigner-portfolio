@@ -21,7 +21,13 @@
             <a href="<?= $project->url() ?>" class="block">
                 <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3] rounded-3xl">
                     <?php if ($image = $project->cover()->toFile()): ?>
-                    <img alt="<?= $image->alt() ?>" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="<?= $image->url() ?>"/>
+                    <img 
+                        alt="<?= $image->alt() ?>" 
+                        class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" 
+                        src="<?= $image->resize(800)->url() ?>"
+                        srcset="<?= $image->srcset([600, 800, 1200]) ?>"
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                    />
                     <?php endif ?>
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                         <span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>

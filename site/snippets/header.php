@@ -21,20 +21,7 @@
     <!-- Robots: Explicitly allow indexing -->
     <meta name="robots" content="index, follow">
 
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    <?= json_encode([
-        "@context" => "https://schema.org",
-        "@type" => "Person",
-        "name" => $site->title()->value(),
-        "url" => $site->url(),
-        "jobTitle" => "UI/UX Designer",
-        "description" => $site->seo()->metaDescription()->exists() ? $site->seo()->metaDescription()->value() : $site->description()->value(),
-        "sameAs" => $site->social_links()->toStructure()->map(function($social) {
-            return $social->url()->value();
-        })->values()
-    ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
-    </script>    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     

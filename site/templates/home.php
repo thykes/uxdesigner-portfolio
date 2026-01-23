@@ -52,7 +52,13 @@
             <a href="<?= $project->url() ?>" class="block">
                 <div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/5] md:aspect-[16/10] rounded-3xl">
                     <?php if ($image = $project->cover()->toFile()): ?>
-                    <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0" src="<?= $image->url() ?>"/>
+                    <img 
+                        alt="<?= $image->alt() ?>" 
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0" 
+                        src="<?= $image->resize(800)->url() ?>"
+                        srcset="<?= $image->srcset([600, 800, 1200, 1600]) ?>"
+                        sizes="(min-width: 1024px) 60vw, 100vw"
+                    />
                     <?php endif ?>
                     <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>

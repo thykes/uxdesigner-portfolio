@@ -1,10 +1,11 @@
 <?php
 // SEO Meta Tags Logic
 $seoTitle = $page->seoTitle()->isNotEmpty() ? $page->seoTitle() : $page->title() . ' | ' . $site->title();
-$seoDesc = $page->seoDescription()->isNotEmpty() ? $page->seoDescription() : $page->text()->excerpt(160);
-$seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site->seoImage()->toFile() ? $site->seoImage()->toFile()->url() : '');
+$seoDesc = $page->seoDescription()->isNotEmpty() ? $page->seoDescription() : ($page->intro()->isNotEmpty() ? $page->intro()->excerpt(160) : ($site->metaDescription()->isNotEmpty() ? $site->metaDescription() : $site->description()));
+$seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site->ogImage()->toFile() ? $site->ogImage()->toFile()->url() : '');
 ?>
 <title><?= $seoTitle ?></title>
+<link rel="canonical" href="<?= $page->url() ?>">
 <meta name="description" content="<?= $seoDesc ?>">
 
 <!-- Open Graph / Facebook -->
@@ -82,6 +83,24 @@ $seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site-
     'knowsAbout' => $page->schema_knows_about()->isNotEmpty() ? $page->schema_knows_about()->split(',') : [],
     'award' => $page->schema_award()->isNotEmpty() ? $page->schema_award()->split(',') : [],
     'sameAs' => $page->schema_same_as()->toStructure()->count() > 0 ? $page->schema_same_as()->toStructure()->map(fn($item) => $item->url()->value())->values()->toArray() : []
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
+</script>
+<?php endif ?>
+
+<?php if ($page->isHomePage()): ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'WebSite',
+    'name' => $site->title()->value(),
+    'url' => $site->url(),
+    'description' => $seoDesc,
+    'publisher' => [
+        '@type' => 'Person',
+        'name' => 'Tim Hykes',
+        'url' => $site->url()
+    ],
+    'sameAs' => $site->social_links()->toStructure()->map(fn($social) => $social->url()->value())->values()->toArray()
 ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 <?php endif ?>

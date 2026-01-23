@@ -17,7 +17,13 @@
              </div>
         <?php elseif ($image = $page->cover()->toFile()): ?>
             <div class="relative w-full aspect-video rounded-3xl overflow-hidden bg-[var(--charcoal)] shadow-2xl group cursor-pointer mb-16">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style="background-image: url('<?= $image->url() ?>');"></div>
+                <img 
+                    src="<?= $image->resize(1200)->url() ?>" 
+                    srcset="<?= $image->srcset([800, 1200, 1600, 2000]) ?>" 
+                    sizes="(min-width: 1200px) 1200px, 90vw"
+                    alt="<?= $image->alt()->or($page->title()) ?>" 
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                >
             </div>
         <?php endif ?>
 
