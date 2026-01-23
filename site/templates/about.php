@@ -2,7 +2,7 @@
 
 <section class="py-20 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
     <div class="lg:col-span-5 relative order-2 lg:order-1">
-        <div class="aspect-[4/5] bg-[var(--charcoal)] relative">
+        <div class="aspect-[4/5] bg-[var(--charcoal)] relative rounded-3xl overflow-hidden">
             <?php if($image = $page->cover()->toFile()): ?>
                 <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="<?= $image->resize(800)->url() ?>"/>
             <?php else: ?>

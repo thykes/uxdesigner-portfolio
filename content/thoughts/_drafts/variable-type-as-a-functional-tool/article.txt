@@ -1,0 +1,18 @@
+Title:
+
+Variable Type as a Functional Tool
+Date: 2024-08-28 12:00
+Category: Typography
+Read_time: 6 Min Read
+
+----
+
+Intro: Moving beyond aesthetics: how variable fonts are revolutionizing accessibility and performance in digital publishing.
+
+----
+
+Text: [{"content":{"level":"h2","text":"Typography is flexible."},"id":"b6c4b9d0-1234-4567-8901-234567890123","isHidden":false,"type":"heading"},{"content":{"text":"<p>With variable fonts, we can adjust weight, width, and slant in real-time, creating responsive designs that adapt to the user's context.</p>"},"id":"a1b2c3d4-5678-9012-3456-789012345678","isHidden":false,"type":"text"}]
+
+----
+
+Uuid: arkq6qihxunk0bja

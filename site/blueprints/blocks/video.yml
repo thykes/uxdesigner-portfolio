@@ -1,0 +1,24 @@
+name: Video
+icon: video
+fields:
+  source:
+    label: Video Source
+    type: toggles
+    default: url
+    options:
+      url: External Link (YouTube/Vimeo)
+      file: Upload File
+  url:
+    label: Video URL
+    type: url
+    when:
+      source: url
+  file:
+    label: Upload Video
+    type: files
+    max: 1
+    when:
+      source: file
+  caption:
+    label: Caption
+    type: text

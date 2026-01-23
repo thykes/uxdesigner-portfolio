@@ -19,6 +19,12 @@ Navigation:
     - page://bmIt72EGdHoffyJt
   url: ""
 - 
+  label: Thoughts
+  link_type: internal
+  page:
+    - page://hc3b9c89htkxejol
+  url: ""
+- 
   label: About
   link_type: internal
   page:

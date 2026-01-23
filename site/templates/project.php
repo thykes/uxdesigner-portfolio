@@ -66,7 +66,7 @@
 <!-- Hero Image (Legacy/Optional) -->
 <?php if ($image = $page->cover()->toFile()): ?>
 <section class="mb-32">
-    <div class="aspect-[21/7] w-full bg-[var(--charcoal)] relative overflow-hidden group">
+    <div class="aspect-[21/7] w-full bg-[var(--charcoal)] relative overflow-hidden group rounded-3xl">
         <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" src="<?= $image->url() ?>"/>
         <div class="absolute inset-0 flex items-center justify-center bg-black/40">
             <div class="text-center px-6">
@@ -85,7 +85,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
         <div class="relative">
             <?php if ($image = $page->challenge_image()->toFile()): ?>
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--charcoal)]">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--charcoal)] rounded-3xl">
                 <img alt="<?= $image->alt() ?>" class="w-full h-full object-cover grayscale" src="<?= $image->url() ?>"/>
             </div>
             <p class="mt-6 text-[10px] uppercase tracking-widest text-[var(--text-muted)]"><?= $image->caption() ?></p>

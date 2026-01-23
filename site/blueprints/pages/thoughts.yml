@@ -1,0 +1,31 @@
+title: Thoughts
+options:
+  delete: false
+  status: true
+
+columns:
+  - width: 2/3
+    sections:
+      drafts:
+        type: pages
+        headline: Drafts
+        template: article
+        status: draft
+        sortBy: date desc
+
+      articles:
+        type: pages
+        headline: Published Articles
+        template: article
+        status: listed
+        sortBy: date desc
+
+  - width: 1/3
+    sections:
+      content:
+        type: fields
+        fields:
+          intro:
+            label: Page Intro
+            type: textarea
+            size: small

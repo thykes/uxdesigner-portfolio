@@ -1,0 +1,25 @@
+Caption: 
+
+----
+
+Alt: 
+
+----
+
+Photographer: 
+
+----
+
+License: 
+
+----
+
+Link: 
+
+----
+
+Uuid: uke9hbd45mjfujte
+
+----
+
+Template: blocks/image

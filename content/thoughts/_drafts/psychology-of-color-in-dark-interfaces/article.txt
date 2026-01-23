@@ -1,0 +1,18 @@
+Title:
+
+The Psychology of Color in Dark Interfaces
+Date: 2024-09-12 12:00
+Category: Color Theory
+Read_time: 8 Min Read
+
+----
+
+Intro: Why high-contrast aesthetics dominate the modern web and how they impact cognitive load and user retention.
+
+----
+
+Text: [{"content":{"level":"h2","text":"Dark mode is more than a trend."},"id":"b6c4b9d0-1234-4567-8901-234567890123","isHidden":false,"type":"heading"},{"content":{"text":"<p>It changes how we perceive information, reduces eye strain, and alters the emotional resonance of a brand.</p>"},"id":"a1b2c3d4-5678-9012-3456-789012345678","isHidden":false,"type":"text"}]
+
+----
+
+Uuid: jv7btwtzcezgqnck

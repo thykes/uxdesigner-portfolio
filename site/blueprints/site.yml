@@ -16,6 +16,7 @@ tabs:
               - works
               - contact
               - default
+              - thoughts
       - width: 1/2
         sections:
           fields:

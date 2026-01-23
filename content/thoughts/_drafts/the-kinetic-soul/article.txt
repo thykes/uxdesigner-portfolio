@@ -1,0 +1,18 @@
+Title:
+
+The Kinetic Soul
+Date: 2026-01-23 12:00
+Category: Motion Design
+Read_time: 12 Min Watch
+
+----
+
+Intro: Exploring the fundamental grammar of modern communication through the lens of temporal design and spatial intuition.
+
+----
+
+Text: [{"content":{"level":"h2","text":"Motion is meaningless without intent."},"id":"b6c4b9d0-1234-4567-8901-234567890123","isHidden":false,"type":"heading"},{"content":{"text":"<p>Motion design is not just about making things move. It is about guiding the eye, telling a story, and creating an emotional connection.<\/p>"},"id":"a1b2c3d4-5678-9012-3456-789012345678","isHidden":false,"type":"text"}]
+
+----
+
+Uuid: vbrbwcxkuw7mbq68

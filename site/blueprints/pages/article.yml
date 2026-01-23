@@ -1,0 +1,109 @@
+title: Article
+num: '{{ page.date.toDate("Ymd") }}'
+
+tabs:
+  main:
+    label: Content
+    icon: text
+    columns:
+      - width: 2/3
+        sections:
+          content:
+            type: fields
+            fields:
+              intro:
+                label: Introduction/Excerpt
+                type: textarea
+                size: small
+              text:
+                label: Main Content
+                type: blocks
+                fieldsets:
+                  - heading
+                  - text
+                  - list
+                  - image
+                  - video
+                  - quote
+
+      - width: 1/3
+        sections:
+          meta:
+            type: fields
+            fields:
+              date:
+                label: Publication Date
+                type: date
+                time: true
+                default: now
+              featured:
+                label: Feature on Blog Home?
+                type: toggle
+                text:
+                  - "No"
+                  - "Yes"
+                default: false
+                width: 1/2
+              category:
+                label: Category
+                type: tags
+                width: 1/2
+              hero_type:
+                label: Hero Media Type
+                type: toggles
+                default: image
+                options:
+                  image: Image
+                  video_local: Local Video (Upload)
+                  video_external: External Video (YouTube/Vimeo)
+
+              cover:
+                label: Cover Image / Video Poster
+                type: files
+                layout: cards
+                multiple: false
+                size: small
+                help: "Used as the main image or the poster frame for videos."
+
+              hero_video_file:
+                label: Local Video File
+                type: files
+                multiple: false
+                when:
+                  hero_type: video_local
+
+              hero_video_url:
+                label: External Video URL
+                type: url
+                help: "YouTube or Vimeo URL"
+                when:
+                  hero_type: video_external
+
+  seo:
+    label: SEO & Sharing
+    icon: search
+    columns:
+      - width: 1/2
+        fields:
+          seoTitle:
+            label: SEO Title
+            type: text
+            help: "Overrides the default title (Title | Site Name). Keep < 60 chars."
+            counter: true
+            maxlength: 60
+          seoDescription:
+            label: Meta Description
+            type: textarea
+            size: small
+            help: "The short summary in search results. Keep < 160 chars."
+            counter: true
+            maxlength: 160
+      - width: 1/2
+        sections:
+          seo_preview:
+            type: fields
+            fields:
+              seo_help:
+                type: info
+                theme: positive
+                text: "Additional SEO settings like OG Image will use your Cover Image automatically."
