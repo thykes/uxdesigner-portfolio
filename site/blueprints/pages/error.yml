@@ -1,0 +1,13 @@
+title: Error Page
+options:
+  delete: false
+  status: false
+  slug: false
+
+fields:
+  text:
+    label: Error Message
+    type: textarea
+    buttons: false
+    size: small
+    default: "The page you're looking for seems to have drifted into the digital void."

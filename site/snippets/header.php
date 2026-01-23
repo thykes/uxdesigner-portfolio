@@ -120,7 +120,7 @@
     </style>
 </head>
 <body class="selection:bg-[var(--accent)] selection:text-black">
-    <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex flex-col relative">
         <header class="py-10 flex justify-between items-center">
             <div class="group cursor-pointer">
                 <!-- Logo Container: Removed border box for cleaner look with SVG, kept dimensions -->
@@ -197,4 +197,4 @@
             });
         </script>
 
-        <main>
+        <main class="flex-grow flex flex-col relative">
