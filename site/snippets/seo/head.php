@@ -28,17 +28,24 @@ $seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site-
 <!-- Structured Data (JSON-LD) for Blog Posts -->
 <?php if ($page->template() == 'article'): ?>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "<?= $page->title() ?>",
-  "author": {
-    "@type": "Person",
-    "name": "Todd Hykes"
-  },
-  "datePublished": "<?= $page->date()->toDate('Y-m-d') ?>",
-  "description": "<?= $seoDesc ?>",
-  "image": "<?= $seoImage ?>"
-}
+<?= json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BlogPosting',
+    'headline' => $page->title()->value(),
+    'name' => $page->title()->value(),
+    'description' => (string)$seoDesc,
+    'datePublished' => $page->date()->toDate('c'),
+    'dateModified' => $page->modified('c'),
+    'author' => [
+        '@type' => 'Person',
+        'name' => 'Tim Hykes',
+        'url' => $site->url()
+    ],
+    'image' => $seoImage ? [$seoImage] : [],
+    'mainEntityOfPage' => [
+        '@type' => 'WebPage',
+        '@id' => $page->url()
+    ]
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 <?php endif ?>
