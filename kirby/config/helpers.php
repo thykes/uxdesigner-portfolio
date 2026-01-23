@@ -443,7 +443,9 @@ if (Helpers::hasOverride('qr') === false) { // @codeCoverageIgnore
 	function qr(string|ModelWithContent $data): QrCode
 	{
 		if ($data instanceof ModelWithContent) {
-			$data = $data->url();
+			if (method_exists($data, 'url') === true) {
+				$data = $data->url();
+			}
 		}
 
 		return new QrCode($data);

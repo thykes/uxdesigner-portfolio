@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1P12XNP41H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1P12XNP41H');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if($icon = $site->favicon()->toFile()): ?>
     <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
     <?php endif ?>
     <?php snippet('seo/head') ?>
     
+    <!-- Robots: Explicitly allow indexing -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    <?= json_encode([
+        "@context" => "https://schema.org",
+        "@type" => "Person",
+        "name" => $site->title()->value(),
+        "url" => $site->url(),
+        "jobTitle" => "UI/UX Designer",
+        "description" => $site->seo()->metaDescription()->exists() ? $site->seo()->metaDescription()->value() : $site->description()->value(),
+        "sameAs" => array_map(function($item) {
+            return $item->url()->value();
+        }, $site->social_links()->toStructure()->toArray())
+    ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+    </script>    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <?= css('assets/css/index.css') ?>
     

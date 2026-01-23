@@ -1,4 +1,7 @@
 <?php
+
+use Postmark\PostmarkClient;
+
 return function($kirby, $pages, $page) {
 
     $alert = null;
@@ -38,7 +41,7 @@ return function($kirby, $pages, $page) {
         } else {
             try {
                 // Initialize Postmark Client
-                $client = new \Postmark\PostmarkClient(option('postmark.token'));
+                $client = new PostmarkClient(option('postmark.token'));
                 
                 // Prepare Data
                 $emailData = [

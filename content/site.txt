@@ -33,19 +33,34 @@ Navigation:
 
 ----
 
-Metatemplate: 
+Social-links:
+
+- 
+  platform: linkedin
+  url: https://www.linkedin.com/in/timhykes/
+- 
+  platform: youtube
+  url: https://www.youtube.com/@TimHykes
+- 
+  platform: bluesky
+  url: >
+    https://bsky.app/profile/thykes.bsky.social
 
 ----
 
-Metadescription: 
+Metatemplate: <span data-seo-template-variable="title">{{ title }}</span>  | UI/UX Designer
 
 ----
 
-Ogtemplate: 
+Metadescription: Tim Hykes is a black UI/UX Designer specializing in usability testing, wireframing, and Figma prototyping. Open to freelance UX projects for tech companies and small businesses.
 
 ----
 
-Ogdescription: 
+Ogtemplate: <span data-seo-template-variable="title">{{ title }}</span>  | UI/UX Designer
+
+----
+
+Ogdescription: Black UI/UX Designer specializing in Figma, usability testing, and wireframing. Available for freelance.
 
 ----
 
@@ -53,7 +68,7 @@ Ogsitename:
 
 ----
 
-Ogimage: 
+Ogimage: - file://7atxdqlejzeli4ho
 
 ----
 
@@ -61,24 +76,33 @@ Cropogimage: true
 
 ----
 
-Robotsindex: 
+Robotsindex: true
 
 ----
 
-Robotsfollow: 
+Robotsfollow: true
 
 ----
 
-Robotsarchive: 
+Robotsarchive: true
 
 ----
 
-Robotsimageindex: 
+Robotsimageindex: true
 
 ----
 
-Robotssnippet: 
+Robotssnippet: true
 
 ----
 
-Socialmediaaccounts: 
+Socialmediaaccounts:
+
+twitter: ""
+facebook: ""
+instagram: https://www.instagram.com/maxdelaro/
+youtube: https://www.youtube.com/@TimHykes
+linkedin: https://www.linkedin.com/in/timhykes/
+bluesky: >
+  https://bsky.app/profile/thykes.bsky.social
+mastodon: ""

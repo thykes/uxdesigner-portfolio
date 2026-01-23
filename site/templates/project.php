@@ -1,5 +1,6 @@
 <?php snippet('header') ?>
 
+<article>
 <!-- Project Hero -->
 <section class="pt-20 pb-24">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
@@ -258,5 +259,7 @@
     </a>
 </section>
 <?php endif ?>
+
+</article>
 
 <?php snippet('footer') ?>

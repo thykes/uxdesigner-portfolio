@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /cdn-cgi/
+
+# Point search engines to your content map
+Sitemap: https://timhykes.com/sitemap.xml

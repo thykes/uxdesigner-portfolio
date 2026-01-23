@@ -70,4 +70,28 @@ tabs:
                     when:
                       link_type: external
 
+      - width: 1/2
+        sections:
+          social:
+            type: fields
+            fields:
+              social_links:
+                label: Social Media Links
+                type: structure
+                fields:
+                  platform:
+                    label: Platform
+                    type: select
+                    options:
+                      instagram: Instagram
+                      linkedin: LinkedIn
+                      youtube: YouTube
+                      threads: Threads
+                      bluesky: Bluesky
+                      twitter: X (Twitter)
+                      github: GitHub
+                  url:
+                    label: URL
+                    type: url
+
   seo: seo/site
