@@ -114,6 +114,74 @@ Email: tim@timhykes.com
 
 ----
 
+Schema-name: Tim Hykes
+
+----
+
+Schema-image: - file://70g5shlffbkba7ry
+
+----
+
+Schema-alternate-name: Timothy Hykes
+
+----
+
+Schema-job-title: Interaction Designer
+
+----
+
+Schema-works-for-name: Google
+
+----
+
+Schema-works-for-url: https://www.google.com/
+
+----
+
+Schema-alumni-name: University of Missour — St. Louis
+
+----
+
+Schema-alumni-url: https://missouri.edu/
+
+----
+
+Schema-birth-date: 1983-07-03
+
+----
+
+Schema-birth-place: Saint Louis, Missouri
+
+----
+
+Schema-knows-about: User Experience Design, Graphic Design, AI Designer, Artificial Intelligence, Public Speaking, UX Design, UI Design
+
+----
+
+Schema-award: Adobe 2019 UX Designer to Watch, 2017-2018 cohort of Artists at CIC@CET
+
+----
+
+Schema-same-as:
+
+- 
+  url: https://www.linkedin.com/in/timhykes/
+- 
+  url: https://www.instagram.com/maxdelaro/
+- 
+  url: https://www.threads.com/@maxdelaro
+- 
+  url: https://www.youtube.com/@TimHykes
+- 
+  url: https://github.com/thykes
+- 
+  url: >
+    https://bsky.app/profile/thykes.bsky.social
+- 
+  url: https://mastodon.social/@timhykes
+
+----
+
 Meta-title: 
 
 ----

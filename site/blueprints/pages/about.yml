@@ -87,4 +87,62 @@ tabs:
                 label: Contact Email
                 type: email
 
-  seo: seo/page
+  schema:
+    label: Google Person Schema
+    icon: account
+    columns:
+      - width: 1/2
+        fields:
+          schema_name:
+            label: Full Name
+            type: text
+            help: "Your official name for Google."
+          schema_image:
+            label: Profile Photo
+            type: files
+            multiple: false
+            help: "The official headshot for Google knowledge panel."
+          schema_alternate_name:
+            label: Alternate Name / Nickname
+            type: text
+          schema_job_title:
+            label: Job Title
+            type: text
+          schema_works_for_name:
+            label: Current Company Name
+            type: text
+          schema_works_for_url:
+            label: Current Company URL
+            type: url
+          schema_alumni_name:
+            label: Alumni University Name
+            type: text
+          schema_alumni_url:
+            label: Alumni University URL
+            type: url
+
+      - width: 1/2
+        fields:
+          schema_birth_date:
+            label: Birth Date
+            type: date
+            display: DD-MM-YYYY
+          schema_birth_place:
+            label: Birth Place (City, Country)
+            type: text
+          schema_knows_about:
+            label: Knows About (Skills/Topics)
+            type: tags
+            help: "Key topics you are an expert in (e.g. UX Design, AI)."
+          schema_award:
+            label: Awards
+            type: tags
+            help: "List your awards here."
+          schema_same_as:
+            label: Social Profiles (SameAs)
+            type: structure
+            fields:
+              url:
+                label: Profile URL
+                type: url
+                placeholder: https://linkedin.com/in/...
