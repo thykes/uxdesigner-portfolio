@@ -82,7 +82,7 @@ $seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site-
     ] : null,
     'knowsAbout' => $page->schema_knows_about()->isNotEmpty() ? $page->schema_knows_about()->split(',') : [],
     'award' => $page->schema_award()->isNotEmpty() ? $page->schema_award()->split(',') : [],
-    'sameAs' => $page->schema_same_as()->toStructure()->count() > 0 ? $page->schema_same_as()->toStructure()->map(fn($item) => $item->url()->value())->values()->toArray() : []
+    'sameAs' => $page->schema_same_as()->toStructure()->count() > 0 ? $page->schema_same_as()->toStructure()->map(fn($item) => $item->url()->value())->values() : []
 ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 <?php endif ?>
@@ -100,7 +100,7 @@ $seoImage = $page->cover()->toFile() ? $page->cover()->toFile()->url() : ($site-
         'name' => 'Tim Hykes',
         'url' => $site->url()
     ],
-    'sameAs' => $site->social_links()->toStructure()->map(fn($social) => $social->url()->value())->values()->toArray()
+    'sameAs' => $site->social_links()->toStructure()->map(fn($social) => $social->url()->value())->values()
 ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 <?php endif ?>
