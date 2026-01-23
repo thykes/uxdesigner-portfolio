@@ -5,6 +5,7 @@ return [
   'panel' => [
     'install' => true
   ],
+  'tobimori.seo.robots.enabled' => false,
   'postmark' => [
     'token' => getenv('POSTMARK_TOKEN')
   ],
