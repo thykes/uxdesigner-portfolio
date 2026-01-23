@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1P12XNP41H"></script>
     <script>
@@ -10,7 +13,6 @@
 
       gtag('config', 'G-1P12XNP41H');
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if($icon = $site->favicon()->toFile()): ?>
     <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
     <?php endif ?>
