@@ -71,7 +71,7 @@
             alt="<?= $image->alt() ?>" 
             class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" 
             src="<?= $image->resize(1200)->url() ?>"
-            srcset="<?= $image->srcset([800, 1200, 1600, 2048]) ?>"
+            srcset="<?= $image->srcset([800, 1200, 1400]) ?>"
             sizes="100vw"
         />
         <div class="absolute inset-0 flex items-center justify-center bg-black/40">
@@ -96,7 +96,7 @@
                     alt="<?= $image->alt() ?>" 
                     class="w-full h-full object-cover grayscale" 
                     src="<?= $image->resize(800)->url() ?>"
-                    srcset="<?= $image->srcset([600, 800, 1200]) ?>"
+                    srcset="<?= $image->srcset([600, 800]) ?>"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                 />
             </div>

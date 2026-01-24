@@ -56,7 +56,7 @@
                         alt="<?= $image->alt() ?>" 
                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale group-hover:grayscale-0" 
                         src="<?= $image->resize(800)->url() ?>"
-                        srcset="<?= $image->srcset([600, 800, 1200, 1600]) ?>"
+                        srcset="<?= $image->srcset([600, 800, 1024]) ?>"
                         sizes="(min-width: 1024px) 60vw, 100vw"
                     />
                     <?php endif ?>
