@@ -7,6 +7,13 @@ return [
   'panel' => [
     'install' => true
   ],
+  'thumbs' => [
+    'driver' => 'imagick',
+    'quality' => 80,
+    'srcsets' => [
+      'default' => [300, 600, 900, 1200]
+    ]
+  ],
   'tobimori.seo.robots.enabled' => false,
   'postmark' => [
     'token' => getenv('POSTMARK_TOKEN')
