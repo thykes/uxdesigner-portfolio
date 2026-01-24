@@ -12,7 +12,7 @@ class ArticlePage extends Page
         
         $est = ($minutes < 1) ? '1' : $minutes;
         
-        return $est . ' Min Watch';
+        return $est . ' Min Read';
     }
 
     public function isLive(): bool
