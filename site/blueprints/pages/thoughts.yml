@@ -12,9 +12,7 @@ columns:
         template: article
         status: draft
         layout: cards
-        image:
-          query: page.cover.toFile
-          cover: true
+        image: false
         info: "{{ page.autopublish.isNotEmpty ? '⏰ ' ~ page.autopublish.toDate('d.m.Y @ H:i') : 'Draft' }}"
         sortBy: date desc
 
@@ -24,9 +22,7 @@ columns:
         template: article
         status: listed
         layout: cards
-        image:
-          query: page.cover.toFile
-          cover: true
+        image: false
         info: "{{ page.date.toDate('d.m.Y') }}"
         sortable: true
 
