@@ -1,0 +1,49 @@
+title: Video File
+accept:
+  type: video
+
+columns:
+  main:
+    width: 1/1
+    fields:
+      caption:
+        label: Caption
+        type: text
+      alt:
+        label: Alt Text
+        type: text
+        help: "Description of the video content for accessibility."
+
+      section_seo:
+        type: headline
+        label: Video SEO (Google)
+
+      video_title:
+        label: Video Title
+        type: text
+        help: "The title of the video for search engines."
+
+      video_description:
+        label: Video Description
+        type: textarea
+        buttons: false
+        help: "A brief description of the video content."
+
+      upload_date:
+        label: Upload Date
+        type: date
+        time: true
+        default: now
+        help: "When was this video first published?"
+
+      duration:
+        label: Duration (ISO 8601)
+        type: text
+        placeholder: PT1M30S
+        help: "Format: PT{M}M{S}S (e.g. PT1M30S for 1 minute 30 seconds)"
+
+      thumbnail:
+        label: Custom Thumbnail
+        type: files
+        multiple: false
+        help: "Upload a specific thumbnail for this video. If empty, Google may auto-generate."

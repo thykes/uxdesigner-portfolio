@@ -22,3 +22,24 @@ fields:
   caption:
     label: Caption
     type: text
+
+  seo_section:
+    type: headline
+    label: Video SEO Status
+
+  video_title:
+    label: Video Title
+    type: text
+    width: 1/2
+
+  upload_date:
+    label: Upload Date
+    type: date
+    width: 1/2
+    default: now
+
+  video_description:
+    label: Video Description
+    type: textarea
+    buttons: false
+    size: small
