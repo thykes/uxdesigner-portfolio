@@ -26,7 +26,7 @@ columns:
         image:
           query: page.cover.toFile
           cover: true
-        info: "{{ page.date.toDate('d.m.Y') }}"
+        info: "{{ page.date.toDate('d.m.Y @ H:i') }}"
         sortable: true
 
       published:
