@@ -14,9 +14,9 @@
     
     // THE GATE: Filter out "Scheduled" content for public (non-logged-in) users
     // "Scheduled" = Listed but Date > Now
-    if (!kirby()->user()) {
+    // if (!kirby()->user()) {
         $articles = $articles->filter(fn($p) => $p->isLive());
-    }
+    // }
     
     $articles = $articles->flip();
     
