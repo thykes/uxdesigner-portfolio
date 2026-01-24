@@ -2,6 +2,8 @@
 
 return [
   'debug' => true,
+  'date.handler' => 'date',
+  'date.timezone' => 'America/New_York',
   'panel' => [
     'install' => true
   ],

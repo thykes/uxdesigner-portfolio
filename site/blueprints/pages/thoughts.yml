@@ -17,16 +17,28 @@ columns:
           cover: true
         sortBy: date desc
 
-      articles:
+      scheduled:
         type: pages
-        headline: Articles (Published & Scheduled)
+        headline: Scheduled
         template: article
+        status: unlisted
         layout: cards
         image:
           query: page.cover.toFile
           cover: true
-        info: "{{ page.date.toDate('d.m.Y') }} {{ page.date.toDate > date.toDate ? '(FUTURE)' : '' }}"
+        info: "{{ page.date.toDate('d.m.Y') }}"
+        sortable: true
+
+      published:
+        type: pages
+        headline: Published
+        template: article
         status: listed
+        layout: cards
+        image:
+          query: page.cover.toFile
+          cover: true
+        info: "{{ page.date.toDate('d.m.Y') }}"
         sortable: true
 
   - width: 1/3

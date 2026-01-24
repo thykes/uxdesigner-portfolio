@@ -10,7 +10,8 @@
 
     <?php 
     // Logic to get featured and list articles
-    $articles = $page->children()->listed();
+    // Fetch BOTH listed (Published) and unlisted (Scheduled) articles
+    $articles = $page->children()->listed()->merge($page->children()->unlisted());
     
     // THE GATE: Filter out "Scheduled" content for public (non-logged-in) users
     // "Scheduled" = Listed but Date > Now
