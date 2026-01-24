@@ -17,11 +17,11 @@ columns:
 
       articles:
         type: pages
-        headline: Published Articles
+        headline: Articles (Published & Scheduled)
         template: article
         layout: cards
         image: cover
-        info: "{{ page.date.toDate('d.m.Y') }}"
+        info: "{{ page.date.toDate('d.m.Y') }} {{ page.date.toDate > date.toDate ? '(FUTURE)' : '' }}"
         status: listed
         sortBy: date desc
 

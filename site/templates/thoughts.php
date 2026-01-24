@@ -12,9 +12,10 @@
     // Logic to get featured and list articles
     $articles = $page->children()->listed();
     
-    // Hide future posts for non-logged in users (Scheduling)
+    // THE GATE: Filter out "Scheduled" content for public (non-logged-in) users
+    // "Scheduled" = Listed but Date > Now
     if (!kirby()->user()) {
-        $articles = $articles->filter(fn($p) => $p->date()->toDate() <= time());
+        $articles = $articles->filter(fn($p) => $p->isLive());
     }
     
     $articles = $articles->flip();

@@ -14,4 +14,9 @@ class ArticlePage extends Page
         
         return $est . ' Min Watch';
     }
+
+    public function isLive(): bool
+    {
+        return $this->date()->toDate() <= time();
+    }
 }
