@@ -11,12 +11,17 @@ columns:
         headline: Drafts
         template: article
         status: draft
+        layout: cards
+        image: cover
         sortBy: date desc
 
       articles:
         type: pages
         headline: Published Articles
         template: article
+        layout: cards
+        image: cover
+        info: "{{ page.date.toDate('d.m.Y') }}"
         status: listed
         sortBy: date desc
 

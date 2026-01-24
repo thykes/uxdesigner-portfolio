@@ -10,7 +10,14 @@
 
     <?php 
     // Logic to get featured and list articles
-    $articles = $page->children()->listed()->flip();
+    $articles = $page->children()->listed();
+    
+    // Hide future posts for non-logged in users (Scheduling)
+    if (!kirby()->user()) {
+        $articles = $articles->filter(fn($p) => $p->date()->toDate() <= time());
+    }
+    
+    $articles = $articles->flip();
     
     // Check for a manually featured article first
     $featured = $articles->filterBy('featured', 'true')->first();
