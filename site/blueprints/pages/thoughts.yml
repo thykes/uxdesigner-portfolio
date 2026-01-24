@@ -12,7 +12,9 @@ columns:
         template: article
         status: draft
         layout: cards
-        image: cover
+        image:
+          query: page.cover.toFile
+          cover: true
         sortBy: date desc
 
       articles:
@@ -20,10 +22,12 @@ columns:
         headline: Articles (Published & Scheduled)
         template: article
         layout: cards
-        image: cover
+        image:
+          query: page.cover.toFile
+          cover: true
         info: "{{ page.date.toDate('d.m.Y') }} {{ page.date.toDate > date.toDate ? '(FUTURE)' : '' }}"
         status: listed
-        sortBy: date desc
+        sortable: true
 
   - width: 1/3
     sections:
