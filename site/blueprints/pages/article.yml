@@ -36,6 +36,11 @@ tabs:
                 type: date
                 time: true
                 default: now
+              autopublish:
+                label: Auto Publish Date
+                type: date
+                time: true
+                help: "Set a future date to automatically publish this draft."
               featured:
                 label: Feature on Blog Home?
                 type: toggle

@@ -3,13 +3,22 @@
         'name' => 'getkirby/plainkit',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '57306b9eea2b24c2f1f9d6a1a8fc28bf50dfcca5',
+        'reference' => 'cb46be3b2ee462bb2da485e468a0e5729a0063d3',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'bvdputte/kirby-autopublish' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'b8b43a984ef41183d5be50bbc538b325211bbcba',
+            'type' => 'kirby-plugin',
+            'install_path' => __DIR__ . '/../../site/plugins/kirby-autopublish',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'christian-riesen/base32' => array(
             'pretty_version' => '1.6.0',
             'version' => '1.6.0.0',
@@ -67,7 +76,7 @@
         'getkirby/plainkit' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '57306b9eea2b24c2f1f9d6a1a8fc28bf50dfcca5',
+            'reference' => 'cb46be3b2ee462bb2da485e468a0e5729a0063d3',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

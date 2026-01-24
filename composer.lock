@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ce8a012c06bd0ca16f6f874b91dc82d",
+    "content-hash": "4c85971341bb33de3154627375206d06",
     "packages": [
+        {
+            "name": "bvdputte/kirby-autopublish",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bvdputte/kirby-autopublish.git",
+                "reference": "b8b43a984ef41183d5be50bbc538b325211bbcba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bvdputte/kirby-autopublish/zipball/b8b43a984ef41183d5be50bbc538b325211bbcba",
+                "reference": "b8b43a984ef41183d5be50bbc538b325211bbcba",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bart Vandeputte",
+                    "email": "bart.vdputte@gmail.com"
+                }
+            ],
+            "description": "Kirby plugin to schedule the automatic publishing of pages on a certain date+time. It is built to work with enabled cache.",
+            "keywords": [
+                "Tasks",
+                "autopublish",
+                "background tasks",
+                "kirby3",
+                "kirby3-plugin",
+                "kirby4",
+                "kirby4-plugin",
+                "publish",
+                "schedule"
+            ],
+            "support": {
+                "issues": "https://github.com/bvdputte/kirby-autopublish/issues",
+                "source": "https://github.com/bvdputte/kirby-autopublish/tree/3.0.0"
+            },
+            "time": "2023-12-03T16:55:28+00:00"
+        },
         {
             "name": "christian-riesen/base32",
             "version": "1.6.0",
