@@ -27,7 +27,7 @@
         <?php 
         $projects = $page->featured_projects()->toPages();
         if ($projects->isEmpty()) {
-            $projects = site()->find('works')->children()->listed();
+            $projects = site()->find('works')->children()->listed()->limit(8);
         }
         $i = 0;
         ?>
