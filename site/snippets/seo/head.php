@@ -149,7 +149,7 @@ if ($page->template() == 'thoughts') {
 // Filter duplicates
 $uniqueImages = $imagesToSchema->unique();
 
-if ($uniqueImages->count() > 0): 
+if ($uniqueImages && $uniqueImages->count() > 0): 
 ?>
 <script type="application/ld+json">
 <?= json_encode($uniqueImages->map(function($image) use ($site) {
