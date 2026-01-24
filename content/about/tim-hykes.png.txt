@@ -1,8 +1,8 @@
-Caption: Tim Hykes UX Designer
+Caption: Tim Hykes
 
 ----
 
-Alt: Tim Hykes UX Designer
+Alt: Tim Hykes
 
 ----
 
@@ -19,3 +19,7 @@ Link:
 ----
 
 Uuid: 1z4ouhegzeegwhgp
+
+----
+
+Focus: 50.3% 2.4%

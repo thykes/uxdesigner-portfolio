@@ -196,54 +196,7 @@
 </section>
 <?php endif ?>
 
-<!-- Alternative Paths (Rejected Concepts) -->
-<?php if ($page->alternative_paths()->isNotEmpty()): ?>
-<section class="mb-32">
-    <span class="sub-header-caps mb-12 block">Alternative Paths</span>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <?php foreach ($page->alternative_paths()->toStructure() as $concept): ?>
-        <div class="p-10 border border-white/10 hover:border-[var(--accent)]/30 transition-colors">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="material-symbols-outlined text-white/40 text-sm">close</span>
-                <h4 class="uppercase tracking-[0.2em] text-[10px] font-bold text-white/60"><?= $concept->concept() ?></h4>
-            </div>
-            <p class="text-sm text-[var(--text-muted)] mb-8 leading-relaxed"><?= $concept->description() ?></p>
-            <div class="pt-6 border-t border-white/5">
-                <span class="text-[10px] uppercase text-[var(--accent)] font-bold block mb-2">Outcome</span>
-                <p class="text-xs text-white/80 leading-relaxed italic"><?= $concept->outcome() ?></p>
-            </div>
-        </div>
-        <?php endforeach ?>
-    </div>
-</section>
-<?php endif ?>
 
-<!-- Inclusion & Accessibility -->
-<?php if ($page->inclusion_points()->isNotEmpty()): ?>
-<section class="mb-40">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-5">
-            <span class="sub-header-caps mb-6 block">Inclusion Standards</span>
-            <h3 class="serif-display text-5xl mb-8">Accessibility <br/><span class="italic">&amp; Compliance</span></h3>
-            <p class="text-[var(--text-muted)] text-lg leading-relaxed max-w-md">
-                <?= $page->inclusion_intro()->or("Luxury is for everyone. We ensured the dark theme wasn't just aesthetic, but compliant with global accessibility standards.") ?>
-            </p>
-        </div>
-        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
-            <?php foreach ($page->inclusion_points()->toStructure() as $point): ?>
-            <div class="flex flex-col gap-6">
-                <div class="flex items-center gap-4">
-                    <span class="material-symbols-outlined text-[var(--accent)]"><?= $point->icon() ?></span>
-                    <span class="badge-aa"><?= $point->badge() ?></span>
-                </div>
-                <h4 class="font-bold text-sm uppercase tracking-widest text-white"><?= $point->title() ?></h4>
-                <p class="text-xs text-[var(--text-muted)] leading-[1.8]"><?= $point->description() ?></p>
-            </div>
-            <?php endforeach ?>
-        </div>
-    </div>
-</section>
-<?php endif ?>
 
 <!-- Final Impact -->
 <section class="mb-48 max-w-5xl mx-auto text-center">
