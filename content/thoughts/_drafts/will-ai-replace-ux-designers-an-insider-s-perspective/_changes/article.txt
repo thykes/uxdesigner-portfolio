@@ -1,0 +1,57 @@
+Title: Will AI Replace UX Designers? An Insider’s Perspective
+
+----
+
+Intro: This is the question I get asked constantly: Is the UX design industry on the cusp of being replaced? In some cases, the answer is a resounding yes; but in others, it is a hard no. Let me explain.
+
+----
+
+Text: [{"content":{"level":"h2","text":"<strong>The \"Yes\": Why Junior Roles are at Risk</strong>"},"id":"fc87afc3-2dbf-43a1-9f44-d7f437417118","isHidden":false,"type":"heading"},{"content":{"text":"<p>AI currently builds beautiful websites. You can select colors, but we’re only scratching the surface of how design has evolved over the last 30 years. AI is exceptionally good at snapping objects to a grid and layering them with text and imagery. For many organizations, that alone will disrupt the traditional workforce.</p><p>The \"average Joe\" now uses tools like <a href=\"https://lovable.dev/\" target=\"_blank\" title=\"Lovable\"><strong>Lovable</strong></a> or <a href=\"https://stitch.withgoogle.com/\" target=\"_blank\" title=\"Stitch\"><strong>stitch.withgoogle.com</strong></a> to create functional websites just by prompting repeatedly. These tools aren't just for mockups; they spit out functional HTML and CSS ready to be uploaded.</p><p>When you add an AI-powered <strong>IDE (Integrated Development Environment) </strong>such as <a href=\"https://antigravity.google/\" target=\"_blank\" title=\"Antigravity\">Antigravity</a>, it takes those standard files and codes them appropriately. In my experience, this replaces a team of six engineers and two designers. One person can now prompt a fully functioning website that handles uploads, downloads, emails, and QR code generation. Layer that with a standard CMS, and you have something incredibly powerful.</p>"},"id":"2a099d9c-8db0-4f39-a88b-d9e2c4a9ced8","isHidden":false,"type":"text"},{"content":{"location":"kirby","image":["file://pvmzajbru70negjp"],"src":"","alt":"","caption":"","link":"","ratio":"","crop":"false"},"id":"e104b067-5331-432a-935d-03fbabf33eef","isHidden":false,"type":"image"},{"content":{"level":"h2","text":"<strong>The Reality for New Designers:</strong>"},"id":"bf76f17e-be97-4def-b020-189b43e417f3","isHidden":false,"type":"heading"},{"content":{"text":"<ul><li><strong>(highlight: The Level Playing Field:)</strong> AI narrows the gap between designers and developers.</li><li><strong>(highlight: Junior Displacement:)</strong> I believe AI has effectively replaced an entire generation of Junior designers, as well as the field of people who built basic websites for a living.</li><li><strong>(highlight:  The New Requirement:)</strong> The next generation of graduates must not only know how to use these tools for speed but also master the methodologies that sit on top of them.</li></ul>"},"id":"aac1118a-e818-452d-8714-09a337269d33","isHidden":false,"type":"list"},{"content":{"level":"h2","text":"<strong>The \"No\": Where AI Falls Short</strong>"},"id":"d25cb906-485d-45d0-9b42-17e1a2e05611","isHidden":false,"type":"heading"},{"content":{"text":"<p>I don’t believe AI is in a position to replace us completely. Currently, AI cannot grasp the nuances of a standard design system or implement its complex rules.</p>"},"id":"18710a4a-bdc2-42bf-9d9d-897aab1af0b4","isHidden":false,"type":"text"},{"content":{"text":"<ul><li><strong>(highlight: Consistency Issues:)</strong> It takes hours of prompting to get AI to implement a design system without it simply mimicking what has already been done. AI is often inconsistent; in my attempts to push it to be more creative, it often deviates so far that the design no longer feels cohesive. You might have rounded corners for images on one page, but entirely different button styles on the next.</li><li><strong>(highlight: Lack of Systematic Knowledge:</strong>) AI doesn't understand the foundational rules required for long-term consistency.</li></ul>"},"id":"1872b8ab-c410-4b38-98d6-d93edaccf50d","isHidden":false,"type":"list"},{"content":{"location":"kirby","image":["file://vo4xzaouixfsnbdo"],"src":"","alt":"","caption":"","link":"","ratio":"","crop":"false"},"id":"f449f428-e2d4-4cca-bd80-9e55d108bc4b","isHidden":false,"type":"image"},{"content":{"level":"h2","text":"<strong>Patterns vs. People (The Grandma Test)</strong>"},"id":"0b0700b7-f560-42b0-8561-9095b72722cf","isHidden":false,"type":"heading"},{"content":{"text":"<p>AI can build a beautiful site, but it can’t tell me why my grandma can't add an item to her cart or why she can’t read the font on the screen. Ultimately, AI designs for <strong>patterns</strong>, but humans design for <strong>people</strong>.</p><p>This is why user research, accessibility, and manual testing are non-negotiable for a usable website. These are human-led endeavors. We can build machines to watch a user's body language or track their mouse to see if they’re frustrated, but it still takes a human touch to talk to people and truly understand them in a human way.</p>"},"id":"9fa83430-3e99-43b6-b72a-7fdfd8ef65bf","isHidden":false,"type":"text"},{"content":{"text":"AI designs for patterns, but humans design for people.","citation":"Tim Hykes"},"id":"ef17c3f7-1a09-48da-9d85-fb1de25f605a","isHidden":false,"type":"quote"},{"content":{"level":"h2","text":"<strong>The Legal Gray Area: Who Owns the \"Vibe\"?</strong>"},"id":"f60a4993-1ee0-44d6-88fd-f03d84956edf","isHidden":false,"type":"heading"},{"content":{"text":"<p>There are legal and ethical questions no one is talking about yet regarding <strong>ownership</strong>. Who truly owns the code that Stitch or Lovable spits out?</p><p>If a designer prompts an entire site into existence, is that work trademarkable? As of 2026, the legal landscape is still a massive gray area. If AI determines the expressive elements of the output, current copyright laws often treat it as public domain. This adds a layer of risk and complexity that businesses aren't prepared for.</p>"},"id":"0e1f5ff9-e404-4d4d-b542-0368636cfad2","isHidden":false,"type":"text"},{"content":{"level":"h2","text":"<strong>Final Thoughts: The Bridge Forward</strong>"},"id":"a0e29828-b76f-48de-99d4-bbe0d21cd918","isHidden":false,"type":"heading"},{"content":{"text":"<p>From my experience building with AI every day, the future is still being written. We may see <strong>Figma</strong> eventually allow AI to manage design systems, but management is not the same as implementation. Until a tool can handle the politics, the empathy, and the execution, we still need a human touch.</p><p>Junior designers need to find a way to bridge this gap. You might not be \"pushing pixels\" anymore—AI can give us those creative beginning ideas—but you can become an <strong>AI Operator</strong>, a <strong>Prompt Engineer</strong>, or a <strong>Product Editor</strong>. These are the job descriptions being written as we speak.</p>"},"id":"f4a3db3f-d069-48bb-8dc0-ee13f0a6d64f","isHidden":false,"type":"text"},{"content":{"level":"h2","text":"<strong>Look at the speed difference:</strong>"},"id":"c82de1d8-695f-448b-8a37-d230e413ca0e","isHidden":false,"type":"heading"},{"content":{"text":"<ul><li><strong>(highlight: Before AI:)</strong> A 10-year veteran team would take six months to build a high-end, advanced site.</li><li><strong>(highlight: Today:)</strong> I can build two fully functioning websites with advanced features in two weeks.</li></ul>"},"id":"71d539ec-96ee-4353-8c85-03687e3867bd","isHidden":false,"type":"list"},{"content":{"text":"<p>We used to start with paper wireframes to show layout, then move to low-fidelity mockups so people understood the structure and the impact on the audience. Now, we move at lightning speed. The speed is here—our job now is to provide the soul and the strategy.</p>"},"id":"2035d62f-595f-4d2d-ba95-eb59e25c2807","isHidden":false,"type":"text"}]
+
+----
+
+Date: 2026-02-09 04:45:00
+
+----
+
+Autopublish: 2026-02-09 00:55:00
+
+----
+
+Featured: true
+
+----
+
+Category: AI
+
+----
+
+Hero-type: image
+
+----
+
+Cover: - file://9jsqqq9viiiejdy1
+
+----
+
+Hero-video-file: 
+
+----
+
+Hero-video-url: 
+
+----
+
+Seotitle: 
+
+----
+
+Seodescription: 
+
+----
+
+Uuid: daauvfl86s0pwaov
+
+----
+
+Lock: EcHTrGk0

@@ -15,19 +15,8 @@ columns:
         image:
           query: page.cover.toFile
           cover: true
+        info: "{{ page.autopublish.isNotEmpty ? '⏰ ' ~ page.autopublish.toDate('d.m.Y @ H:i') : 'Draft' }}"
         sortBy: date desc
-
-      scheduled:
-        type: pages
-        headline: Scheduled
-        template: article
-        status: unlisted
-        layout: cards
-        image:
-          query: page.cover.toFile
-          cover: true
-        info: "{{ page.date.toDate('d.m.Y @ H:i') }}"
-        sortable: true
 
       published:
         type: pages
