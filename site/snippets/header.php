@@ -16,7 +16,7 @@
     <?php if($icon = $site->favicon()->toFile()): ?>
     <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
     <?php endif ?>
-    <?php // snippet('seo/head') ?>
+    <?php snippet('seo/head') ?>
     
     <!-- Robots: Explicitly allow indexing -->
     <meta name="robots" content="index, follow">
