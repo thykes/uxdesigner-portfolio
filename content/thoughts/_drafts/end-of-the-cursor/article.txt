@@ -6,7 +6,7 @@ Intro: In this recorded keynote, we explore why movement in digital interfaces i
 
 ----
 
-Text: [{"content":{"text":"<p>As we transition from static screens to fluid environments, the way an object enters, resides, and exits a viewport tells a story. In the video above, we dissect the mechanics of Temporal Design—the art of designing over time rather than just space.</p>"},"id":"2c6c7906-7fc1-4ba2-84f1-fb67282942c8","isHidden":false,"type":"text"},{"content":{"level":"h2","text":"<strong>The Narrative of Weight</strong>"},"id":"f2e3ce79-e060-477b-8f7e-2ff88d78fd62","isHidden":false,"type":"heading"},{"content":{"text":"<p>Every motion carries an implied mass. A bounce suggests playfulness; a slow, linear fade suggests solemnity. When these physics-based interactions are applied consistently, they create a \"spatial intuition\" for the user. They no longer need to think about where they are; they feel the architecture of the app through its resistance and velocity.</p>"},"id":"be0d418f-9fe7-48a0-bd48-fd5fff18e3b1","isHidden":false,"type":"text"},{"content":{"source":"","url":"https://www.youtube.com/watch?v=MvWVcZi8r-o","file":[],"caption":"Extended Session: Applying Narrative Curves to Utility Interfaces"},"id":"43fd9ddd-0674-42e6-a36d-d1fb9ca307af","isHidden":false,"type":"video"},{"content":{"text":"Motion is the bridge between what the user sees and what the user understands.","citation":"Julian Vane, 2024 Keynote"},"id":"cc225b1a-ba46-4aa9-9b31-65b133196886","isHidden":false,"type":"quote"},{"content":{"text":"<p>In the second half of the presentation, we look at the psychological impact of transition speed. We found that transitions under 200ms feel instantaneous, while those over 500ms begin to feel like a \"journey.\" Choosing where to place your experience on this spectrum is the difference between a tool and an experience.</p>"},"id":"201604eb-27be-4912-84d6-81051dd0b4d6","isHidden":false,"type":"text"},{"content":{"location":"kirby","image":["file://tqhytvabakgitge7"],"src":"","alt":"","caption":"Fig 02. Mapping ease-in-out curves to emotional resonance.","link":"","ratio":"16/9","crop":"true"},"id":"c045195b-bab3-446a-ac4a-75ef35c0f426","isHidden":false,"type":"image"},{"content":{"level":"h2","text":"<strong>Future Gazing</strong>"},"id":"4b25baa6-c270-4e74-b9ec-5a22d13ae511","isHidden":false,"type":"heading"},{"content":{"text":"<p>The future of theory isn't written; it's performed. As designers, we must become directors of attention. The restraint required to keep an interface clean while making it move with purpose is the highest form of digital craftsmanship.</p>"},"id":"24ecee47-787a-46d6-8b11-82c1b96bcb42","isHidden":false,"type":"text"}]
+Text: [{"content":{"text":"<p>As we transition from static screens to fluid environments, the way an object enters, resides, and exits a viewport tells a story. In the video above, we dissect the mechanics of Temporal Design—the art of designing over time rather than just space.</p>"},"id":"2c6c7906-7fc1-4ba2-84f1-fb67282942c8","isHidden":false,"type":"text"},{"content":{"level":"h2","text":"<strong>The Narrative of Weight</strong>"},"id":"f2e3ce79-e060-477b-8f7e-2ff88d78fd62","isHidden":false,"type":"heading"},{"content":{"text":"<p>Every motion carries an implied mass. A bounce suggests playfulness; a slow, linear fade suggests solemnity. When these physics-based interactions are applied consistently, they create a \"spatial intuition\" for the user. They no longer need to think about where they are; they feel the architecture of the app through its resistance and velocity.</p>"},"id":"be0d418f-9fe7-48a0-bd48-fd5fff18e3b1","isHidden":false,"type":"text"},{"content":{"source":"","url":"https://www.youtube.com/watch?v=MvWVcZi8r-o","file":[],"caption":"Extended Session: Applying Narrative Curves to Utility Interfaces","video_title":"","upload_date":"","video_description":""},"id":"43fd9ddd-0674-42e6-a36d-d1fb9ca307af","isHidden":false,"type":"video"},{"content":{"text":"Motion is the bridge between what the user sees and what the user understands.","citation":"Julian Vane, 2024 Keynote"},"id":"cc225b1a-ba46-4aa9-9b31-65b133196886","isHidden":false,"type":"quote"},{"content":{"text":"<p>In the second half of the presentation, we look at the psychological impact of transition speed. We found that transitions under 200ms feel instantaneous, while those over 500ms begin to feel like a \"journey.\" Choosing where to place your experience on this spectrum is the difference between a tool and an experience.</p>"},"id":"201604eb-27be-4912-84d6-81051dd0b4d6","isHidden":false,"type":"text"},{"content":{"location":"kirby","image":["file://tqhytvabakgitge7"],"src":"","alt":"","caption":"Fig 02. Mapping ease-in-out curves to emotional resonance.","link":"","ratio":"16/9","crop":"true"},"id":"c045195b-bab3-446a-ac4a-75ef35c0f426","isHidden":false,"type":"image"},{"content":{"before_image":["file://iujyfjqpyzsmolkr"],"after_image":["file://itxxtuanonh5ys2l"],"before_label":"Before","after_label":"After"},"id":"5194d669-360a-4924-8bcc-74689ae67839","isHidden":false,"type":"before-after"},{"content":{"level":"h2","text":"<strong>Future Gazing</strong>"},"id":"4b25baa6-c270-4e74-b9ec-5a22d13ae511","isHidden":false,"type":"heading"},{"content":{"text":"<p>The future of theory isn't written; it's performed. As designers, we must become directors of attention. The restraint required to keep an interface clean while making it move with purpose is the highest form of digital craftsmanship.</p>"},"id":"24ecee47-787a-46d6-8b11-82c1b96bcb42","isHidden":false,"type":"text"}]
 
 ----
 
@@ -14,11 +14,15 @@ Date: 2026-01-23 14:40:00
 
 ----
 
-Category: Design Theory
+Autopublish: 
 
 ----
 
 Featured: true
+
+----
+
+Category: Design Theory
 
 ----
 
@@ -35,6 +39,14 @@ Hero-video-file:
 ----
 
 Hero-video-url: 
+
+----
+
+Seotitle: 
+
+----
+
+Seodescription: 
 
 ----
 
