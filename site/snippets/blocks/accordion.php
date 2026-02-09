@@ -54,8 +54,7 @@ $uniqueId = 'accordion-' . uniqid();
 
         <!-- Right: Image Display -->
         <div class="sticky top-24 hidden lg:block lg:col-span-8">
-            <div class="relative w-full rounded-lg overflow-hidden bg-[var(--charcoal)]"
-                style="height: 60vh; max-height: 600px;">
+            <div class="relative w-full rounded-lg overflow-hidden" style="height: 60vh; max-height: 600px;">
                 <?php foreach ($items as $index => $item): ?>
                     <?php if ($image = $item->image()->toFile()): ?>
                         <img id="<?= $uniqueId ?>-img-<?= $index ?>" src="<?= $image->url() ?>"
