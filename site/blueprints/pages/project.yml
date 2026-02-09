@@ -18,6 +18,11 @@ tabs:
             type: textarea
             size: small
             help: "Use this for special formatting like (br:) or (accent: text)"
+          accent_color:
+            label: Accent Color (Hex/RGB)
+            type: text
+            width: 1/2
+            placeholder: "#E0FF00"
           role:
             type: text
             width: 1/2

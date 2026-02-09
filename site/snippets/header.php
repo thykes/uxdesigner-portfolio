@@ -39,11 +39,11 @@
 
     <!-- <?= css('assets/css/index.css') ?> -->
 
-    <style type="text/tailwindcss">
+    <style>
         :root {
             --bg-deep: #0D0D0D;
             --charcoal: #1A1A1A;
-            --accent: #E0FF00;
+            --accent: <?= $page->accent_color()->isNotEmpty() ? $page->accent_color() : '#E0FF00' ?>;
             --text-main: #FFFFFF;
             --text-muted: #A0A0A0;
         }
@@ -54,6 +54,8 @@
             -webkit-font-smoothing: antialiased;
             min-height: max(884px, 100dvh);
         }
+    </style>
+    <style type="text/tailwindcss">
         .serif-display {
             font-family: 'Playfair Display', serif;
         }
