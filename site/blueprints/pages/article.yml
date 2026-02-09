@@ -23,6 +23,7 @@ tabs:
                   - text
                   - list
                   - image
+                  - before-after
                   - video
                   - quote
 

@@ -1,0 +1,21 @@
+name: Before/After Slider
+icon: images
+fields:
+  before_image:
+    label: Before Image
+    type: files
+    max: 1
+  after_image:
+    label: After Image
+    type: files
+    max: 1
+  before_label:
+    label: Before Label
+    type: text
+    default: Before
+    width: 1/2
+  after_label:
+    label: After Label
+    type: text
+    default: After
+    width: 1/2

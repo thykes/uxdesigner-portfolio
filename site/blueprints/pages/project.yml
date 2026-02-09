@@ -41,6 +41,7 @@ tabs:
             fieldsets:
               - text
               - image
+              - before-after
               - video
               - code
               - section-header
@@ -90,6 +91,7 @@ tabs:
             fieldsets:
               - text
               - image
+              - before-after
               - video
               - code
               - quote # We can customize this to match the pull-quote style

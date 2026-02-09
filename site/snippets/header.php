@@ -104,6 +104,21 @@
         .neon-stop-1 { animation: neonflow 4s infinite linear 0s; }
         .neon-stop-2 { animation: neonflow 4s infinite linear -1s; }
         .neon-stop-3 { animation: neonflow 4s infinite linear -2s; }
+
+        /* Before/After Slider */
+        .slider-handle {
+            @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-12 rounded-full bg-[var(--accent)] shadow-[0_0_30px_rgba(224,255,0,0.6)] flex items-center justify-center border-4 border-[var(--bg-deep)] cursor-ew-resize z-40 transition-transform duration-200 active:scale-90;
+        }
+        .slider-handle::before, .slider-handle::after {
+            content: "";
+            @apply w-0 h-0 border-y-[6px] border-y-transparent;
+        }
+        .slider-handle::before {
+            @apply border-r-[8px] border-r-[var(--bg-deep)] mr-1;
+        }
+        .slider-handle::after {
+            @apply border-l-[8px] border-l-[var(--bg-deep)] ml-1;
+        }
     </style>
 </head>
 <body class="selection:bg-[var(--accent)] selection:text-black">
