@@ -20,18 +20,24 @@
             </div>
             <div class="lg:col-span-4 flex flex-col gap-10 pb-4">
                 <?php if ($page->role()->isNotEmpty()): ?>
-                    <div class="flex flex-col items-start gap-1">
-                        <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Role</span>
-                        <div class="w-6 h-[2px] bg-[var(--accent)]"></div>
-                        <p class="font-medium text-white"><?= $page->role() ?></p>
+                    <div class="flex flex-row items-center gap-4">
+                        <div class="w-[2px] h-8 bg-[var(--accent)]"></div>
+                        <div>
+                            <span
+                                class="block text-xs uppercase tracking-widest text-[var(--text-muted)] leading-none mb-1">Role</span>
+                            <p class="font-medium text-white leading-tight"><?= $page->role() ?></p>
+                        </div>
                     </div>
                 <?php endif ?>
 
                 <?php if ($page->timeline()->isNotEmpty()): ?>
-                    <div class="flex flex-col items-start gap-1">
-                        <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Timeline</span>
-                        <div class="w-6 h-[2px] bg-[var(--accent)]"></div>
-                        <p class="font-medium text-white"><?= $page->timeline() ?></p>
+                    <div class="flex flex-row items-center gap-4">
+                        <div class="w-[2px] h-8 bg-[var(--accent)]"></div>
+                        <div>
+                            <span
+                                class="block text-xs uppercase tracking-widest text-[var(--text-muted)] leading-none mb-1">Timeline</span>
+                            <p class="font-medium text-white leading-tight"><?= $page->timeline() ?></p>
+                        </div>
                     </div>
                 <?php endif ?>
             </div>
