@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Theory &amp; Insights | Design Index</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E6FB04",
+                        "background-light": "#f7f8f5",
+                        "background-dark": "#0A0C08",
+                        "charcoal": "#141811",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "serif-title": ["Playfair Display", "serif"],
+                        "serif-body": ["Lora", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "2xl": "2rem", "3xl": "2.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-glow:hover {
+            text-shadow: 0 0 15px rgba(230, 251, 4, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white transition-colors duration-300 antialiased">
+<header class="sticky top-0 z-50 bg-background-dark/90 backdrop-blur-xl border-b border-white/5 px-6 lg:px-40 py-5">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
+<span class="text-[10px] font-black text-background-dark">DT</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary" href="#">Theory Index</a>
+<a class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/40 hover:text-white transition-colors" href="#">Archive</a>
+<a class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/40 hover:text-white transition-colors" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-white/40 hover:text-white transition-colors">search</button>
+<button class="bg-white/5 hover:bg-white/10 text-[10px] font-bold tracking-widest uppercase px-6 py-2.5 rounded-full border border-white/10 transition-all">Subscribe</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-6 lg:px-20 py-16">
+<header class="mb-20">
+<h1 class="font-serif-title text-6xl md:text-8xl lg:text-9xl leading-none mb-6">Theory<span class="text-primary italic">.</span></h1>
+<p class="text-white/40 text-sm max-w-md uppercase tracking-[0.2em] leading-relaxed">
+                Critical perspectives on the intersection of motion, psychology, and digital craftsmanship.
+            </p>
+</header>
+<section class="mb-32">
+<a class="group block relative" href="#">
+<div class="relative w-full aspect-[21/9] rounded-3xl overflow-hidden bg-charcoal mb-10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCm7JfSEwK2aCEPfJlsnicBTLQqIWJPjXd0y-xy76loYdIVBd2pvjjyLcS5lftku3t4auvyhmNhd44nHDYQN02I6d6cI9NfsrGKdOZNhL801m1zaR7Wq2TnjU5Ei0AZNrMg1_s1H9C4XDDTV3mLttNnE8MgXJ9CnTxe13bw67Yoay9lhRFZcovvuWrJUwt2EG1nGbEEJYQCdyu72fch5tcScmnlAIJKF8t-FehhajhZjUkJZ2O4Vuf8IEzGuQrMbUlTbb77TCAxXAM');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<span class="bg-primary text-background-dark text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Featured Essay</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-8">
+<h2 class="font-serif-title text-4xl md:text-6xl text-white group-hover:text-primary transition-colors duration-500 leading-tight mb-6">
+                            The Kinetic Soul: How Motion Defines Digital Meaning
+                        </h2>
+<p class="font-display text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed">
+                            Exploring the fundamental grammar of modern communication through the lens of temporal design and spatial intuition.
+                        </p>
+</div>
+<div class="md:col-span-4 md:text-right pt-4">
+<p class="text-primary text-xs font-bold uppercase tracking-[0.4em] mb-2">Motion Design</p>
+<p class="text-white/30 text-xs font-bold uppercase tracking-widest">Oct 24, 2024 • 12 Min Watch</p>
+</div>
+</div>
+</a>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
+<article class="group">
+<a class="block" href="#">
+<div class="aspect-video rounded-2xl overflow-hidden bg-charcoal mb-8">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnm42GgC8DDYndic6WiNekq7yJmN6ccKVirIaO_SGjEdPB6sC-Mw71G5UphtiNDHTwce37oCH97Wu6Q3F5NkuLvRODLBNjugpDAFdFP4vawpqa-mgROdpSjdXHKDdo_wTC0VVM5eg1Di94S7rItlu2yAcCY506WUdYl-CMnS0gBiZqJqkp_A5bnGBRNoqhCZpAW23FYZjAfqCgfbuv4pAgA5vXgIMQuIqgSfrvvEjHMYyFFS4t4hXlHcGRrHSBLJeY3inePb2DIMQ');"></div>
+</div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-primary text-[10px] font-bold uppercase tracking-[0.4em]">Color Theory</span>
+<span class="text-white/30 text-[10px] font-bold uppercase tracking-widest">Sep 12, 2024</span>
+</div>
+<h3 class="font-serif-title text-3xl text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                        The Psychology of Color in Dark Interfaces
+                    </h3>
+<p class="text-white/50 text-sm leading-relaxed max-w-md">
+                        Why high-contrast aesthetics dominate the modern web and how they impact cognitive load and user retention.
+                    </p>
+</a>
+</article>
+<article class="group">
+<a class="block" href="#">
+<div class="aspect-video rounded-2xl overflow-hidden bg-charcoal mb-8">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdakYUQ8MTvzViP7NGifTKG4-6MUbbPJIN9Rl80dmPq58R0czbUJwaDnlJ1JTG0i8EvywLL4DjAxdF6KcelIgSOrbWtbSZZwIjlV4RXPFdz0__RVJMjVAjfbJC4X3flcAnQwmAui-Ud_o6TQc10JNnIJa2eZ92VFaDJ91-83uRo1I0zg8lMIYSeIo8GauG59aTBQ3SeSj3dEpJk9XkHMb4lI3fexzHVASB4ZN1eRxbuKpVF_EsFlIxvqHk0b6-GYc1Ov74h5uscTM');"></div>
+</div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-primary text-[10px] font-bold uppercase tracking-[0.4em]">Typography</span>
+<span class="text-white/30 text-[10px] font-bold uppercase tracking-widest">Aug 28, 2024</span>
+</div>
+<h3 class="font-serif-title text-3xl text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                        Variable Type as a Functional Tool
+                    </h3>
+<p class="text-white/50 text-sm leading-relaxed max-w-md">
+                        Moving beyond aesthetics: how variable fonts are revolutionizing accessibility and performance in digital publishing.
+                    </p>
+</a>
+</article>
+<article class="group">
+<a class="block" href="#">
+<div class="aspect-video rounded-2xl overflow-hidden bg-charcoal mb-8">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfZvDyry8PKs7s6RVyBlTO02Sth2nuJsdbEJcafkX0Dl_GHR2VS2RL6TblAKagB6OXSRgpkCie-6v8NbUVtekY62tNDPkjdvEc_uOc76-kwbPhcIgJ7HiO-VkCoAZWTh3FA16-hSnM0HfOMlcdsJNuFkn7wkD64V-6oXuEsajXPTz19OQai_-UskepqOSgxjTuG6OoHOGavCTDMgbpSlmN4L2hB5NLdXMbkwhrtdXhW23PIl5Oq1VanWpnt_Ttnkwri-RzQxXhCZ4');"></div>
+</div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-primary text-[10px] font-bold uppercase tracking-[0.4em]">Interaction</span>
+<span class="text-white/30 text-[10px] font-bold uppercase tracking-widest">Aug 05, 2024</span>
+</div>
+<h3 class="font-serif-title text-3xl text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                        The End of the Cursor: Spatial Computing
+                    </h3>
+<p class="text-white/50 text-sm leading-relaxed max-w-md">
+                        Predicting the transition from pointer-based interactions to gestural and eye-tracking interfaces.
+                    </p>
+</a>
+</article>
+<article class="group">
+<a class="block" href="#">
+<div class="aspect-video rounded-2xl overflow-hidden bg-charcoal mb-8">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFK3uGM4VnSFSeH_VBFez7cg2n1qsDAX_Gs82QhtX6X_fwjPvWEDXNx8QNIuaoDmhPZskh-a9_S1Sjy8gMCsw2S47ioeE79G0OhdmJ50qZMVzsHuYpmM8AkXMKOsHGfGplVUW5pMNLFq0UyoBJul9nUXZrxjKYmAh4vmSxaOY77IvR9ADKQvOg3WNzmpC327IM4BwvWhxhiMoYdQvU7rGG5Ep9QNB5DcdvuFrT4YcEzWSE0c6BKNb4bzl4fdorM-KoQ14a5O7FN-o');"></div>
+</div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-primary text-[10px] font-bold uppercase tracking-[0.4em]">Ethics</span>
+<span class="text-white/30 text-[10px] font-bold uppercase tracking-widest">Jul 19, 2024</span>
+</div>
+<h3 class="font-serif-title text-3xl text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                        Algorithmic Curation vs. Human Taste
+                    </h3>
+<p class="text-white/50 text-sm leading-relaxed max-w-md">
+                        The designer's role in a world where AI determines what users see, feel, and interact with.
+                    </p>
+</a>
+</article>
+</div>
+<div class="mt-32 flex flex-col items-center">
+<div class="w-full h-[1px] bg-white/5 mb-12"></div>
+<button class="group flex flex-col items-center gap-4">
+<span class="text-[10px] font-bold uppercase tracking-[0.5em] text-white/40 group-hover:text-primary transition-colors">Discover More Theory</span>
+<div class="size-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-500">
+<span class="material-symbols-outlined text-white/40 group-hover:text-background-dark group-hover:rotate-90 transition-all">arrow_downward</span>
+</div>
+</button>
+</div>
+</main>
+<footer class="bg-background-dark py-24 px-6 lg:px-40 border-t border-white/5 mt-20">
+<div class="max-w-[1200px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start mb-20">
+<div>
+<div class="size-12 bg-white text-background-dark rounded-full flex items-center justify-center font-black mb-8">DT</div>
+<h4 class="font-serif-title text-4xl text-white mb-6 leading-tight">Join the theory collective for monthly insights.</h4>
+<div class="flex max-w-md">
+<input class="bg-charcoal border-white/5 focus:border-primary focus:ring-0 text-sm text-white px-6 py-4 rounded-l-xl w-full transition-all" placeholder="Email address" type="email"/>
+<button class="bg-primary text-background-dark font-black text-[10px] uppercase tracking-widest px-8 rounded-r-xl hover:bg-white transition-colors">Join</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-12">
+<div class="flex flex-col gap-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-white/20">Navigation</p>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Theory Index</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Case Studies</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">About Julian</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-white/20">Connect</p>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Twitter (X)</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Substack</a>
+<a class="text-sm text-white/60 hover:text-primary transition-colors" href="#">Read.cv</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6">
+<p class="text-[10px] text-white/30 font-bold uppercase tracking-widest">© 2024 Design Theory Collective • Curated by Julian Vane</p>
+<div class="flex gap-8">
+<a class="text-[10px] text-white/30 hover:text-white uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-[10px] text-white/30 hover:text-white uppercase tracking-widest" href="#">RSS Feed</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

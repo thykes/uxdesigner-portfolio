@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Project Gallery - John Doe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --bg-deep: #0D0D0D;
+            --charcoal: #1A1A1A;
+            --accent: #E0FF00;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0A0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .filter-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .filter-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .filter-link:hover::after, .filter-link.active::after {
+            width: 100%;
+        }
+        .filter-link.active {
+            color: var(--accent);
+        }
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+    </style>
+<style>
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--accent)] selection:text-black">
+<div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+<header class="py-10 flex justify-between items-center">
+<div class="group cursor-pointer">
+<div class="border-2 border-[var(--text-main)] w-10 h-10 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]">
+<span class="text-xl font-bold transition-colors group-hover:text-black">K</span>
+</div>
+</div>
+<nav class="flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+<a class="text-[var(--accent)] transition-colors" href="#">Work</a>
+<a class="hover:text-[var(--accent)] transition-colors" href="#">About</a>
+<button class="material-symbols-outlined text-3xl">menu</button>
+</nav>
+</header>
+<main>
+<section class="pt-20 pb-12">
+<h1 class="serif-display text-6xl md:text-8xl lg:text-9xl leading-none">Selected <span class="italic text-[var(--accent)]">Works</span></h1>
+<p class="mt-8 text-xl md:text-2xl text-[var(--text-muted)] max-w-2xl font-light leading-relaxed">
+                    A curated selection of projects spanning branding, digital design, and photography.
+                </p>
+</section>
+<section class="mb-20">
+<div class="flex flex-wrap gap-x-10 gap-y-6 text-xs uppercase tracking-[0.2em] font-semibold text-[var(--text-muted)] border-b border-white/10 pb-8">
+<a class="filter-link active" href="#">All Projects</a>
+<a class="filter-link" href="#">Branding</a>
+<a class="filter-link" href="#">Photography</a>
+<a class="filter-link" href="#">Digital Design</a>
+<a class="filter-link" href="#">Art Direction</a>
+</div>
+</section>
+<section class="pb-32">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-12 gap-y-24">
+<div class="project-card group cursor-pointer">
+<div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+<img alt="Visual Identity Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCETAcWHfXGbbaeRCREkfD3i-8wC7gaTKBArwG-7lWJXhXqFzB2FxakwfXZchHEIKqY7TflTDESJGxjwPgp4dnnpWNw2CH89xdtvYCOyhibuXlB0EA05YroV2y3Ko7FU4ROZqIWXV0TVaBLIpFopxLNy11ThnVKCp9y2T6OmTzk1yq0WRlXuGiTqsRy96Lo3Kcivs2AXIwIffiYEm8wJ3W-ChsVjBhXSK-860DbD2KTnJtThd3XUQXaSaGTCX6WHVTy-QboVchGnLw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Visual Identity</h3>
+<p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Branding • 2024</p>
+</div>
+</div>
+<div class="project-card group cursor-pointer">
+<div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+<img alt="Luxe Cosmetics Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5PGMU21Fvo62MnYrUTxS8oHu7Jtheax7r1tR2TtsPSVTtoIXZO_OXLV_OCvXb6dhsnALN9gE2SeRXWAjr0Qe6tgqGeQDGMcyveSW76fLFq7oUsy0RwkVef84ZfL9oGuJgp26Wq1VjNQpDdJ0T9-5_BSFBEY5mEAkMVY82ZBwx-dMbhTx6RfQzKXU3OUUFT6JIM6kom15Ho0eMzI6KPFdqZAyOZOza11Zxo-rwYoYtlxOSyVZAQskaRyyhHAR03py_87OV2oeLfYo"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Luxe Cosmetics</h3>
+<p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Digital Design • 2023</p>
+</div>
+</div>
+<div class="project-card group cursor-pointer">
+<div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+<img alt="Editorial Concept Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbbqS9GtDgi05GW9Aih47eSqxrznKCEl3RRlU-taJpMbcHT_5iGf7XeWFnzbaR5e9lLsSZckQZ9U1dUq3ZJBCeJbqYRs34LmVzmKKNR2FGVTKjU1bWkqzQgmFBJZH04xr4bGxZ7wtS9drHWNrgxEsPEvbBF-G9nHRxVIezTKNJXxPR0GTT9NINlPTdM4I61bTTQOyDh8CjhuZ_O2MbN2kvtrtq5ytwMNfjgPdrA6xeDyzvsIT4rYB-qSMagOV30aseOu82zCPCOqw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Editorial Concept</h3>
+<p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Photography • 2023</p>
+</div>
+</div>
+<div class="project-card group cursor-pointer">
+<div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+<img alt="Minimalist Form Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIOlXLof08At6vlBIjOAaQVsbvC1GXAH2OZZxnp0TPBm6gpVVEjG49qWg3bJNVkT9GkFcHlSP2qZeZlQVvHuDhY2ppgMvIC9EB90EyUCPz5vN4q8wuAwP5nOU_G3zHiMHeH6gXwpTSI8K1xK9pfOD2TsTP-hlMxyoZ7AKjrp8tcdC6rEnO1OaunLfp-elL0XXLCMeSRWVlcoOfbvcXxtzwxF5Vg5ulSOB9C9TMvN4kvaTiLRwJQWtRxr_zJBWwPkDNp6oxrYuwVq0"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Minimalist Form</h3>
+<p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Art Direction • 2024</p>
+</div>
+</div>
+<div class="project-card group cursor-pointer">
+<div class="relative overflow-hidden bg-[var(--charcoal)] aspect-[4/3]">
+<img alt="Urban Textures Project" class="project-image w-full h-full object-cover transition-transform duration-1000 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASN7Ahx7eo9olKR39S3OdIr9nkdoh-Of_w6bmP5lLqTJNvkfKHnOL0c6ZEJJRmoEbNCbjXx0akMOrfSXqBVf7P9T49RsKPuAOjK78IkVsMK0Mu6yDll0mU6JEwnYD-_-YeykOie1wsoUA0T8m7z7dmAd8bGcyHgmiVoO1OjdxwnjFAZwoAV1qSCEjHQWrb0Z02s4ikdiG3tnorGRoBWlYj8WzkrGBpvDhaSubTPvByL8PlJaA0lyenh3qud0XqElN8DYwyuOd-oiw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-[var(--accent)]">add</span>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="serif-display text-3xl md:text-4xl font-bold group-hover:text-[var(--accent)] transition-colors">Urban Textures</h3>
+<p class="text-xs uppercase tracking-widest text-[var(--text-muted)] mt-3">Photography • 2022</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="py-16 border-t border-white/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="text-center md:text-left">
+<h2 class="serif-display text-4xl mb-4">Let's create together.</h2>
+<a class="text-[var(--accent)] text-lg hover:underline underline-offset-8" href="mailto:hello@johndoe.design">hello@johndoe.design</a>
+</div>
+<div class="flex flex-col items-center md:items-end gap-6">
+<div class="flex space-x-6">
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 3.582 8 8 8s8-3.582 8-8c0-4.418-3.582-8-8-8zm4.5 9.5h-9v-1h9v1z"></path></svg>
+</a>
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+</a>
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.8.058 1.016.048 1.71.21 2.316.446a4.688 4.688 0 011.669 1.087 4.688 4.688 0 011.087 1.669c.236.606.398 1.3.446 2.316.048 1.016.058 1.37.058 3.8s-.01 2.784-.058 3.8c-.048 1.016-.21 1.71-.446 2.316a4.688 4.688 0 01-1.087 1.669 4.688 4.688 0 01-1.669 1.087c-.606.236-1.3.398-2.316.446-1.016.048-1.37.058-3.8.058s-2.784-.01-3.8-.058c-1.016-.048-1.71-.21-2.316-.446a4.688 4.688 0 01-1.669-1.087 4.688 4.688 0 01-1.087-1.669c-.236-.606-.398-1.3-.446-2.316C2.01 14.784 2 14.43 2 12s.01-2.784.058-3.8c.048-1.016.21-1.71.446-2.316a4.688 4.688 0 011.087-1.669A4.688 4.688 0 015.315 2.5c.606-.236 1.3-.398 2.316-.446 1.016-.048 1.37-.058 3.8-.058zm0 1.8c-2.43 0-2.743.01-3.703.054-.887.04-1.37.188-1.691.31-.424.165-.726.362-1.044.68-.318.318-.515.62-.68 1.044-.122.321-.27.804-.31 1.691-.044.96-.054 1.272-.054 3.703s.01 2.743.054 3.703c.04.887.188 1.37.31 1.691.165.424.362.726.68 1.044.318.318.62.515 1.044.68.321.122.804.27 1.691.31.96.044 1.272.054 3.703.054s2.743-.01 3.703-.054c.887-.04 1.37-.188 1.691-.31.424-.165.726-.362 1.044-.68.318-.318.515-.62.68-1.044.122-.321.27-.804.31-1.691.044-.96.054-1.272.054-3.703s-.01-2.743-.054-3.703c-.04-.887-.188-1.37-.31-1.691-.165-.424-.362-.726-.68-1.044-.318-.318-.62-.515-1.044-.68-.321-.122-.804-.27-1.691-.31-.96-.044-1.272-.054-3.703-.054zM12 6.865A5.135 5.135 0 1017.135 12 5.135 5.135 0 0012 6.865zm0 8.468A3.333 3.333 0 1115.333 12 3.333 3.333 0 0112 15.333zm5.338-8.303a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z"></path></svg>
+</a>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-[var(--text-muted)] opacity-50">© 2024 John Doe. Portfolio Edition.</p>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

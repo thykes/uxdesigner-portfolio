@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About | John Doe - Designer &amp; Photographer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --bg-deep: #0D0D0D;
+            --charcoal: #1A1A1A;
+            --accent: #E0FF00;
+            --text-main: #FFFFFF;
+            --text-muted: #A0A0A0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+        .line-accent {
+            height: 1px;
+            background: linear-gradient(to right, var(--accent), transparent);
+            width: 60px;
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--accent)] selection:text-black">
+<div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20">
+<header class="py-10 flex justify-between items-center">
+<div class="group cursor-pointer">
+<div class="border-2 border-[var(--text-main)] w-10 h-10 flex items-center justify-center transition-all duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)]">
+<span class="text-xl font-bold transition-colors group-hover:text-black">K</span>
+</div>
+</div>
+<nav class="flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+<a class="hover:text-[var(--accent)] transition-colors" href="#">Work</a>
+<a class="text-[var(--accent)]" href="#">About</a>
+<button class="material-symbols-outlined text-3xl">menu</button>
+</nav>
+</header>
+<main>
+<section class="py-20 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+<div class="lg:col-span-5 relative order-2 lg:order-1">
+<div class="aspect-[4/5] bg-[var(--charcoal)] relative">
+<img alt="John Doe Portrait" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCETAcWHfXGbbaeRCREkfD3i-8wC7gaTKBArwG-7lWJXhXqFzB2FxakwfXZchHEIKqY7TflTDESJGxjwPgp4dnnpWNw2CH89xdtvYCOyhibuXlB0EA05YroV2y3Ko7FU4ROZqIWXV0TVaBLIpFopxLNy11ThnVKCp9y2T6OmTzk1yq0WRlXuGiTqsRy96Lo3Kcivs2AXIwIffiYEm8wJ3W-ChsVjBhXSK-860DbD2KTnJtThd3XUQXaSaGTCX6WHVTy-QboVchGnLw"/>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 border border-white/10 hidden md:block"></div>
+</div>
+<div class="mt-8 flex gap-4 items-center">
+<div class="line-accent"></div>
+<p class="text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)]">Based in New York City</p>
+</div>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2">
+<span class="text-[var(--accent)] uppercase tracking-widest text-xs font-semibold mb-4 block">Designer &amp; Photographer</span>
+<h1 class="serif-display text-5xl md:text-7xl lg:text-8xl leading-tight mb-10">
+                        Crafting the <span class="italic">unseen</span> details of digital life.
+                    </h1>
+<div class="space-y-8 max-w-2xl">
+<p class="text-xl md:text-2xl font-light leading-relaxed text-[var(--text-muted)]">
+                            With over a decade of experience across diverse creative fields, I bridge the gap between <span class="text-white">aesthetic elegance</span> and <span class="text-white">functional clarity</span>.
+                        </p>
+<p class="text-lg font-light leading-relaxed text-[var(--text-muted)]">
+                            My journey began behind the lens, capturing the quiet intersections of light and architecture. This photographic eye now informs my approach to digital design, where negative space and hierarchy are as vital as the content itself. I believe that every brand has a story that deserves to be told through a unique visual language.
+                        </p>
+</div>
+</div>
+</section>
+<section class="py-24 border-t border-white/10">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-4">
+<h2 class="serif-display text-4xl">Capabilities</h2>
+<p class="mt-4 text-[var(--text-muted)] text-sm max-w-xs">I help brands grow by creating meaningful connections with their audience through design and visual storytelling.</p>
+</div>
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+<div>
+<span class="text-xs text-[var(--accent)] font-mono">01</span>
+<h3 class="text-xl font-medium mt-4 mb-3">Brand Identity</h3>
+<p class="text-sm text-[var(--text-muted)] leading-relaxed">Logo systems, color palettes, and comprehensive brand guidelines that resonate.</p>
+</div>
+<div>
+<span class="text-xs text-[var(--accent)] font-mono">02</span>
+<h3 class="text-xl font-medium mt-4 mb-3">Digital Design</h3>
+<p class="text-sm text-[var(--text-muted)] leading-relaxed">User-centric interface design for web and mobile platforms with a focus on experience.</p>
+</div>
+<div>
+<span class="text-xs text-[var(--accent)] font-mono">03</span>
+<h3 class="text-xl font-medium mt-4 mb-3">Art Direction</h3>
+<p class="text-sm text-[var(--text-muted)] leading-relaxed">Visual strategy and concept development for campaigns and editorial projects.</p>
+</div>
+<div>
+<span class="text-xs text-[var(--accent)] font-mono">04</span>
+<h3 class="text-xl font-medium mt-4 mb-3">Photography</h3>
+<p class="text-sm text-[var(--text-muted)] leading-relaxed">Commercial, architectural, and lifestyle photography with a minimalist aesthetic.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 border-t border-white/10 mb-20">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-4">
+<h2 class="serif-display text-4xl">Experience</h2>
+</div>
+<div class="md:col-span-8">
+<div class="space-y-0">
+<div class="group flex justify-between items-center py-8 border-b border-white/5 hover:border-[var(--accent)] transition-colors">
+<div>
+<h4 class="text-xl font-medium">Senior Designer</h4>
+<p class="text-sm text-[var(--text-muted)] mt-1">Creative Agency NYC</p>
+</div>
+<span class="text-sm text-[var(--text-muted)] font-mono">2020 — Present</span>
+</div>
+<div class="group flex justify-between items-center py-8 border-b border-white/5 hover:border-[var(--accent)] transition-colors">
+<div>
+<h4 class="text-xl font-medium">Visual Designer</h4>
+<p class="text-sm text-[var(--text-muted)] mt-1">Global Tech Hub</p>
+</div>
+<span class="text-sm text-[var(--text-muted)] font-mono">2017 — 2020</span>
+</div>
+<div class="group flex justify-between items-center py-8 border-b border-white/5 hover:border-[var(--accent)] transition-colors">
+<div>
+<h4 class="text-xl font-medium">Freelance Photographer</h4>
+<p class="text-sm text-[var(--text-muted)] mt-1">Self-Employed</p>
+</div>
+<span class="text-sm text-[var(--text-muted)] font-mono">2014 — 2017</span>
+</div>
+</div>
+<div class="mt-20">
+<h5 class="uppercase tracking-[0.2em] text-[10px] text-[var(--text-muted)] mb-10">Selected Clients</h5>
+<div class="flex flex-wrap gap-x-12 gap-y-8 grayscale opacity-60">
+<span class="serif-display text-2xl md:text-3xl">Aperture</span>
+<span class="serif-display text-2xl md:text-3xl">Canvas</span>
+<span class="serif-display text-2xl md:text-3xl">Lumina</span>
+<span class="serif-display text-2xl md:text-3xl">Vertex</span>
+<span class="serif-display text-2xl md:text-3xl">Nova</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="py-16 border-t border-white/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="text-center md:text-left">
+<h2 class="serif-display text-4xl mb-4">Let's create together.</h2>
+<a class="text-[var(--accent)] text-lg hover:underline underline-offset-8" href="mailto:hello@johndoe.design">hello@johndoe.design</a>
+</div>
+<div class="flex flex-col items-center md:items-end gap-6">
+<div class="flex space-x-6">
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 3.582 8 8 8s8-3.582 8-8c0-4.418-3.582-8-8-8zm4.5 9.5h-9v-1h9v1z"></path></svg>
+</a>
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+</a>
+<a class="text-[var(--text-muted)] hover:text-white transition-colors" href="#">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.8.058 1.016.048 1.71.21 2.316.446a4.688 4.688 0 011.669 1.087 4.688 4.688 0 011.087 1.669c.236.606.398 1.3.446 2.316.048 1.016.058 1.37.058 3.8s-.01 2.784-.058 3.8c-.048 1.016-.21 1.71-.446 2.316a4.688 4.688 0 01-1.087 1.669 4.688 4.688 0 01-1.669 1.087c-.606.236-1.3.398-2.316.446-1.016.048-1.37.058-3.8.058s-2.784-.01-3.8-.058c-1.016-.048-1.71-.21-2.316-.446a4.688 4.688 0 01-1.669-1.087 4.688 4.688 0 01-1.087-1.669c-.236-.606-.398-1.3-.446-2.316C2.01 14.784 2 14.43 2 12s.01-2.784.058-3.8c.048-1.016.21-1.71.446-2.316a4.688 4.688 0 011.087-1.669A4.688 4.688 0 015.315 2.5c.606-.236 1.3-.398 2.316-.446 1.016-.048 1.37-.058 3.8-.058zm0 1.8c-2.43 0-2.743.01-3.703.054-.887.04-1.37.188-1.691.31-.424.165-.726.362-1.044.68-.318.318-.515.62-.68 1.044-.122.321-.27.804-.31 1.691-.044.96-.054 1.272-.054 3.703s.01 2.743.054 3.703c.04.887.188 1.37.31 1.691.165.424.362.726.68 1.044.318.318.62.515 1.044.68.321.122.804.27 1.691.31.96.044 1.272.054 3.703.054s2.743-.01 3.703-.054c.887-.04 1.37-.188 1.691-.31.424-.165.726-.362 1.044-.68.318-.318.515-.62.68-1.044.122-.321.27-.804.31-1.691.044-.96.054-1.272.054-3.703s-.01-2.743-.054-3.703c-.04-.887-.188-1.37-.31-1.691-.165-.424-.362-.726-.68-1.044-.318-.318-.62-.515-1.044-.68-.321-.122-.804-.27-1.691-.31-.96-.044-1.272-.054-3.703-.054zM12 6.865A5.135 5.135 0 1017.135 12 5.135 5.135 0 0012 6.865zm0 8.468A3.333 3.333 0 1115.333 12 3.333 3.333 0 0112 15.333zm5.338-8.303a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z"></path></svg>
+</a>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-[var(--text-muted)] opacity-50">© 2024 John Doe. Portfolio Edition.</p>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
