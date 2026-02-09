@@ -6,15 +6,15 @@ Subtitle: UX DESIGN CASE STUDY
 
 ----
 
-Hero-title: 
+Hero-title: Google  (accent: *for* ) Jobs
 
 ----
 
-Role: 
+Role: Interaction Designer
 
 ----
 
-Timeline: 
+Timeline: 1 Years (2022)
 
 ----
 
@@ -22,55 +22,11 @@ Intro:
 
 ----
 
-Modules: 
-
-----
-
-Challenge-text: 
-
-----
-
-Challenge-points: 
-
-----
-
-Strategy-intro: 
-
-----
-
 Text: 
 
 ----
 
-Alternative-paths: 
-
-----
-
-Inclusion-intro: 
-
-----
-
-Inclusion-points: 
-
-----
-
-Outcome-text: 
-
-----
-
-Case-study-pdf: 
-
-----
-
 Cover: - file://clfo4dgckm8rgdna
-
-----
-
-Challenge-image: 
-
-----
-
-Stats: 
 
 ----
 
@@ -131,6 +87,50 @@ Robotssnippet: default
 ----
 
 Metainherit: 
+
+----
+
+Modules: 
+
+----
+
+Challenge-text: 
+
+----
+
+Challenge-points: 
+
+----
+
+Strategy-intro: 
+
+----
+
+Alternative-paths: 
+
+----
+
+Inclusion-intro: 
+
+----
+
+Inclusion-points: 
+
+----
+
+Outcome-text: 
+
+----
+
+Case-study-pdf: 
+
+----
+
+Challenge-image: 
+
+----
+
+Stats: 
 
 ----
 
