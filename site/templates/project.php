@@ -20,16 +20,18 @@
             </div>
             <div class="lg:col-span-4 flex flex-col gap-10 pb-4">
                 <?php if ($page->role()->isNotEmpty()): ?>
-                    <div class="border-l-2 border-[var(--accent)] pl-6">
+                    <div class="flex flex-col items-start gap-1">
                         <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Role</span>
-                        <p class="font-medium mt-2"><?= $page->role() ?></p>
+                        <div class="w-6 h-[2px] bg-[var(--accent)]"></div>
+                        <p class="font-medium text-white"><?= $page->role() ?></p>
                     </div>
                 <?php endif ?>
 
                 <?php if ($page->timeline()->isNotEmpty()): ?>
-                    <div class="border-l-2 border-[var(--accent)] pl-6">
+                    <div class="flex flex-col items-start gap-1">
                         <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Timeline</span>
-                        <p class="font-medium mt-2"><?= $page->timeline() ?></p>
+                        <div class="w-6 h-[2px] bg-[var(--accent)]"></div>
+                        <p class="font-medium text-white"><?= $page->timeline() ?></p>
                     </div>
                 <?php endif ?>
             </div>
