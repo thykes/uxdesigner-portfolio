@@ -20,134 +20,30 @@ tabs:
             help: "Use this for special formatting like (br:) or (accent: text)"
           role:
             type: text
-            width: 1/4
+            width: 1/2
           timeline:
             type: text
-            width: 1/4
+            width: 1/2
           intro:
             label: Project Intro
             type: textarea
             buttons: false
             size: small
 
-          # Layout Canvas
-          modules:
-            label: Page Layout Canvas (New)
-            type: layout
-            layouts:
-              - "1/1"
-              - "1/2, 1/2"
-              - "1/3, 2/3"
-            fieldsets:
-              - text
-              - image
-              - before-after
-              - video
-              - code
-              - section-header
-              - technical-callout
-              - pull-quote
-              - labeled-image
-              - gallery
-              - stats-grid
-              - challenge # Legacy Custom Block
-              - strategy # Legacy Custom Block
-
-          # Check project.php to see how strictly these are used now.
-          # We might deprecate these if the user moves everything to modules.
-
-          # Challenge Section (Legacy)
-          challenge_header:
-            type: headline
-            label: ⚠️ Legacy Challenge Section
-          challenge_text:
-            label: Challenge Description
-            type: textarea
-          challenge_points:
-            label: Challenge Pain Points
-            type: structure
-            fields:
-              icon:
-                type: text
-                width: 1/4
-                help: Material Symbol Name
-              title:
-                type: text
-                width: 1/4
-              description:
-                type: textarea
-                width: 1/2
-
-          # Strategy Section
-          strategy_section_header:
-            type: headline
-            label: Strategic Intervention
-          strategy_intro:
-            label: Strategy Intro Text
-            type: textarea
-
           text:
             label: Main Content Blocks
             type: blocks
             fieldsets:
+              - heading
               - text
+              - list
               - image
               - before-after
               - video
+              - quote
               - code
+              - gallery
               - stats-grid
-              - quote # We can customize this to match the pull-quote style
-
-          # Alternative Paths Section
-          alternative_paths_header:
-            type: headline
-            label: Alternative Paths
-          alternative_paths:
-            label: Rejected Concepts
-            type: structure
-            fields:
-              concept:
-                type: text
-                label: Concept Title
-              description:
-                type: textarea
-              outcome:
-                type: textarea
-                label: Rejection Reason / Outcome
-
-          # Inclusion Section
-          inclusion_header:
-            type: headline
-            label: Inclusion Standards
-          inclusion_intro:
-            type: textarea
-            label: Inclusion Intro Text
-          inclusion_points:
-            label: Accessibility Points
-            type: structure
-            fields:
-              icon:
-                type: text
-                label: Icon Name
-              badge:
-                type: text
-                label: Badge (e.g. WCAG AA)
-              title:
-                type: text
-              description:
-                type: textarea
-
-          # Outcome Section
-          outcome_section_header:
-            type: headline
-            label: Final Impact / Outcome
-          outcome_text:
-            label: Outcome Description
-            type: textarea
-          case_study_pdf:
-            label: Full Case Study PDF
-            type: files
-            multiple: false
 
       - width: 1/3
         fields:
@@ -155,23 +51,5 @@ tabs:
             type: files
             label: Hero Background Image
             max: 1
-          challenge_image:
-            type: files
-            label: Challenge Section Image
-            max: 1
-
-          stats:
-            label: Key Metrics (Stats)
-            type: structure
-            fields:
-              label:
-                type: text
-                label: Label (e.g. Conversion)
-              value:
-                type: text
-                label: Value (e.g. +45%)
-              description:
-                type: text
-                label: Description (e.g. Mobile Checkout)
 
   seo: seo/page
