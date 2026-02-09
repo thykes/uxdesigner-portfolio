@@ -26,6 +26,7 @@ tabs:
                   - before-after
                   - video
                   - quote
+                  - scroll-gallery
 
       - width: 1/3
         sections:

@@ -14,15 +14,15 @@ Role: Interaction Designer
 
 ----
 
-Timeline: 1 Years (2022)
+Timeline: 1 Years (2023)
 
 ----
 
-Intro: 
+Intro: I led the design strategy and cross-functional execution for Google Jobs, navigating complex regulatory landscapes (DMA) and driving significant engagement growth through a user-centered modernization of the Search page.
 
 ----
 
-Text: 
+Text: [{"content":{"stats":[{"label":"Search Engagement","value":"+1.48%","description":""},{"label":"Daily Active Users","value":"+13.24K","description":""},{"label":"Personalized Discovery","value":"+.066%","description":""}]},"id":"0161141f-7d04-44fd-b82c-55d7312c77a0","isHidden":false,"type":"stats-grid"},{"content":{"headline":"Mobile Design Explorations","intro":"","items":[{"image":["file://clfo4dgckm8rgdna"],"caption":""},{"image":[],"caption":""}]},"id":"e6ffe42e-288e-4806-8fd5-f45fc711885f","isHidden":false,"type":"scroll-gallery"}]
 
 ----
 

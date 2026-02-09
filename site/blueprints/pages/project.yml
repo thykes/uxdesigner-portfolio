@@ -43,6 +43,7 @@ tabs:
               - quote
               - code
               - gallery
+              - scroll-gallery
               - stats-grid
 
       - width: 1/3

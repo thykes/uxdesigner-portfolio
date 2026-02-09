@@ -1,0 +1,22 @@
+name: Scrollable Mobile Gallery
+icon: device-mobile
+fields:
+  headline:
+    label: Gallery Headline
+    type: text
+    width: 1/1
+  intro:
+    label: Gallery Intro
+    type: textarea
+    size: small
+  items:
+    label: Mobile UI Designs
+    type: structure
+    fields:
+      image:
+        label: Image (Mobile Portrait Recommended)
+        type: files
+        max: 1
+      caption:
+        label: Caption (Optional)
+        type: text
