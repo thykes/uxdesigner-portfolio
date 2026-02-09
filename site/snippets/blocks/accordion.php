@@ -10,30 +10,25 @@ $uniqueId = 'accordion-' . uniqid();
 ?>
 
 <section class="mb-32">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <!-- Left: Accordion Items -->
-        <div class="space-y-4">
+        <div class="space-y-2">
             <?php foreach ($items as $index => $item): ?>
                 <?php
                 $itemId = $uniqueId . '-' . $index;
                 $isFirst = $index === 0;
                 ?>
-                <div class="accordion-item border-b border-white/10 pb-4" data-accordion-id="<?= $itemId ?>">
+                <div class="accordion-item border-b border-white/10" data-accordion-id="<?= $itemId ?>">
                     <!-- Header: Always visible -->
                     <button
-                        class="accordion-header w-full flex items-center justify-between text-left group cursor-pointer py-4 <?= $isFirst ? 'active' : '' ?>"
+                        class="accordion-header w-full flex items-center justify-between text-left group cursor-pointer py-6 <?= $isFirst ? 'active' : '' ?>"
                         data-image="<?= $item->image()->toFile()?->url() ?? '' ?>"
                         onclick="toggleAccordion('<?= $itemId ?>', '<?= $uniqueId ?>')">
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold mb-2 group-hover:text-[var(--accent)] transition-colors">
-                                <?= $item->title()->html() ?>
-                            </h3>
-                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
-                                <?= $item->preview()->html() ?>
-                            </p>
-                        </div>
+                        <h3 class="text-3xl font-bold group-hover:text-[var(--accent)] transition-colors flex-1">
+                            <?= $item->title()->html() ?>
+                        </h3>
                         <span
-                            class="material-symbols-outlined text-3xl ml-4 transition-transform duration-300 accordion-icon <?= $isFirst ? 'rotate-180' : '' ?>">
+                            class="material-symbols-outlined text-3xl ml-6 transition-transform duration-300 accordion-icon flex-shrink-0 <?= $isFirst ? 'rotate-180' : '' ?>">
                             expand_more
                         </span>
                     </button>
@@ -41,7 +36,7 @@ $uniqueId = 'accordion-' . uniqid();
                     <!-- Expanded Content -->
                     <div
                         class="accordion-content overflow-hidden transition-all duration-500 <?= $isFirst ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0' ?>">
-                        <div class="pt-4 pb-6 text-[var(--text-muted)] leading-relaxed">
+                        <div class="pb-6 text-[var(--text-muted)] leading-relaxed">
                             <?= $item->content()->kirbytext() ?>
                         </div>
                     </div>
@@ -51,7 +46,7 @@ $uniqueId = 'accordion-' . uniqid();
 
         <!-- Right: Image Display -->
         <div class="sticky top-24">
-            <div class="aspect-[4/5] bg-[var(--charcoal)] rounded-lg overflow-hidden relative">
+            <div class="aspect-[3/4] bg-[var(--charcoal)] rounded-lg overflow-hidden relative">
                 <?php foreach ($items as $index => $item): ?>
                     <?php if ($image = $item->image()->toFile()): ?>
                         <img id="<?= $uniqueId ?>-img-<?= $index ?>" src="<?= $image->url() ?>"
