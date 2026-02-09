@@ -9,11 +9,6 @@ fields:
         label: Title
         type: text
         required: true
-      preview:
-        label: Preview Text
-        type: textarea
-        size: small
-        help: Short description shown when collapsed
       content:
         label: Expanded Content
         type: textarea

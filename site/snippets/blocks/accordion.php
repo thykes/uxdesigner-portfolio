@@ -35,9 +35,11 @@ $uniqueId = 'accordion-' . uniqid();
 
                     <!-- Expanded Content -->
                     <div
-                        class="accordion-content overflow-hidden transition-all duration-500 ease-in-out <?= $isFirst ? 'max-h-[500px] opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0' ?>">
-                        <div class="text-[var(--text-muted)] leading-relaxed text-lg">
-                            <?= $item->content()->kirbytext() ?>
+                        class="accordion-content grid transition-all duration-500 ease-in-out <?= $isFirst ? 'grid-rows-[1fr] opacity-100 mb-6' : 'grid-rows-[0fr] opacity-0 mb-0' ?>">
+                        <div class="overflow-hidden">
+                            <div class="text-[var(--text-muted)] leading-relaxed text-lg">
+                                <?= $item->content()->kirbytext() ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,8 +80,8 @@ $uniqueId = 'accordion-' . uniqid();
                 const icon = item.querySelector('.accordion-icon');
 
                 header.classList.remove('active');
-                content.classList.remove('max-h-[1000px]', 'opacity-100');
-                content.classList.add('max-h-0', 'opacity-0');
+                content.classList.remove('grid-rows-[1fr]', 'opacity-100', 'mb-6');
+                content.classList.add('grid-rows-[0fr]', 'opacity-0', 'mb-0');
                 icon.classList.remove('rotate-180');
             }
         });
@@ -89,13 +91,13 @@ $uniqueId = 'accordion-' . uniqid();
 
         if (isActive) {
             clickedHeader.classList.remove('active');
-            clickedContent.classList.remove('max-h-[1000px]', 'opacity-100');
-            clickedContent.classList.add('max-h-0', 'opacity-0');
+            clickedContent.classList.remove('grid-rows-[1fr]', 'opacity-100', 'mb-6');
+            clickedContent.classList.add('grid-rows-[0fr]', 'opacity-0', 'mb-0');
             clickedIcon.classList.remove('rotate-180');
         } else {
             clickedHeader.classList.add('active');
-            clickedContent.classList.add('max-h-[1000px]', 'opacity-100');
-            clickedContent.classList.remove('max-h-0', 'opacity-0');
+            clickedContent.classList.add('grid-rows-[1fr]', 'opacity-100', 'mb-6');
+            clickedContent.classList.remove('grid-rows-[0fr]', 'opacity-0', 'mb-0');
             clickedIcon.classList.add('rotate-180');
         }
 
