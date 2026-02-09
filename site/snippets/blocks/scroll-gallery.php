@@ -3,9 +3,9 @@
 $items = $block->items()->toStructure();
 ?>
 
-<section class="py-12 my-12 overflow-hidden full-width-breakout">
+<section class="py-12 my-12 full-width-breakout">
     <?php if ($block->headline()->isNotEmpty()): ?>
-        <div class="px-6 md:px-12 lg:px-20 mb-10">
+        <div class="mb-10">
             <h2 class="serif-display text-4xl md:text-6xl font-bold mb-4">
                 <?= $block->headline() ?>
             </h2>
@@ -19,13 +19,28 @@ $items = $block->items()->toStructure();
 
     <!-- Horizontal Scrolling Container -->
     <div class="relative group/gallery">
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 md:px-12 lg:px-20 pb-12 -mx-6 md:-mx-12 lg:-mx-20 scrollbar-hide no-scrollbar"
-            style="scrollbar-width: none; -ms-overflow-style: none;">
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 scrollbar-hide no-scrollbar" style="
+                /* Full viewport width */
+                width: 100vw;
+                /* Pull to left edge of screen */
+                margin-left: calc(-50vw + 50%);
+                /* Push content back to align with container (adjust 1.5rem/24px based on site padding) */
+                padding-left: calc(50vw - 50% + 1.5rem);
+                /* Add identical padding to right edge so it ends aligned with content */
+                padding-right: calc(50vw - 50% + 1.5rem);
+                scrollbar-width: none; 
+                -ms-overflow-style: none;
+            ">
+            <?php
+            $galleryId = 'gallery-' . uniqid();
+            $imageIndex = 0;
+            ?>
             <?php foreach ($items as $item): ?>
                 <?php if ($image = $item->image()->toFile()): ?>
                     <div class="snap-center shrink-0 w-[75vw] md:w-[320px] lg:w-[380px] flex flex-col">
                         <div class="relative overflow-hidden aspect-[9/19] rounded-[2.5rem] bg-[var(--charcoal)] border-8 border-white/5 shadow-2xl cursor-zoom-in group/image"
-                            data-lightbox="<?= $image->url() ?>" data-caption="<?= $item->caption() ?>">
+                            data-lightbox="<?= $image->url() ?>" data-caption="<?= $item->caption() ?>"
+                            data-gallery="<?= $galleryId ?>" data-index="<?= $imageIndex ?>">
                             <img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->alt() ?>"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-105"
                                 loading="lazy">
@@ -43,11 +58,12 @@ $items = $block->items()->toStructure();
                             </p>
                         <?php endif ?>
                     </div>
+                    <?php $imageIndex++; ?>
                 <?php endif ?>
             <?php endforeach ?>
 
             <!-- End Spacer -->
-            <div class="snap-center shrink-0 w-6 md:w-12 lg:w-20"></div>
+            <div class="snap-center shrink-0 w-6"></div>
         </div>
 
         <!-- Scroll Indicators / Controls -->

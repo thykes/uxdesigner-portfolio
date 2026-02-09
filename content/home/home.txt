@@ -6,7 +6,7 @@ Headline: <p>Designing with <em>purpose</em>. Building for people.</p>
 
 ----
 
-Intro: <p>I’m Tim Hykes, a DC UX Designer turning <strong>complex challenges</strong> into seamless, <strong>human-centered</strong><br>digital experiences.</p>
+Intro: <p>I’m Tim Hykes, a DC UX Designer turning <strong>complex challenges</strong> into seamless, <strong>human-centered <br></strong>digital experiences.</p>
 
 ----
 
@@ -16,9 +16,9 @@ Scroll-label: Scroll to explore
 
 Featured-projects:
 
+- page://zknivktzwlqk1eji
 - page://odkd6chcqetdqswv
 - page://aqdvgxtvxwmpjypp
-- page://zknivktzwlqk1eji
 - page://neagfhulvrbaolg3
 
 ----
