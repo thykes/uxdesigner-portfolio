@@ -14,7 +14,7 @@
         ],
         'accent' => [
             'html' => function ($tag) {
-                return '<span class="accent-text">' . kirby()->kirbytags($tag->value) . '</span>';
+                return '<span class="text-[var(--accent)]">' . kirby()->kirbytags($tag->value) . '</span>';
             }
         ],
         'br' => [
