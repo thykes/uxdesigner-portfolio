@@ -27,6 +27,7 @@ tabs:
                   - video
                   - quote
                   - scroll-gallery
+                  - accordion
 
       - width: 1/3
         sections:

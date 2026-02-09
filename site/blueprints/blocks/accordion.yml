@@ -1,0 +1,25 @@
+name: Interactive Accordion
+icon: list
+fields:
+  items:
+    label: Accordion Items
+    type: structure
+    fields:
+      title:
+        label: Title
+        type: text
+        required: true
+      preview:
+        label: Preview Text
+        type: textarea
+        size: small
+        help: Short description shown when collapsed
+      content:
+        label: Expanded Content
+        type: textarea
+        help: Full content shown when expanded
+      image:
+        label: Image
+        type: files
+        max: 1
+        help: Image that displays when this item is active

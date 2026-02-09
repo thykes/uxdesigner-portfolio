@@ -44,6 +44,7 @@ tabs:
               - code
               - gallery
               - scroll-gallery
+              - accordion
               - stats-grid
 
       - width: 1/3
