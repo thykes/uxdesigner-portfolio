@@ -1,0 +1,19 @@
+name: Stats Grid
+icon: list-bullet
+fields:
+  stats:
+    label: Key Metrics (Stats)
+    type: structure
+    fields:
+      label:
+        type: text
+        label: Label (e.g. Conversion)
+        width: 1/3
+      value:
+        type: text
+        label: Value (e.g. +45%)
+        width: 1/3
+      description:
+        type: text
+        label: Description (e.g. Mobile Checkout)
+        width: 1/3

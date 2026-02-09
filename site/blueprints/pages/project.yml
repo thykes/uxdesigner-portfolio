@@ -49,6 +49,7 @@ tabs:
               - pull-quote
               - labeled-image
               - gallery
+              - stats-grid
               - challenge # Legacy Custom Block
               - strategy # Legacy Custom Block
 
@@ -94,6 +95,7 @@ tabs:
               - before-after
               - video
               - code
+              - stats-grid
               - quote # We can customize this to match the pull-quote style
 
           # Alternative Paths Section
