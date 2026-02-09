@@ -35,8 +35,8 @@ $uniqueId = 'accordion-' . uniqid();
 
                     <!-- Expanded Content -->
                     <div
-                        class="accordion-content overflow-hidden transition-all duration-500 <?= $isFirst ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0' ?>">
-                        <div class="pb-6 text-[var(--text-muted)] leading-relaxed">
+                        class="accordion-content overflow-hidden transition-all duration-500 ease-in-out <?= $isFirst ? 'max-h-[500px] opacity-100 mb-6' : 'max-h-0 opacity-0 mb-0' ?>">
+                        <div class="text-[var(--text-muted)] leading-relaxed text-lg">
                             <?= $item->content()->kirbytext() ?>
                         </div>
                     </div>
@@ -45,13 +45,13 @@ $uniqueId = 'accordion-' . uniqid();
         </div>
 
         <!-- Right: Image Display -->
-        <div class="sticky top-24">
-            <div class="aspect-[3/4] bg-[var(--charcoal)] rounded-lg overflow-hidden relative">
+        <div class="sticky top-24 hidden lg:block">
+            <div class="relative w-full rounded-lg overflow-hidden bg-[var(--charcoal)]" style="height: 60vh; max-height: 600px;">
                 <?php foreach ($items as $index => $item): ?>
                     <?php if ($image = $item->image()->toFile()): ?>
                         <img id="<?= $uniqueId ?>-img-<?= $index ?>" src="<?= $image->url() ?>"
                             alt="<?= $item->title()->html() ?>"
-                            class="accordion-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 <?= $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' ?>" />
+                            class="accordion-image absolute inset-0 w-full h-full object-contain p-8 transition-opacity duration-500 <?= $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' ?>" />
                     <?php endif ?>
                 <?php endforeach ?>
             </div>
