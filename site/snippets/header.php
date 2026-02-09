@@ -219,9 +219,47 @@
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-main);
             font-family: 'Playfair Display', serif;
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 1.5rem;
-            font-weight: 400; /* Regular weight for that elegant look */
+            font-weight: 400;
+        }
+
+        /* Proper heading sizes for content blocks */
+        h1 {
+            font-size: 3.75rem; /* 60px */
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 3rem; /* 48px */
+            line-height: 1.15;
+        }
+        
+        h3 {
+            font-size: 2.25rem; /* 36px */
+            line-height: 1.2;
+        }
+        
+        h4 {
+            font-size: 1.875rem; /* 30px */
+            line-height: 1.3;
+        }
+        
+        h5 {
+            font-size: 1.5rem; /* 24px */
+            line-height: 1.4;
+        }
+        
+        h6 {
+            font-size: 1.25rem; /* 20px */
+            line-height: 1.4;
+        }
+
+        /* Keep numbers in sans-serif for readability */
+        h1 .number, h2 .number, h3 .number, h4 .number, h5 .number, h6 .number,
+        p .number, li .number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
         }
         
         p, li {
@@ -242,10 +280,11 @@
             color: var(--text-main);
         }
 
-        /* Fix specific UI elements to not be affected if needed, 
-           though Tailwind utility classes usually override these. 
-           Adding a prose wrapper scope would be safer but user wants global consistency. 
-        */
+        /* Accent text support - for (accent: text) syntax */
+        .accent-text {
+            color: var(--accent);
+            font-style: italic;
+        }
     </style>
 </head>
 
