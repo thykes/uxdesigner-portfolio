@@ -7,27 +7,27 @@
             <div class="lg:col-span-8">
                 <?php if ($page->subtitle()->isNotEmpty()): ?>
                     <span
-                        class="block text-sm font-bold text-[var(--accent)] uppercase tracking-[0.2em] mb-8"><?= $page->subtitle()->html() ?></span>
+                        class="text-[var(--accent)] uppercase tracking-[0.3em] font-bold text-sm mb-6 block"><?= $page->subtitle()->html() ?></span>
                 <?php endif ?>
-                <h1 class="serif-display text-7xl md:text-8xl lg:text-9xl leading-tight">
+                <h1 class="serif-display text-6xl md:text-8xl lg:text-9xl leading-tight">
                     <?= $page->hero_title()->isNotEmpty() ? $page->hero_title()->kti() : $page->title()->html() ?>
                 </h1>
                 <?php if ($page->intro()->isNotEmpty()): ?>
-                    <p class="mt-14 text-2xl md:text-3xl text-[var(--text-main)] max-w-4xl font-light leading-[1.8]">
+                    <p class="mt-12 text-xl md:text-2xl text-[var(--text-muted)] max-w-2xl font-light leading-relaxed">
                         <?= $page->intro()->html() ?>
                     </p>
                 <?php endif ?>
             </div>
             <div class="lg:col-span-4 flex flex-col gap-10 pb-4">
                 <?php if ($page->role()->isNotEmpty()): ?>
-                    <div class="border-l border-white/20 pl-6">
+                    <div class="border-l-2 border-[var(--accent)] pl-6">
                         <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Role</span>
                         <p class="font-medium mt-2"><?= $page->role() ?></p>
                     </div>
                 <?php endif ?>
 
                 <?php if ($page->timeline()->isNotEmpty()): ?>
-                    <div class="border-l border-white/20 pl-6">
+                    <div class="border-l-2 border-[var(--accent)] pl-6">
                         <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Timeline</span>
                         <p class="font-medium mt-2"><?= $page->timeline() ?></p>
                     </div>
