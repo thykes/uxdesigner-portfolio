@@ -1,0 +1,141 @@
+Title: Google for Jobs
+
+----
+
+Subtitle: UX DESIGN CASE STUDY
+
+----
+
+Hero-title: Google  (accent: **Jobs** )
+
+----
+
+Role: Interaction Designer
+
+----
+
+Timeline: 1 Years (2023)
+
+----
+
+Intro: I led the design strategy and cross-functional execution for Google Jobs, navigating complex regulatory landscapes (DMA) and driving significant engagement growth through a user-centered modernization of the Search page.
+
+----
+
+Text: [{"content":{"stats":[{"label":"Search Engagement","value":"+1.48%","description":""},{"label":"Daily Active Users","value":"+13.24K","description":""},{"label":"Personalized Discovery","value":"+.066%","description":""}]},"id":"0161141f-7d04-44fd-b82c-55d7312c77a0","isHidden":false,"type":"stats-grid"},{"content":{"headline":"","intro":"","items":[{"image":["file://ornrainqxn2eez4l"],"caption":""},{"image":["file://x2buz8voam6su1nx"],"caption":""}]},"id":"e6ffe42e-288e-4806-8fd5-f45fc711885f","isHidden":false,"type":"scroll-gallery"},{"content":{"level":"h1","text":"The Challenge"},"id":"c55650dd-4231-40f2-b388-2e92babdd3fd","isHidden":false,"type":"heading"},{"content":{"text":"<p><strong>Navigating Regulatory Volatility (DMA)<br></strong>The most significant hurdle was the digital marketing act (DMA). I had to rebuild and redesigned the entire job suite to meet with European legal constraints. This wasn't just a layout change; it was a \"constantly moving target\" where a specifications evolved based on external legal guidance. I had to develop a flexible component system that ensure the team could pivot quickly without breaking the product.<br><br><strong>Modernizing a \"Bespoke\" experience</strong><br>For years, jobs lived in a bespoke immersive environment that felt separated from the rest of Google. My challenge was to lead the visual migration of the product experience. This required creating coherence with the broader search ecosystem—including complex elements like the location picker and universal viewer—while maintaining the specialize functionality job seekers need.</p>"},"id":"e6dae87f-a63e-4523-9aed-84118aab5951","isHidden":false,"type":"text"},{"content":{"items":[{"title":"Iphone and Mac","content":"With iPhone Mirroring, you can view your iPhone screen on your Mac and control it without picking up your phone. Continuity features also let you answer calls or messages right from your Mac. You can even copy images, video, or text from your iPhone and paste it all into a different app on your Mac. And with iCloud, you can access your files from either device.","image":["file://ornrainqxn2eez4l"],"preview":""},{"title":"IPhone and Apple Watch","content":"Misplaced your iPhone? The latest Apple Watch models can show you its approximate distance and direction.17 To set up a group photo on your iPhone, join the group and use Apple Watch as a viewfinder to snap the shot. And when you take a call on your Apple Watch, just tap your iPhone to continue the conversation there.","image":["file://giqjqattzhop6bdr"],"preview":""}]},"id":"af890007-b4dc-412b-a176-3c81fe74bedc","isHidden":false,"type":"accordion"}]
+
+----
+
+Cover: - file://clfo4dgckm8rgdna
+
+----
+
+Metatitle: 
+
+----
+
+Metatemplate: 
+
+----
+
+Usetitletemplate: true
+
+----
+
+Metadescription: 
+
+----
+
+Ogtemplate: 
+
+----
+
+Useogtemplate: true
+
+----
+
+Ogdescription: 
+
+----
+
+Ogimage: 
+
+----
+
+Cropogimage: 
+
+----
+
+Robotsindex: default
+
+----
+
+Robotsfollow: default
+
+----
+
+Robotsarchive: default
+
+----
+
+Robotsimageindex: default
+
+----
+
+Robotssnippet: default
+
+----
+
+Metainherit: 
+
+----
+
+Modules: 
+
+----
+
+Challenge-text: 
+
+----
+
+Challenge-points: 
+
+----
+
+Strategy-intro: 
+
+----
+
+Alternative-paths: 
+
+----
+
+Inclusion-intro: 
+
+----
+
+Inclusion-points: 
+
+----
+
+Outcome-text: 
+
+----
+
+Case-study-pdf: 
+
+----
+
+Challenge-image: 
+
+----
+
+Stats: 
+
+----
+
+Uuid: zknivktzwlqk1eji
+
+----
+
+Lock: EcHTrGk0

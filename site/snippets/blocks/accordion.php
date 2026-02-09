@@ -4,15 +4,13 @@ $items = $block->items()->toStructure();
 if ($items->isEmpty())
     return;
 
-// Get the first item's image as default
-$firstImage = $items->first()->image()->toFile();
 $uniqueId = 'accordion-' . uniqid();
 ?>
 
 <section class="mb-32">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         <!-- Left: Accordion Items -->
-        <div class="space-y-2">
+        <div class="lg:col-span-4 space-y-2">
             <?php foreach ($items as $index => $item): ?>
                 <?php
                 $itemId = $uniqueId . '-' . $index;
@@ -24,7 +22,8 @@ $uniqueId = 'accordion-' . uniqid();
                         class="accordion-header w-full flex items-center justify-between text-left group cursor-pointer py-6 <?= $isFirst ? 'active' : '' ?>"
                         data-image="<?= $item->image()->toFile()?->url() ?? '' ?>"
                         onclick="toggleAccordion('<?= $itemId ?>', '<?= $uniqueId ?>')">
-                        <h3 class="text-3xl font-bold group-hover:text-[var(--accent)] transition-colors flex-1">
+                        <h3
+                            class="text-3xl font-sans font-medium group-hover:text-[var(--accent)] transition-colors flex-1">
                             <?= $item->title()->html() ?>
                         </h3>
                         <span
@@ -34,12 +33,19 @@ $uniqueId = 'accordion-' . uniqid();
                     </button>
 
                     <!-- Expanded Content -->
-                    <div
-                        class="accordion-content grid transition-all duration-500 ease-in-out <?= $isFirst ? 'grid-rows-[1fr] opacity-100 mb-6' : 'grid-rows-[0fr] opacity-0 mb-0' ?>">
-                        <div class="overflow-hidden">
-                            <div class="text-[var(--text-muted)] leading-relaxed text-lg">
-                                <?= $item->content()->kirbytext() ?>
-                            </div>
+                    <div id="<?= $itemId ?>-content"
+                        class="accordion-content overflow-hidden transition-all duration-300 ease-in-out"
+                        style="max-height: <?= $isFirst ? '1000px' : '0px' ?>; opacity: <?= $isFirst ? '1' : '0' ?>; margin-bottom: <?= $isFirst ? '1.5rem' : '0' ?>;">
+                        <div class="text-[var(--text-muted)] leading-relaxed text-lg">
+                            <?php
+                            // Try to get 'text' field first (new format), fallback to 'content' (old format)
+                            // We use $item->content()->get() to avoid conflict with StructureObject::content() method
+                            $textContent = $item->content()->get('text');
+                            if ($textContent->isEmpty()) {
+                                $textContent = $item->content()->get('content');
+                            }
+                            ?>
+                            <?= $textContent->kirbytext() ?>
                         </div>
                     </div>
                 </div>
@@ -47,8 +53,9 @@ $uniqueId = 'accordion-' . uniqid();
         </div>
 
         <!-- Right: Image Display -->
-        <div class="sticky top-24 hidden lg:block">
-            <div class="relative w-full rounded-lg overflow-hidden bg-[var(--charcoal)]" style="height: 60vh; max-height: 600px;">
+        <div class="sticky top-24 hidden lg:block lg:col-span-8">
+            <div class="relative w-full rounded-lg overflow-hidden bg-[var(--charcoal)]"
+                style="height: 60vh; max-height: 600px;">
                 <?php foreach ($items as $index => $item): ?>
                     <?php if ($image = $item->image()->toFile()): ?>
                         <img id="<?= $uniqueId ?>-img-<?= $index ?>" src="<?= $image->url() ?>"
@@ -66,7 +73,7 @@ $uniqueId = 'accordion-' . uniqid();
         const clickedItem = document.querySelector(`[data-accordion-id="${itemId}"]`);
         const allItems = document.querySelectorAll(`[data-accordion-id^="${groupId}"]`);
         const clickedHeader = clickedItem.querySelector('.accordion-header');
-        const clickedContent = clickedItem.querySelector('.accordion-content');
+        const clickedContent = document.getElementById(`${itemId}-content`);
         const clickedIcon = clickedItem.querySelector('.accordion-icon');
 
         // Get the index from the itemId
@@ -76,13 +83,17 @@ $uniqueId = 'accordion-' . uniqid();
         allItems.forEach(item => {
             if (item !== clickedItem) {
                 const header = item.querySelector('.accordion-header');
-                const content = item.querySelector('.accordion-content');
+                const contentId = item.dataset.accordionId + '-content';
+                const content = document.getElementById(contentId);
                 const icon = item.querySelector('.accordion-icon');
 
-                header.classList.remove('active');
-                content.classList.remove('grid-rows-[1fr]', 'opacity-100', 'mb-6');
-                content.classList.add('grid-rows-[0fr]', 'opacity-0', 'mb-0');
-                icon.classList.remove('rotate-180');
+                if (header) header.classList.remove('active');
+                if (content) {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                    content.style.marginBottom = '0';
+                }
+                if (icon) icon.classList.remove('rotate-180');
             }
         });
 
@@ -91,13 +102,16 @@ $uniqueId = 'accordion-' . uniqid();
 
         if (isActive) {
             clickedHeader.classList.remove('active');
-            clickedContent.classList.remove('grid-rows-[1fr]', 'opacity-100', 'mb-6');
-            clickedContent.classList.add('grid-rows-[0fr]', 'opacity-0', 'mb-0');
+            clickedContent.style.maxHeight = '0px';
+            clickedContent.style.opacity = '0';
+            clickedContent.style.marginBottom = '0';
             clickedIcon.classList.remove('rotate-180');
         } else {
             clickedHeader.classList.add('active');
-            clickedContent.classList.add('grid-rows-[1fr]', 'opacity-100', 'mb-6');
-            clickedContent.classList.remove('grid-rows-[0fr]', 'opacity-0', 'mb-0');
+            // Check scroll height for smooth animation
+            clickedContent.style.maxHeight = clickedContent.scrollHeight + 'px';
+            clickedContent.style.opacity = '1';
+            clickedContent.style.marginBottom = '1.5rem';
             clickedIcon.classList.add('rotate-180');
         }
 

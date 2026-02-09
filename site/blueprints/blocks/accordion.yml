@@ -10,7 +10,7 @@ fields:
         type: text
         required: true
       content:
-        label: Expanded Content
+        label: Text
         type: textarea
         help: Full content shown when expanded
       image:
