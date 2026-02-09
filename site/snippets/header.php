@@ -214,6 +214,38 @@
             max-width: 600px;
             padding: 0 2rem;
         }
+
+        /* Global Typography Overrides */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 400; /* Regular weight for that elegant look */
+        }
+        
+        p, li {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.125rem; /* 18px / lg */
+            margin-bottom: 1.5rem;
+        }
+
+        strong, b {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        em, i {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-main);
+        }
+
+        /* Fix specific UI elements to not be affected if needed, 
+           though Tailwind utility classes usually override these. 
+           Adding a prose wrapper scope would be safer but user wants global consistency. 
+        */
     </style>
 </head>
 
