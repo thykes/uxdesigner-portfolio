@@ -20,7 +20,7 @@
             </div>
             <div class="lg:col-span-4 flex flex-col gap-10 pb-4">
                 <?php if ($page->role()->isNotEmpty()): ?>
-                    <div class="flex flex-row items-center gap-4">
+                    <div class="flex flex-row items-start gap-4">
                         <div class="w-[2px] h-8 bg-[var(--accent)]"></div>
                         <div>
                             <span
@@ -31,7 +31,7 @@
                 <?php endif ?>
 
                 <?php if ($page->timeline()->isNotEmpty()): ?>
-                    <div class="flex flex-row items-center gap-4">
+                    <div class="flex flex-row items-start gap-4">
                         <div class="w-[2px] h-8 bg-[var(--accent)]"></div>
                         <div>
                             <span
