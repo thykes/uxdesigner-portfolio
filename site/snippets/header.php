@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1P12XNP41H"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-1P12XNP41H');
+        gtag('config', 'G-1P12XNP41H');
     </script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php if($icon = $site->favicon()->toFile()): ?>
-    <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
+    <?php if ($icon = $site->favicon()->toFile()): ?>
+        <link rel="icon" type="<?= $icon->mime() ?>" href="<?= $icon->url() ?>">
     <?php endif ?>
     <?php snippet('seo/head') ?>
-    
+
     <!-- Robots: Explicitly allow indexing -->
     <meta name="robots" content="index, follow">
 
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@300;400;500;600&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <?= css('assets/css/index.css') ?>
-    
+
     <style type="text/tailwindcss">
         :root {
             --bg-deep: #0D0D0D;
@@ -107,26 +114,51 @@
 
         /* Before/After Slider */
         .slider-handle {
-            @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-12 rounded-full bg-[var(--accent)] shadow-[0_0_30px_rgba(224,255,0,0.6)] flex items-center justify-center border-4 border-[var(--bg-deep)] cursor-ew-resize z-40 transition-transform duration-200 active:scale-90;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            background-color: var(--accent);
+            box-shadow: 0 0 30px rgba(224, 255, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--bg-deep);
+            cursor: ew-resize;
+            z-index: 40;
+            transition: transform 0.2s;
+        }
+        .slider-handle:active {
+            transform: translate(-50%, -50%) scale(0.9);
         }
         .slider-handle::before, .slider-handle::after {
             content: "";
-            @apply w-0 h-0 border-y-[6px] border-y-transparent;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
         }
         .slider-handle::before {
-            @apply border-r-[8px] border-r-[var(--bg-deep)] mr-1;
+            border-right: 8px solid var(--bg-deep);
+            margin-right: 4px;
         }
         .slider-handle::after {
-            @apply border-l-[8px] border-l-[var(--bg-deep)] ml-1;
+            border-left: 8px solid var(--bg-deep);
+            margin-left: 4px;
         }
     </style>
 </head>
+
 <body class="selection:bg-[var(--accent)] selection:text-black">
     <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex flex-col relative">
         <header class="py-10 flex justify-between items-center">
             <div class="group cursor-pointer">
                 <!-- Logo Container: Removed border box for cleaner look with SVG, kept dimensions -->
-                <a href="<?= $site->url() ?>" class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <a href="<?= $site->url() ?>"
+                    class="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                     <svg viewBox="0 0 291 315" fill="none" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="neonGradient" x1="0%" y1="0%" x2="200%" y2="200%">
@@ -135,43 +167,48 @@
                                 <stop offset="100%" class="neon-stop-3" stop-color="#0000ff" />
                             </linearGradient>
                         </defs>
-                        <path d="M235.379 5.5H55.6213H5V122.955H55.6213V56.2818H120.017V138.5H170.983V56.2818H235.379V122.955H286V5.5H235.379Z" fill="url(#neonGradient)"/>
-                        <path d="M171.159 186.5H119.841V258.853H55V309.5H236V258.853H171.159V186.5Z" fill="url(#neonGradient)"/>
+                        <path
+                            d="M235.379 5.5H55.6213H5V122.955H55.6213V56.2818H120.017V138.5H170.983V56.2818H235.379V122.955H286V5.5H235.379Z"
+                            fill="url(#neonGradient)" />
+                        <path d="M171.159 186.5H119.841V258.853H55V309.5H236V258.853H171.159V186.5Z"
+                            fill="url(#neonGradient)" />
                     </svg>
                 </a>
             </div>
             <nav class="flex items-center">
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
-                    <?php foreach($site->navigation()->toStructure() as $navItem): ?>
-                        <?php 
-                            $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url(); 
-                            if (!$linkUrl) continue;
+                    <?php foreach ($site->navigation()->toStructure() as $navItem): ?>
+                        <?php
+                        $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url();
+                        if (!$linkUrl)
+                            continue;
                         ?>
-                        <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>" 
-                           href="<?= $linkUrl ?>" 
-                           <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
+                        <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>"
+                            href="<?= $linkUrl ?>" <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
                             <?= $navItem->label() ?>
                         </a>
                     <?php endforeach ?>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
-                <button id="menu-toggle" class="material-symbols-outlined text-3xl md:hidden z-50 relative hover:text-[var(--accent)] transition-colors">menu</button>
+                <button id="menu-toggle"
+                    class="material-symbols-outlined text-3xl md:hidden z-50 relative hover:text-[var(--accent)] transition-colors">menu</button>
             </nav>
         </header>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-[var(--bg-deep)]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-[var(--bg-deep)]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
             <a class="hover:text-[var(--accent)] transition-colors" href="<?= $site->url() ?>">Home</a>
-            <?php foreach($site->navigation()->toStructure() as $navItem): ?>
-                <?php 
-                    $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url(); 
-                    if (!$linkUrl) continue;
+            <?php foreach ($site->navigation()->toStructure() as $navItem): ?>
+                <?php
+                $linkUrl = ($navItem->link_type() == 'internal') ? ($navItem->page()->toPage() ? $navItem->page()->toPage()->url() : '') : $navItem->url();
+                if (!$linkUrl)
+                    continue;
                 ?>
-                <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>" 
-                   href="<?= $linkUrl ?>"
-                   <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
+                <a class="hover:text-[var(--accent)] transition-colors <?= $page->url() == $linkUrl ? 'text-[var(--accent)]' : '' ?>"
+                    href="<?= $linkUrl ?>" <?= ($navItem->link_type() == 'external') ? 'target="_blank" rel="noopener noreferrer"' : '' ?>>
                     <?= $navItem->label() ?>
                 </a>
             <?php endforeach ?>
@@ -184,7 +221,7 @@
 
             menuToggle.addEventListener('click', () => {
                 const isOpen = mobileMenu.classList.contains('translate-x-0');
-                
+
                 if (isOpen) {
                     mobileMenu.classList.remove('translate-x-0');
                     mobileMenu.classList.add('translate-x-full');
