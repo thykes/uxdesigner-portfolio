@@ -1,0 +1,8 @@
+name: Clear Floats
+icon: minus
+preview: false
+wysiwyg: true
+fields:
+  info:
+    type: info
+    text: "This block clears any floating elements (like images or galleries) above it, forcing subsequent content to start on a new line."

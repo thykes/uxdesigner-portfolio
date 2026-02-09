@@ -4,27 +4,83 @@ $before = $block->before_image()->toFile();
 $after = $block->after_image()->toFile();
 
 if ($before && $after):
+    $align = $block->alignment()->or('center')->value();
+    $width = $block->width()->or('full')->value();
+
+    // Outer Wrapper Classes (Layout: Width, Float, Margin)
+    $wrapperClasses = ['slider-wrapper', 'w-full']; // Base
+
+    // Width logic
+    $wrapperClasses[] = match ($width) {
+        '1/2' => 'md:w-1/2',
+        '1/3' => 'md:w-1/3',
+        default => '' // Full width by default
+    };
+
+    // Alignment/Float logic
+    if ($width !== 'full') {
+        $wrapperClasses[] = match ($align) {
+            'left' => 'md:float-left md:mr-8 md:mb-8 my-8',
+            'right' => 'md:float-right md:ml-8 md:mb-8 my-8',
+            default => 'mx-auto my-12' // Center alignment for partial width
+        };
+    } else {
+        $wrapperClasses[] = 'my-24'; // Vertical rhythm for full width
+    }
+
+    // Inner Slider Classes (Component: Border, Radius, Overflow, Shrink-Wrap)
+    $sliderClasses = [
+        'relative',
+        'w-fit',
+        'mx-auto', // Always center inside wrapper
+        'max-w-full',
+        'h-auto',
+        'rounded-3xl',
+        'overflow-hidden',
+        'bg-charcoal',
+        'group',
+        'cursor-pointer',
+        'border',
+        'border-white/5',
+        'select-none',
+        'slider-container'
+    ];
     ?>
-    <div class="my-24 relative w-full aspect-[16/9] rounded-3xl overflow-hidden bg-charcoal group cursor-pointer border border-white/5 select-none slider-container"
-        id="slider-<?= $block->id() ?>">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?= $before->url() ?>');"></div>
-        <div class="absolute inset-0 bg-cover bg-center slider-after"
-            style="background-image: url('<?= $after->url() ?>'); clip-path: inset(0 50% 0 0);"></div>
-        <div class="absolute inset-y-0 left-1/2 w-[2px] bg-primary z-20 slider-line"></div>
-        <div class="slider-handle"></div>
+    <div class="<?= implode(' ', $wrapperClasses) ?>">
+        <div class="<?= implode(' ', $sliderClasses) ?>" id="slider-<?= $block->id() ?>">
 
-        <?php if ($block->before_label()->isNotEmpty()): ?>
-            <div
-                class="absolute bottom-4 left-4 bg-background-dark/80 backdrop-blur px-3 py-1 rounded-full text-[8px] font-bold tracking-widest uppercase text-white/60 z-30">
-                <?= $block->before_label() ?>
-            </div>
-        <?php endif ?>
+            <!-- Base Image (Sets Height & Width) -->
+            <img src="<?= $before->url() ?>" alt="Before"
+                class="block max-h-[80vh] w-auto h-auto slider-before pointer-events-none select-none">
 
-        <?php if ($block->after_label()->isNotEmpty()): ?>
-            <div
-                class="absolute bottom-4 right-4 bg-primary/80 backdrop-blur px-3 py-1 rounded-full text-[8px] font-bold tracking-widest uppercase text-background-dark z-30">
-                <?= $block->after_label() ?>
+            <!-- Overlay Image (After) -->
+            <div class="absolute inset-0 select-none slider-after" style="clip-path: inset(0 50% 0 0);">
+                <img src="<?= $after->url() ?>" alt="After"
+                    class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
             </div>
+
+            <div class="absolute inset-y-0 left-1/2 w-[2px] bg-primary z-20 slider-line pointer-events-none"></div>
+            <div class="slider-handle z-30"></div>
+
+            <?php if ($block->before_label()->isNotEmpty()): ?>
+                <div
+                    class="absolute bottom-4 left-4 bg-background-dark/80 backdrop-blur px-3 py-1 rounded-full text-[8px] font-bold tracking-widest uppercase text-white/60 z-30">
+                    <?= $block->before_label() ?>
+                </div>
+            <?php endif ?>
+
+            <?php if ($block->after_label()->isNotEmpty()): ?>
+                <div
+                    class="absolute bottom-4 right-4 bg-primary/80 backdrop-blur px-3 py-1 rounded-full text-[8px] font-bold tracking-widest uppercase text-background-dark z-30">
+                    <?= $block->after_label() ?>
+                </div>
+            <?php endif ?>
+        </div>
+
+        <?php if ($block->caption()->isNotEmpty()): ?>
+            <figcaption class="mt-4 text-center text-sm font-medium text-[var(--text-muted)] tracking-wide italic opacity-80 max-w-2xl mx-auto">
+                <?= $block->caption() ?>
+            </figcaption>
         <?php endif ?>
     </div>
 
