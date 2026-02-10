@@ -43,10 +43,13 @@
         :root {
             --bg-deep: #0D0D0D;
             --charcoal: #1A1A1A;
-            --accent: <?= $page->accent_color()->isNotEmpty() ? $page->accent_color() : '#E0FF00' ?>;
+            --accent:
+                <?= $page->accent_color()->isNotEmpty() ? $page->accent_color() : '#E0FF00' ?>
+            ;
             --text-main: #FFFFFF;
             --text-muted: #A0A0A0;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-deep);
@@ -337,7 +340,7 @@
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu"
-            class="fixed inset-0 bg-[var(--bg-deep)]/95 backdrop-blur-xl z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
+            class="fixed inset-0 bg-black z-40 translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center space-y-12 text-3xl uppercase tracking-widest font-light">
             <a class="hover:text-[var(--accent)] transition-colors" href="<?= $site->url() ?>">Home</a>
             <?php foreach ($site->navigation()->toStructure() as $navItem): ?>
                 <?php
